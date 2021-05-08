@@ -18,12 +18,16 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.7.0 <3.0.0"
+  sdk: ">=2.8.1 <3.0.0"
 
 dependencies:
   flutter:
     sdk: flutter
-
+  adobe_xd: ^1.0.0+1
+  flutter_launcher_icons: ^0.8.1
+  flutter_svg: ^0.18.0
+  google_fonts: ^1.0.0
+  flutter_swiper: ^1.1.6
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -34,12 +38,17 @@ dependencies:
   flutter_signin_button: ^1.0.0
   flutter_login_facebook: ^0.2.1
   provider: ^4.3.2
-
-
+  google_sign_in: ^4.5.6
+  firebase_core: ^0.4.4
+  mongo_dart: ^0.4.3
+  sevr: ^1.0.4
+  dio: ^3.0.10
+  faker: ^1.2.1
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  pedantic: ^1.9.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -53,9 +62,8 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  # assets:
-  #   - images/a_dot_burr.jpeg
-  #   - images/a_dot_ham.jpeg
+  assets:
+      - images
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

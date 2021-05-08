@@ -1,11 +1,13 @@
 import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_firebase/blocs/auth_bloc.dart';
+import 'package:flutter_firebase/blocs/auth_bloc_facebook.dart';
 import 'package:flutter_firebase/screens/login.dart';
-import 'package:flutter_signin_button/button_list.dart';
-import 'package:flutter_signin_button/button_view.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_firebase/blocs/auth_bloc_google.dart';
+import 'package:flutter_firebase/UI/HomeUI.dart';
+
+
 
 class Home extends StatefulWidget {
   @override
@@ -14,13 +16,30 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   StreamSubscription<FirebaseUser> homeStateSubscription;
+  int generalFlag = 0;
   @override
   void initState() {
-    var authBloc = Provider.of<AuthBloc>(context, listen: false);
-    homeStateSubscription = authBloc.currentUser.listen((fbUser) {
+    var authBlocFacebook = Provider.of<AuthBlocFacebook>(context, listen: false);
+    if (authBlocFacebook.flag == 1) {
+      generalFlag = 1;
+    }
+    homeStateSubscription = authBlocFacebook.currentUser.listen((fbUser) {
       if (fbUser == null) {
+        authBlocFacebook.flag = 0;
         Navigator.of(context)
             .pushReplacement(MaterialPageRoute(builder: (context) => Login()));
+      }
+    });
+    var authBlockGoogle =  Provider.of<AuthBlocGoogle>(context, listen: false);
+    if (authBlockGoogle.flag == 1) {
+      generalFlag = 2;
+    }
+    // the case that the user loged out
+    homeStateSubscription = authBlockGoogle.currentUser.listen((event) {
+      if (event == null) {
+        authBlockGoogle.flag = 0;
+        Navigator.of(context)
+          .pushReplacement(MaterialPageRoute(builder: (context) => Login()));
       }
     });
     super.initState();
@@ -34,38 +53,18 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    var authBloc = Provider.of<AuthBloc>(context);
-    return Scaffold(
-      body: Center(
-        child: StreamBuilder<FirebaseUser>(
-            stream: authBloc.currentUser,
-            builder: (context, snapshot) {
-              if (!snapshot.hasData) return CircularProgressIndicator();
-              return Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Text(
-                    snapshot.data.displayName,
-                    style: TextStyle(fontSize: 35.0),
-                  ),
-                  SizedBox(
-                    height: 20.0,
-                  ),
-                  CircleAvatar(
-                    backgroundImage: NetworkImage(
-                        snapshot.data.photoUrl + "?height=500&access_token="),
-                    radius: 60.0,
-                  ),
-                  SizedBox(
-                    height: 100.0,
-                  ),
-                  SignInButton(Buttons.Facebook,
-                      text: "Sign out of Facebook",
-                      onPressed: () => authBloc.logut())
-                ],
-              );
-            }),
-      ),
-    );
+    /**
+     * the case of facebook
+     */
+    switch(generalFlag) {
+      case 1:
+        return getFacebookUI(context);
+        break;
+      case 2:
+        return getGoogleUI(context);
+        break;
+      default:
+        return Login();
+    }
   }
 }
