@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:adobe_xd/pinned.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class XDAddActivities extends StatelessWidget {
-  XDAddActivities({
+class XDnew_profile extends StatelessWidget {
+  XDnew_profile({
     Key key,
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xff344856),
+      backgroundColor: const Color(0xff353549),
       body: Stack(
         children: <Widget>[
           Pinned.fromPins(
@@ -260,46 +260,9 @@ class XDAddActivities extends StatelessWidget {
                   child:
                       // Adobe XD layer: 'bg' (shape)
                       SvgPicture.string(
-                    _svg_ihdz80,
+                    _svg_d957fq,
                     allowDrawingOutsideViewBox: true,
                     fit: BoxFit.fill,
-                  ),
-                ),
-                Pinned.fromPins(
-                  Pin(size: 18.3, start: 19.5),
-                  Pin(size: 14.3, middle: 0.2726),
-                  child:
-                      // Adobe XD layer: 'icn_menu_dark' (group)
-                      Stack(
-                    children: <Widget>[
-                      Pinned.fromPins(
-                        Pin(start: 0.0, end: 0.0),
-                        Pin(size: 1.0, start: 0.0),
-                        child: SvgPicture.string(
-                          _svg_3395br,
-                          allowDrawingOutsideViewBox: true,
-                          fit: BoxFit.fill,
-                        ),
-                      ),
-                      Pinned.fromPins(
-                        Pin(start: 0.0, end: 0.0),
-                        Pin(size: 1.0, middle: 0.5375),
-                        child: SvgPicture.string(
-                          _svg_20ivmu,
-                          allowDrawingOutsideViewBox: true,
-                          fit: BoxFit.fill,
-                        ),
-                      ),
-                      Pinned.fromPins(
-                        Pin(size: 11.7, start: 0.0),
-                        Pin(size: 1.0, end: -1.0),
-                        child: SvgPicture.string(
-                          _svg_9qv0au,
-                          allowDrawingOutsideViewBox: true,
-                          fit: BoxFit.fill,
-                        ),
-                      ),
-                    ],
                   ),
                 ),
               ],
@@ -400,9 +363,5 @@ const String _svg_o98t9d =
     '<svg viewBox="145.5 50.5 33.4 1.0" ><path transform="translate(145.5, 50.5)" d="M 0 0 L 33.41015625 0" fill="none" stroke="#ffffff" stroke-width="1" stroke-miterlimit="4" stroke-linecap="butt" /></svg>';
 const String _svg_ihdz80 =
     '<svg viewBox="1.0 0.0 428.0 96.4" ><defs><filter id="shadow"><feDropShadow dx="0" dy="0" stdDeviation="10"/></filter></defs><path transform="translate(1.0, 0.0)" d="M 0 0 L 428 0 L 428 96.41648864746094 L 0 96.41648864746094 L 0 0 Z" fill="#d97d54" stroke="none" stroke-width="1" stroke-miterlimit="4" stroke-linecap="butt" filter="url(#shadow)"/></svg>';
-const String _svg_3395br =
-    '<svg viewBox="1.0 1.0 18.3 1.0" ><path transform="translate(1.0, 1.0)" d="M 0 0 L 18.33203125 0" fill="none" stroke="#dbe1e5" stroke-width="2" stroke-miterlimit="4" stroke-linecap="round" /></svg>';
-const String _svg_20ivmu =
-    '<svg viewBox="1.0 8.2 18.3 1.0" ><path transform="translate(1.0, 8.16)" d="M 0 0 L 18.33203125 0" fill="none" stroke="#dbe1e5" stroke-width="2" stroke-miterlimit="4" stroke-linecap="round" /></svg>';
-const String _svg_9qv0au =
-    '<svg viewBox="1.0 15.3 11.7 1.0" ><path transform="translate(1.0, 15.32)" d="M 0 0 L 11.66583824157715 0" fill="none" stroke="#dbe1e5" stroke-width="2" stroke-miterlimit="4" stroke-linecap="round" /></svg>';
+const String _svg_d957fq =
+    '<svg viewBox="1.0 0.0 428.0 96.4" ><defs><filter id="shadow"><feDropShadow dx="0" dy="0" stdDeviation="10"/></filter></defs><path transform="translate(1.0, 0.0)" d="M 0 0 L 428 0 L 428 96.41648864746094 L 0 96.41648864746094 L 0 0 Z" fill="#53a8df" stroke="none" stroke-width="1" stroke-miterlimit="4" stroke-linecap="butt" filter="url(#shadow)"/></svg>';

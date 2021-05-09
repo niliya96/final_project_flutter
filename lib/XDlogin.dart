@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:adobe_xd/pinned.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class XDCreateAccount1 extends StatelessWidget {
-  XDCreateAccount1({
+class XDlogin extends StatelessWidget {
+  XDlogin({
     Key key,
   }) : super(key: key);
   @override
@@ -144,110 +144,6 @@ class XDCreateAccount1 extends StatelessWidget {
             ),
           ),
           Pinned.fromPins(
-            Pin(start: -2.0, end: 0.0),
-            Pin(size: 96.4, start: 0.0),
-            child:
-                // Adobe XD layer: 'bar_nav' (group)
-                Stack(
-              children: <Widget>[
-                Pinned.fromPins(
-                  Pin(start: 0.0, end: 0.0),
-                  Pin(start: 0.0, end: 0.0),
-                  child:
-                      // Adobe XD layer: 'bg' (shape)
-                      SvgPicture.string(
-                    _svg_kgnuw7,
-                    allowDrawingOutsideViewBox: true,
-                    fit: BoxFit.fill,
-                  ),
-                ),
-                Container(),
-                Pinned.fromPins(
-                  Pin(size: 18.3, start: 19.5),
-                  Pin(size: 14.3, middle: 0.2726),
-                  child:
-                      // Adobe XD layer: 'icn_menu_dark' (group)
-                      Stack(
-                    children: <Widget>[
-                      Pinned.fromPins(
-                        Pin(start: 0.0, end: 0.0),
-                        Pin(size: 1.0, start: 0.0),
-                        child: SvgPicture.string(
-                          _svg_qtdnaj,
-                          allowDrawingOutsideViewBox: true,
-                          fit: BoxFit.fill,
-                        ),
-                      ),
-                      Pinned.fromPins(
-                        Pin(start: 0.0, end: 0.0),
-                        Pin(size: 1.0, middle: 0.5375),
-                        child: SvgPicture.string(
-                          _svg_boobg,
-                          allowDrawingOutsideViewBox: true,
-                          fit: BoxFit.fill,
-                        ),
-                      ),
-                      Pinned.fromPins(
-                        Pin(size: 11.7, start: 0.0),
-                        Pin(size: 1.0, end: -1.0),
-                        child: SvgPicture.string(
-                          _svg_pfhibg,
-                          allowDrawingOutsideViewBox: true,
-                          fit: BoxFit.fill,
-                        ),
-                      ),
-                      Pinned.fromPins(
-                        Pin(start: 0.0, end: 0.0),
-                        Pin(size: 1.0, middle: 0.5375),
-                        child: SvgPicture.string(
-                          _svg_boobg,
-                          allowDrawingOutsideViewBox: true,
-                          fit: BoxFit.fill,
-                        ),
-                      ),
-                      Pinned.fromPins(
-                        Pin(start: 0.0, end: 0.0),
-                        Pin(size: 1.0, start: 0.0),
-                        child: SvgPicture.string(
-                          _svg_qtdnaj,
-                          allowDrawingOutsideViewBox: true,
-                          fit: BoxFit.fill,
-                        ),
-                      ),
-                      Pinned.fromPins(
-                        Pin(start: 0.0, end: 0.0),
-                        Pin(size: 1.0, middle: 0.5375),
-                        child: SvgPicture.string(
-                          _svg_boobg,
-                          allowDrawingOutsideViewBox: true,
-                          fit: BoxFit.fill,
-                        ),
-                      ),
-                      Pinned.fromPins(
-                        Pin(size: 11.7, start: 0.0),
-                        Pin(size: 1.0, end: -1.0),
-                        child: SvgPicture.string(
-                          _svg_pfhibg,
-                          allowDrawingOutsideViewBox: true,
-                          fit: BoxFit.fill,
-                        ),
-                      ),
-                      Pinned.fromPins(
-                        Pin(start: 0.0, end: 0.0),
-                        Pin(size: 1.0, middle: 0.5375),
-                        child: SvgPicture.string(
-                          _svg_boobg,
-                          allowDrawingOutsideViewBox: true,
-                          fit: BoxFit.fill,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ),
-          Pinned.fromPins(
             Pin(start: 0.0, end: 0.0),
             Pin(size: 283.0, middle: 0.3593),
             child:
@@ -309,7 +205,45 @@ class XDCreateAccount1 extends StatelessWidget {
                     textAlign: TextAlign.left,
                   ),
                 ),
-                Container(),
+                Pinned.fromPins(
+                  Pin(size: 16.0, start: 0.0),
+                  Pin(size: 16.0, start: 0.0),
+                  child:
+                      // Adobe XD layer: 'Lock' (group)
+                      Stack(
+                    children: <Widget>[
+                      Pinned.fromPins(
+                        Pin(start: 0.0, end: 0.0),
+                        Pin(start: 0.0, end: 0.0),
+                        child: Container(
+                          decoration: BoxDecoration(),
+                        ),
+                      ),
+                      Pinned.fromPins(
+                        Pin(start: 1.0, end: 1.0),
+                        Pin(start: 0.0, end: 0.0),
+                        child: SvgPicture.string(
+                          _svg_fy8d8n,
+                          allowDrawingOutsideViewBox: true,
+                          fit: BoxFit.fill,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Pinned.fromPins(
+                  Pin(size: 59.0, start: 36.0),
+                  Pin(size: 16.0, start: 0.0),
+                  child: Text(
+                    '●●●●●●●',
+                    style: TextStyle(
+                      fontFamily: 'Arial',
+                      fontSize: 14,
+                      color: const Color(0xff2699fb),
+                    ),
+                    textAlign: TextAlign.left,
+                  ),
+                ),
               ],
             ),
           ),
@@ -356,7 +290,72 @@ class XDCreateAccount1 extends StatelessWidget {
               ],
             ),
           ),
-          Container(),
+          Pinned.fromPins(
+            Pin(size: 178.0, middle: 0.5),
+            Pin(size: 50.0, end: 95.0),
+            child:
+                // Adobe XD layer: 'btn_white' (group)
+                Stack(
+              children: <Widget>[
+                Pinned.fromPins(
+                  Pin(start: 0.0, end: 0.0),
+                  Pin(start: 0.0, end: 0.0),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(100.0),
+                      color: const Color(0xffffffff),
+                      boxShadow: [
+                        BoxShadow(
+                          color: const Color(0x4d000000),
+                          offset: Offset(0, 20),
+                          blurRadius: 50,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                Pinned.fromPins(
+                  Pin(size: 42.0, middle: 0.5),
+                  Pin(size: 19.0, middle: 0.4839),
+                  child: Text(
+                    'המשך',
+                    style: TextStyle(
+                      fontFamily: 'Rift Soft',
+                      fontSize: 14,
+                      color: const Color(0xff1b1c20),
+                      letterSpacing: 1.4000000000000001,
+                      fontWeight: FontWeight.w300,
+                      height: 2.5,
+                    ),
+                    textHeightBehavior:
+                        TextHeightBehavior(applyHeightToFirstAscent: false),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Pinned.fromPins(
+            Pin(start: -2.0, end: 0.0),
+            Pin(size: 96.4, start: 0.0),
+            child:
+                // Adobe XD layer: 'bar_nav' (group)
+                Stack(
+              children: <Widget>[
+                Pinned.fromPins(
+                  Pin(start: 0.0, end: 0.0),
+                  Pin(start: 0.0, end: 0.0),
+                  child:
+                      // Adobe XD layer: 'bg' (shape)
+                      SvgPicture.string(
+                    _svg_kgnuw7,
+                    allowDrawingOutsideViewBox: true,
+                    fit: BoxFit.fill,
+                  ),
+                ),
+              ],
+            ),
+          ),
         ],
       ),
     );
@@ -365,13 +364,9 @@ class XDCreateAccount1 extends StatelessWidget {
 
 const String _svg_lqawoz =
     '<svg viewBox="213.5 8.5 188.0 1.0" ><path transform="translate(213.5, 8.5)" d="M 0 0 L 188 0" fill="none" stroke="#d97d54" stroke-width="2" stroke-miterlimit="4" stroke-linecap="butt" /></svg>';
-const String _svg_kgnuw7 =
-    '<svg viewBox="1.0 0.0 430.0 96.4" ><defs><filter id="shadow"><feDropShadow dx="0" dy="0" stdDeviation="10"/></filter></defs><path transform="translate(1.0, 0.0)" d="M 0 0 L 430 0 L 430 96.41648864746094 L 0 96.41648864746094 L 0 0 Z" fill="#d97d54" stroke="none" stroke-width="1" stroke-miterlimit="4" stroke-linecap="butt" filter="url(#shadow)"/></svg>';
-const String _svg_qtdnaj =
-    '<svg viewBox="0.0 0.0 18.3 1.0" ><path  d="M 0 0 L 18.33203125 0" fill="none" stroke="#dbe1e5" stroke-width="2" stroke-miterlimit="4" stroke-linecap="round" /></svg>';
-const String _svg_boobg =
-    '<svg viewBox="0.0 7.2 18.3 1.0" ><path transform="translate(0.0, 7.16)" d="M 0 0 L 18.33203125 0" fill="none" stroke="#dbe1e5" stroke-width="2" stroke-miterlimit="4" stroke-linecap="round" /></svg>';
-const String _svg_pfhibg =
-    '<svg viewBox="0.0 14.3 11.7 1.0" ><path transform="translate(0.0, 14.32)" d="M 0 0 L 11.66583824157715 0" fill="none" stroke="#dbe1e5" stroke-width="2" stroke-miterlimit="4" stroke-linecap="round" /></svg>';
+const String _svg_fy8d8n =
+    '<svg viewBox="1.0 0.0 14.0 16.0" ><path transform="translate(1.0, 0.0)" d="M 7 8 C 8.100000381469727 8 9 8.899999618530273 9 10 C 9 11.10000038146973 8.100000381469727 12 7 12 C 5.899999618530273 12 5 11.10000038146973 5 10 C 5 8.899999618530273 5.900000095367432 8 7 8 Z M 7 2 C 5.900000095367432 2 5 2.900000095367432 5 4 L 9 4 C 9 2.900000095367432 8.100000381469727 2 7 2 Z M 12 16 L 2 16 C 0.8999999761581421 16 0 15.10000038146973 0 14 L 0 6 C 0 4.900000095367432 0.8999999761581421 4 2 4 L 3 4 C 3 1.799999952316284 4.800000190734863 0 7 0 C 9.199999809265137 0 11 1.799999952316284 11 4 L 12 4 C 13.10000038146973 4 14 4.900000095367432 14 6 L 14 14 C 14 15.10000038146973 13.10000038146973 16 12 16 Z" fill="#2699fb" stroke="none" stroke-width="1" stroke-miterlimit="4" stroke-linecap="butt" /></svg>';
 const String _svg_sua62o =
     '<svg viewBox="40.0 136.0 16.0 16.0" ><path transform="translate(6160.0, 16226.0)" d="M -6120 -16073.9990234375 L -6120 -16075.998046875 C -6120 -16078.19921875 -6116.3984375 -16080 -6112.0009765625 -16080 C -6107.59912109375 -16080 -6104.00146484375 -16078.19921875 -6104.00146484375 -16075.998046875 L -6104.00146484375 -16073.9990234375 L -6120 -16073.9990234375 Z M -6115.99853515625 -16086 C -6115.99853515625 -16088.208984375 -6114.20947265625 -16089.998046875 -6112.0009765625 -16089.998046875 C -6109.7919921875 -16089.998046875 -6107.9990234375 -16088.208984375 -6107.9990234375 -16086 C -6107.9990234375 -16083.7919921875 -6109.7919921875 -16081.9990234375 -6112.0009765625 -16081.9990234375 C -6114.20947265625 -16081.9990234375 -6115.99853515625 -16083.7919921875 -6115.99853515625 -16086 Z" fill="#2699fb" stroke="none" stroke-width="1" stroke-miterlimit="4" stroke-linecap="butt" /></svg>';
+const String _svg_kgnuw7 =
+    '<svg viewBox="1.0 0.0 430.0 96.4" ><defs><filter id="shadow"><feDropShadow dx="0" dy="0" stdDeviation="10"/></filter></defs><path transform="translate(1.0, 0.0)" d="M 0 0 L 430 0 L 430 96.41648864746094 L 0 96.41648864746094 L 0 0 Z" fill="#d97d54" stroke="none" stroke-width="1" stroke-miterlimit="4" stroke-linecap="butt" filter="url(#shadow)"/></svg>';

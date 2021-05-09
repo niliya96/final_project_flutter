@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:adobe_xd/pinned.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class XDAddActivities1 extends StatelessWidget {
-  XDAddActivities1({
+class XDsearch extends StatelessWidget {
+  XDsearch({
     Key key,
   }) : super(key: key);
   @override
@@ -13,8 +13,8 @@ class XDAddActivities1 extends StatelessWidget {
       body: Stack(
         children: <Widget>[
           Pinned.fromPins(
-            Pin(start: 1.0, end: -1.0),
-            Pin(size: 590.0, start: 0.0),
+            Pin(start: 0.0, end: 0.0),
+            Pin(size: 523.0, end: 117.0),
             child:
                 // Adobe XD layer: 'bg' (shape)
                 Container(
@@ -32,7 +32,7 @@ class XDAddActivities1 extends StatelessWidget {
           ),
           Pinned.fromPins(
             Pin(start: 41.9, end: 41.9),
-            Pin(size: 209.0, middle: 0.4469),
+            Pin(size: 209.0, middle: 0.6645),
             child:
                 // Adobe XD layer: 'search_bar' (group)
                 Stack(
@@ -103,10 +103,10 @@ class XDAddActivities1 extends StatelessWidget {
                   ),
                 ),
                 Pinned.fromPins(
-                  Pin(size: 60.0, end: 22.1),
+                  Pin(size: 90.0, end: 22.1),
                   Pin(size: 20.0, start: 18.0),
                   child: Text(
-                    'הקלד שם',
+                    'הקלד פספורט',
                     style: TextStyle(
                       fontFamily: 'Europa',
                       fontSize: 15,
@@ -120,10 +120,10 @@ class XDAddActivities1 extends StatelessWidget {
                   ),
                 ),
                 Pinned.fromPins(
-                  Pin(size: 90.0, end: 22.1),
+                  Pin(size: 36.0, end: 22.1),
                   Pin(size: 20.0, middle: 0.4974),
                   child: Text(
-                    'הקלד פספורט',
+                    'אימות',
                     style: TextStyle(
                       fontFamily: 'Europa',
                       fontSize: 15,
@@ -141,7 +141,7 @@ class XDAddActivities1 extends StatelessWidget {
           ),
           Pinned.fromPins(
             Pin(start: 146.0, end: 146.0),
-            Pin(size: 40.0, start: 245.0),
+            Pin(size: 40.0, start: 401.0),
             child: Text(
               'חפש עובד',
               style: TextStyle(
@@ -153,6 +153,50 @@ class XDAddActivities1 extends StatelessWidget {
               ),
               textHeightBehavior:
                   TextHeightBehavior(applyHeightToFirstAscent: false),
+              textAlign: TextAlign.left,
+            ),
+          ),
+          Pinned.fromPins(
+            Pin(start: 76.0, end: 76.0),
+            Pin(size: 62.0, start: 725.0),
+            child: Text(
+              'אחד הפרטים שהזנת לא נכונים\nאנא נסה שנית',
+              style: TextStyle(
+                fontFamily: 'Europa',
+                fontSize: 20,
+                color: const Color(0xffffffff),
+                fontWeight: FontWeight.w700,
+                height: 1.75,
+              ),
+              textHeightBehavior:
+                  TextHeightBehavior(applyHeightToFirstAscent: false),
+              textAlign: TextAlign.center,
+            ),
+          ),
+          Pinned.fromPins(
+            Pin(start: 0.0, end: 0.0),
+            Pin(size: 241.0, start: 125.0),
+            child:
+                // Adobe XD layer: 'WhatsApp Image 2021…' (shape)
+                Container(
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: const AssetImage(''),
+                  fit: BoxFit.fill,
+                ),
+              ),
+            ),
+          ),
+          Pinned.fromPins(
+            Pin(size: 59.0, start: 55.0),
+            Pin(size: 16.0, middle: 0.7516),
+            child: Text(
+              '●●●●●●●',
+              style: TextStyle(
+                fontFamily: 'Arial',
+                fontSize: 14,
+                color: const Color(0xff2699fb),
+              ),
               textAlign: TextAlign.left,
             ),
           ),
@@ -228,10 +272,10 @@ class XDAddActivities1 extends StatelessWidget {
             ),
           ),
           Pinned.fromPins(
-            Pin(start: 266.0, end: 96.0),
+            Pin(start: 197.0, end: 102.0),
             Pin(size: 27.0, start: 35.0),
             child: Text(
-              'התנתק',
+              'שלום שם מלא',
               style: TextStyle(
                 fontFamily: 'Europa',
                 fontSize: 20,
@@ -245,56 +289,65 @@ class XDAddActivities1 extends StatelessWidget {
             ),
           ),
           Pinned.fromPins(
-            Pin(start: 90.0, end: 56.0),
-            Pin(size: 62.0, start: 657.0),
-            child: Text(
-              'אחד הפרטים שהזנת לא נכונים.\nאנא נסה שנית.',
-              style: TextStyle(
-                fontFamily: 'Europa',
-                fontSize: 20,
-                color: const Color(0xffffffff),
-                fontWeight: FontWeight.w700,
-                height: 1.75,
-              ),
-              textHeightBehavior:
-                  TextHeightBehavior(applyHeightToFirstAscent: false),
-              textAlign: TextAlign.center,
-            ),
-          ),
-          Pinned.fromPins(
-            Pin(start: 13.5, end: 396.2),
-            Pin(size: 1.0, start: 22.4),
-            child: SvgPicture.string(
-              _svg_6u2prs,
-              allowDrawingOutsideViewBox: true,
-              fit: BoxFit.fill,
-            ),
-          ),
-          Pinned.fromPins(
-            Pin(start: 13.5, end: 396.2),
-            Pin(size: 1.0, middle: 0.0319),
-            child: SvgPicture.string(
-              _svg_9qxl19,
-              allowDrawingOutsideViewBox: true,
-              fit: BoxFit.fill,
-            ),
-          ),
-          Pinned.fromPins(
-            Pin(size: 11.7, start: 13.5),
-            Pin(size: 1.0, end: 888.3),
-            child: SvgPicture.string(
-              _svg_gc5s3q,
-              allowDrawingOutsideViewBox: true,
-              fit: BoxFit.fill,
-            ),
-          ),
-          Pinned.fromPins(
-            Pin(start: 13.5, end: 396.2),
-            Pin(size: 1.0, middle: 0.0319),
-            child: SvgPicture.string(
-              _svg_9qxl19,
-              allowDrawingOutsideViewBox: true,
-              fit: BoxFit.fill,
+            Pin(size: 50.0, start: 17.0),
+            Pin(size: 50.0, start: 12.0),
+            child:
+                // Adobe XD layer: 'highlighted item' (group)
+                Stack(
+              children: <Widget>[
+                Pinned.fromPins(
+                  Pin(start: 0.0, end: 0.0),
+                  Pin(start: 0.0, end: 0.0),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius:
+                          BorderRadius.all(Radius.elliptical(9999.0, 9999.0)),
+                      color: const Color(0xffffffff),
+                    ),
+                  ),
+                ),
+                Container(),
+                Pinned.fromPins(
+                  Pin(size: 15.6, middle: 0.7551),
+                  Pin(size: 15.6, start: 5.6),
+                  child:
+                      // Adobe XD layer: 'icn_notification' (group)
+                      Stack(
+                    children: <Widget>[
+                      Pinned.fromPins(
+                        Pin(start: 0.0, end: 0.0),
+                        Pin(start: 0.0, end: 0.0),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.all(
+                                Radius.elliptical(9999.0, 9999.0)),
+                            color: const Color(0xff87bcbf),
+                            border: Border.all(
+                                width: 2.0, color: const Color(0xffffffff)),
+                          ),
+                        ),
+                      ),
+                      Pinned.fromPins(
+                        Pin(size: 4.0, middle: 0.5187),
+                        Pin(size: 10.0, start: 2.0),
+                        child: Text(
+                          '2',
+                          style: TextStyle(
+                            fontFamily: 'Europa',
+                            fontSize: 7,
+                            color: const Color(0xffffffff),
+                            fontWeight: FontWeight.w700,
+                            height: 5.857142857142857,
+                          ),
+                          textHeightBehavior: TextHeightBehavior(
+                              applyHeightToFirstAscent: false),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
             ),
           ),
         ],
@@ -313,9 +366,3 @@ const String _svg_ihdz80 =
     '<svg viewBox="1.0 0.0 428.0 96.4" ><defs><filter id="shadow"><feDropShadow dx="0" dy="0" stdDeviation="10"/></filter></defs><path transform="translate(1.0, 0.0)" d="M 0 0 L 428 0 L 428 96.41648864746094 L 0 96.41648864746094 L 0 0 Z" fill="#d97d54" stroke="none" stroke-width="1" stroke-miterlimit="4" stroke-linecap="butt" filter="url(#shadow)"/></svg>';
 const String _svg_i5qj86 =
     '<svg viewBox="0.0 0.0 16.0 16.0" ><path transform="translate(0.0, -354.0)" d="M 0 369.9999084472656 L 0 368.0001220703125 C 0 365.7996215820313 3.600000143051147 363.9996032714844 8.000100135803223 363.9996032714844 C 12.40019989013672 363.9996032714844 16.00020027160645 365.7996215820313 16.00020027160645 368.0001220703125 L 16.00020027160645 369.9999084472656 L 0 369.9999084472656 Z M 3.999600172042847 358.0002136230469 C 3.999600172042847 355.7907104492188 5.790600299835205 353.9996948242188 8.000100135803223 353.9996948242188 C 10.20870018005371 353.9996948242188 11.99970054626465 355.7907104492188 11.99970054626465 358.0002136230469 C 11.99970054626465 360.2088012695313 10.20870018005371 361.9998168945313 8.000100135803223 361.9998168945313 C 5.790600299835205 361.9998168945313 3.999600172042847 360.2088012695313 3.999600172042847 358.0002136230469 Z" fill="#2699fb" stroke="none" stroke-width="1" stroke-miterlimit="4" stroke-linecap="butt" /></svg>';
-const String _svg_6u2prs =
-    '<svg viewBox="13.5 22.4 18.3 1.0" ><path transform="translate(13.5, 22.38)" d="M 0 0 L 18.33203125 0" fill="none" stroke="#dbe1e5" stroke-width="2" stroke-miterlimit="4" stroke-linecap="round" /></svg>';
-const String _svg_9qxl19 =
-    '<svg viewBox="13.5 29.5 18.3 1.0" ><path transform="translate(13.5, 29.54)" d="M 0 0 L 18.33203125 0" fill="none" stroke="#dbe1e5" stroke-width="2" stroke-miterlimit="4" stroke-linecap="round" /></svg>';
-const String _svg_gc5s3q =
-    '<svg viewBox="13.5 36.7 11.7 1.0" ><path transform="translate(13.5, 36.7)" d="M 0 0 L 11.66583824157715 0" fill="none" stroke="#dbe1e5" stroke-width="2" stroke-miterlimit="4" stroke-linecap="round" /></svg>';
