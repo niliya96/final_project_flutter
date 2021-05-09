@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_firebase/blocs/auth_bloc_facebook.dart';
 import 'package:flutter_firebase/blocs/auth_bloc_google.dart';
-import 'package:flutter_firebase/screens/login.dart';
-import 'package:flutter_firebase/screens/opinion.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_firebase/services/mongodb_server.dart' as server;
+
+import 'XDSamsungGalaxyS101.dart';
 
 // Noy
 void main() {
@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
           brightness: Brightness.dark,
           primarySwatch: Colors.blue,
         ),
-        home: Login(),
+        home: XDSamsungGalaxyS101(),
       ),
     );
   }
