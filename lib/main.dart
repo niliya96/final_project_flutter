@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_firebase/XDnew_profile.dart';
+import 'package:flutter_firebase/new_profile/XDnew_profile.dart';
 import 'package:flutter_firebase/XDprofile.dart';
 import 'package:flutter_firebase/blocs/auth_bloc_facebook.dart';
 import 'package:flutter_firebase/blocs/auth_bloc_google.dart';
@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
           brightness: Brightness.dark,
           primarySwatch: Colors.blue,
         ),
-        home: XDsearch(),
+        home: XDnew_profile(),
       ),
     );
   }
