@@ -92,7 +92,7 @@ class XDcreate_acount extends StatelessWidget {
             child: Container(
               decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: const AssetImage(''),
+                  image: const AssetImage('assets/images/image1.jfif'),
                   fit: BoxFit.fill,
                 ),
               ),

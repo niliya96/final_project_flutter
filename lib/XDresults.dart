@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:adobe_xd/pinned.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class XDGooglePixel44XL1 extends StatelessWidget {
-  XDGooglePixel44XL1({
+class XDresults extends StatelessWidget {
+  XDresults({
     Key key,
   }) : super(key: key);
   @override

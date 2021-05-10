@@ -134,7 +134,7 @@ class XDsearch extends StatelessWidget {
                 Container(
               decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: const AssetImage(''),
+                  image: const AssetImage('assets/images/image2.jfif'),
                   fit: BoxFit.fill,
                 ),
               ),

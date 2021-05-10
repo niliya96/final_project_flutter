@@ -7,6 +7,7 @@ import 'package:flutter_firebase/blocs/auth_bloc_google.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_firebase/services/mongodb_server.dart' as server;
 import 'XDcreate_acount.dart';
+import 'XDreview1.dart';
 import 'XDsearch.dart';
 
 // Noy
@@ -30,7 +31,7 @@ class MyApp extends StatelessWidget {
           brightness: Brightness.dark,
           primarySwatch: Colors.blue,
         ),
-        home: XDnew_profile(),
+        home: XDsearch(),
       ),
     );
   }
