@@ -9,12 +9,12 @@ import 'package:flutter_signin_button/button_view.dart';
 import 'package:provider/provider.dart';
 
 
-class Login extends StatefulWidget {
+class ButtonsLogin extends StatefulWidget {
   @override
-  _LoginState createState() => _LoginState();
+ ButtonsLoginState createState() => ButtonsLoginState();
 }
 
-class _LoginState extends State<Login> {
+class ButtonsLoginState extends State<ButtonsLogin> {
   // for disposal
   StreamSubscription<FirebaseUser> loginStateSubscriptionForFacebook;
   StreamSubscription<FirebaseUser> loginStateSubscriptionForGoogle;
@@ -53,21 +53,22 @@ class _LoginState extends State<Login> {
     var authBlocFacebook = Provider.of<AuthBlocFacebook>(context);
     final authBlocGoogle = Provider.of<AuthBlocGoogle>(context);
     // logic
-    return Scaffold(
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text("welocom!"),
-            // if the sign in with facebook pressed
-            SignInButton(Buttons.Facebook,
-                onPressed: () => authBlocFacebook.loginFacebook()),
-            // if the sign in with google pressed
-            SignInButton(Buttons.Google, 
-                onPressed: () => authBlocGoogle.loginGoogle()),
-          ],
+    return Stack(
+      children: <Widget>[
+        Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              // if the sign in with facebook pressed
+              SignInButton(Buttons.Facebook,
+                  onPressed: () => authBlocFacebook.loginFacebook()),
+              // if the sign in with google pressed
+              SignInButton(Buttons.Google, 
+                  onPressed: () => authBlocGoogle.loginGoogle()),
+            ],
+          ),
         ),
-      ),
+      ]
     );
   }
 }

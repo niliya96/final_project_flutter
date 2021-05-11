@@ -2,7 +2,7 @@ import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_firebase/blocs/auth_bloc_facebook.dart';
-import 'package:flutter_firebase/screens/login.dart';
+import 'package:flutter_firebase/login/main_component.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_firebase/blocs/auth_bloc_google.dart';
 import 'package:flutter_firebase/UI/HomeUI.dart';
@@ -27,7 +27,7 @@ class _HomeState extends State<Home> {
       if (fbUser == null) {
         authBlocFacebook.flag = 0;
         Navigator.of(context)
-            .pushReplacement(MaterialPageRoute(builder: (context) => Login()));
+            .pushReplacement(MaterialPageRoute(builder: (context) => MainComponentLogin()));
       }
     });
     var authBlockGoogle =  Provider.of<AuthBlocGoogle>(context, listen: false);
@@ -39,7 +39,7 @@ class _HomeState extends State<Home> {
       if (event == null) {
         authBlockGoogle.flag = 0;
         Navigator.of(context)
-          .pushReplacement(MaterialPageRoute(builder: (context) => Login()));
+          .pushReplacement(MaterialPageRoute(builder: (context) => MainComponentLogin()));
       }
     });
     super.initState();
@@ -64,7 +64,7 @@ class _HomeState extends State<Home> {
         return getGoogleUI(context);
         break;
       default:
-        return Login();
+        return MainComponentLogin();
     }
   }
 }

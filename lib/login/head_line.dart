@@ -31,6 +31,7 @@ class HeadLineLogin extends StatelessWidget {
               ),
             ),
           ),
+          // image
           Padding(
             padding: const EdgeInsets.fromLTRB(0, 90, 0, 100),
             child: Container(
