@@ -9,6 +9,7 @@ import 'package:flutter_firebase/services/mongodb_server.dart' as server;
 import 'XDcreate_acount.dart';
 import 'XDreview1.dart';
 import 'XDsearch.dart';
+import 'login/main_component.dart';
 
 // Noy
 void main() {
@@ -31,7 +32,7 @@ class MyApp extends StatelessWidget {
           brightness: Brightness.dark,
           primarySwatch: Colors.blue,
         ),
-        home: XDnew_profile(),
+        home: MainComponentLogin(),
       ),
     );
   }

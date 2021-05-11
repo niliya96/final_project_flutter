@@ -3,7 +3,7 @@ import 'package:adobe_xd/pinned.dart';
 
 class XDfull_name_box extends StatefulWidget {
   final String name;
-
+  
   XDfull_name_box({ Key key, this.name}) : super(key: key);
 
   @override
