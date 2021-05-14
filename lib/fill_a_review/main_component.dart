@@ -11,46 +11,33 @@ class MainComponentFill extends StatefulWidget {
 
 class MainComponentFillState extends State<MainComponentFill> {
   int _rating;
-  String _text = "חרוץ";
-  List<Widget> formatList;
 
   Widget factory() {
-    this.widget.list.forEach((element) {
-      switch (element['kind']) {
-        case 'rating':
-          formatList.add(RatingFormat((rating) {
-            setState(() {
-              _rating = rating;
-            });
-          }, element['text'], 5));
-          break;
-        case 'choice':
-          break;
-        case 'text':
-          break;
-      }
-    });
-  }
-
-  Widget loop() {
-    formatList.forEach((element) {
-      return element;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    factory();
-    return Scaffold(
+    /**
+     * A rating format
+     */
+      if (this.widget.list[0]['kind'].toString() == 'rating') {
+        return Scaffold(
         backgroundColor: const Color(0xff353549),
-        appBar: AppBar(
-          backgroundColor: Colors.lightBlue,
+        appBar: AppBar(          backgroundColor: Colors.lightBlue,
         ),
         body: Stack(children: <Widget>[
           Padding(
             padding: const EdgeInsets.fromLTRB(80, 200, 80, 300),
+            child: RatingFormat((rating) {
+                  setState(() {
+                    _rating = rating;
+                  });
+                }, this.widget.list[0]['text'], 5),
           ),
-          fromatList(0)
-        ]));
+        ]
+      )
+    );
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return factory();
   }
 }
