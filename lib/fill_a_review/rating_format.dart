@@ -4,8 +4,10 @@ class RatingFormat extends StatefulWidget {
   final int maximumRating;
   final String text;
   final Function(int) onRatingSelected;
+  final List<Map<String, dynamic>> list;
+  int index;
 
-  RatingFormat(this.onRatingSelected, this.text, [this.maximumRating = 5]);
+  RatingFormat(this.onRatingSelected, this.text, this.list, this.index, [this.maximumRating = 5]);
 
   @override
   RatingFormatState createState() => RatingFormatState();
@@ -43,12 +45,14 @@ class RatingFormatState extends State<RatingFormat> {
         },
       );
     });
-
-    return Column(
+    /**
+     * A rating bar case
+     */
+    if (this.widget.list[this.widget.index]['kind'].toString() == 'rating') {
+      return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Center(
-          child: Text(
+          Text(
             this.widget.text,
             style: TextStyle(
               fontFamily: 'Europa',
@@ -60,7 +64,6 @@ class RatingFormatState extends State<RatingFormat> {
             textHeightBehavior: TextHeightBehavior(applyHeightToFirstAscent: false),
             textAlign: TextAlign.center,
           ),
-        ),
         Divider(
             color: const Color(0xffffffff),
             thickness: 1,
@@ -69,7 +72,7 @@ class RatingFormatState extends State<RatingFormat> {
         ),
        SizedBox(
         width: 0.0,
-         height: 50.0,
+         height: 10.0,
         ),
         Center(
           child: Row(
@@ -77,7 +80,7 @@ class RatingFormatState extends State<RatingFormat> {
           ),
         ),
         FlatButton(
-          child: Text(
+            child: Text(
             "Clear", 
             style: TextStyle(
               fontFamily: 'Europa',
@@ -86,15 +89,36 @@ class RatingFormatState extends State<RatingFormat> {
               height: 1.3888888888888888,
               )
             ),
-          onPressed: () {
+            onPressed: () {
             setState(() {
               _currentRating = 0;
             });
             this.widget.onRatingSelected(_currentRating);
           },
-        )
-      ],
-    );
+        ),
+         FlatButton(
+           child: Text(
+            "next", 
+            style: TextStyle(
+              fontFamily: 'Europa',
+              fontSize: 18,
+              color: const Color(0xffffffff),
+              height: 1.3888888888888888,
+              )
+            ),
+            onPressed: () {
+              this.widget.index++;
+              if (this.widget.index < this.widget.list.length) {
+                
+              }
+              else {
+                print("end");
+              }
+            }
+        ),
+       ],
+      );
+    }
   }
 
   @override
