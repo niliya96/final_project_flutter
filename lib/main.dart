@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_firebase/blocs/auth_bloc_facebook.dart';
 import 'package:flutter_firebase/blocs/auth_bloc_google.dart';
-import 'package:flutter_firebase/services/questions_mongodb.dart';
+import 'package:flutter_firebase/services/read_from_mongodb.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_firebase/services/questions_mongodb.dart' as server;
+import 'package:flutter_firebase/services/read_from_mongodb.dart' as server;
 import 'fill_a_review/main_component.dart';
 import 'fill_a_review/rating_format.dart';
 import 'login/main_component.dart';
@@ -12,11 +12,15 @@ import 'login/main_component.dart';
 // Noy
 void main() {
   //server.start();
-  //server.start();
-  runApp(MyApp());
+  Reader reader = new Reader();
+  reader.read();
+  print(reader.getter());
+  runApp(MyApp(reader.getter()));
 }
 
 class MyApp extends StatelessWidget {
+  final List<Map<String, dynamic>> list;
+  MyApp(this.list);
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -31,7 +35,7 @@ class MyApp extends StatelessWidget {
           brightness: Brightness.dark,
           primarySwatch: Colors.blue,
         ),
-        home: MainComponentFill(),
+        home: MainComponentFill(this.list),
       ),
     );
   }

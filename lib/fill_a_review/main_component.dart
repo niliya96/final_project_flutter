@@ -3,9 +3,8 @@ import 'package:flutter_firebase/fill_a_review/rating_format.dart';
 
 
 class MainComponentFill extends StatefulWidget {
-  MainComponentFill({
-    Key key,
-  }) : super(key: key);
+  final List<Map<String, dynamic>> list;
+  MainComponentFill(this.list);
 
   @override
   MainComponentFillState createState() => MainComponentFillState();
@@ -15,6 +14,12 @@ class MainComponentFillState extends State<MainComponentFill> {
   int _rating;
   String _text = "חרוץ";
   
+  Widget factory() {
+    this.widget.list.forEach((element) {
+      print(element.toString());
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
       return Scaffold(
