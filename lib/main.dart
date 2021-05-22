@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_firebase/blocs/auth_bloc_facebook.dart';
 import 'package:flutter_firebase/blocs/auth_bloc_google.dart';
+import 'package:flutter_firebase/search/main_component.dart';
 import 'package:flutter_firebase/services/read_from_mongodb.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_firebase/services/read_from_mongodb.dart' as server;
@@ -9,13 +10,8 @@ import 'fill_a_review/main_component.dart';
 import 'fill_a_review/rating_format.dart';
 import 'login/main_component.dart';
 
-// Noy
 void main() {
-  //server.start();
   Reader reader = new Reader();
-  //var a = reader.read();
-  //print(reader.read().then((value) => null));
-  //print(reader.getter());
   reader.read().then((value) => {
     runApp(MyApp(value))
   });
@@ -38,7 +34,7 @@ class MyApp extends StatelessWidget {
           brightness: Brightness.dark,
           primarySwatch: Colors.blue,
         ),
-        home: MainComponentFill(this.list),
+        home: MainComponentLogin(this.list),
       ),
     );
   }

@@ -10,6 +10,8 @@ import 'package:provider/provider.dart';
 
 
 class ButtonsLogin extends StatefulWidget {
+  final List<Map<String, dynamic>> list;
+  ButtonsLogin(this.list);
   @override
  ButtonsLoginState createState() => ButtonsLoginState();
 }
@@ -27,14 +29,14 @@ class ButtonsLoginState extends State<ButtonsLogin> {
     loginStateSubscriptionForFacebook = authBlocFacebook.currentUser.listen((fbUser) {
       if (fbUser != null) {
         Navigator.of(context)
-          .pushReplacement(MaterialPageRoute(builder: (context) => Home()));
+          .pushReplacement(MaterialPageRoute(builder: (context) => Home(this.widget.list)));
       }
     });
     // the case that the sign in with google was successful
     loginStateSubscriptionForGoogle = authBlockGoogle.currentUser.listen((event) {
       if (event != null) {
         Navigator.of(context)
-          .pushReplacement(MaterialPageRoute(builder: (context) => Home()));
+          .pushReplacement(MaterialPageRoute(builder: (context) => Home(this.widget.list)));
       }
     });
     super.initState();

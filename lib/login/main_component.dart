@@ -5,9 +5,8 @@ import 'package:flutter_firebase/login/head_line.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class MainComponentLogin extends StatefulWidget {
-  MainComponentLogin({
-    Key key,
-  }) : super(key: key);
+  final List<Map<String, dynamic>> list;
+  MainComponentLogin(this.list);
 
   @override
   MainComponentLoginState createState() => MainComponentLoginState();
@@ -60,7 +59,7 @@ class MainComponentLoginState extends State<MainComponentLogin> {
           ),
           Padding(
             padding: const EdgeInsets.fromLTRB(0,500,0,70),
-            child: ButtonsLogin(),
+            child: ButtonsLogin(this.widget.list),
           )
         ]
       )

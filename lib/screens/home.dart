@@ -10,6 +10,8 @@ import 'package:flutter_firebase/UI/HomeUI.dart';
 
 
 class Home extends StatefulWidget {
+  final List<Map<String, dynamic>> list;
+  Home(this.list);
   @override
   _HomeState createState() => _HomeState();
 }
@@ -27,7 +29,7 @@ class _HomeState extends State<Home> {
       if (fbUser == null) {
         authBlocFacebook.flag = 0;
         Navigator.of(context)
-            .pushReplacement(MaterialPageRoute(builder: (context) => MainComponentLogin()));
+            .pushReplacement(MaterialPageRoute(builder: (context) => MainComponentLogin(this.widget.list)));
       }
     });
     var authBlockGoogle =  Provider.of<AuthBlocGoogle>(context, listen: false);
@@ -39,7 +41,7 @@ class _HomeState extends State<Home> {
       if (event == null) {
         authBlockGoogle.flag = 0;
         Navigator.of(context)
-          .pushReplacement(MaterialPageRoute(builder: (context) => MainComponentLogin()));
+          .pushReplacement(MaterialPageRoute(builder: (context) => MainComponentLogin(this.widget.list)));
       }
     });
     super.initState();
@@ -64,7 +66,7 @@ class _HomeState extends State<Home> {
         return getGoogleUI(context);
         break;
       default:
-        return MainComponentLogin();
+        return MainComponentLogin(this.widget.list);
     }
   }
 }
