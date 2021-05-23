@@ -24,36 +24,41 @@ class ButtonSearchState extends State<ButtonSearch> {
         children: <Widget>[
           Padding(
           padding: const EdgeInsets.fromLTRB(0,530,0,0),
-          child:   FlatButton(
-            color: Colors.lightBlue,
-            child: Icon(
-              Icons.search,
-              color: Colors.white,
-              size: 30,
+          child:   Center(
+            child: FlatButton(
+              color: Colors.lightBlue,
+              child: Icon(
+                Icons.search,
+                color: Colors.white,
+                size: 30,
+              ),
+              onPressed: () {
+                Reader reader = new Reader();
+                reader.searchForWorker(this.widget.nameTyped, this.widget.passportTyped).then((value) => {
+                  if (value == null) {
+                    // message = "העובד שחיפשת אינו מופיע במערכת, נסה שוב."
+                  }
+                  else {
+                    Navigator.of(context).push(MaterialPageRoute(builder: (context)=> MainComponentFill(this.widget.list)))
+                  }
+                });
+              }
             ),
-            onPressed: () {
-              Reader reader = new Reader();
-              reader.searchForWorker(this.widget.nameTyped, this.widget.passportTyped).then((value) => {
-                if (value == new List()) {
-                  message = "העובד שחיפשת אינו מופיע במערכת, נסה שוב."
-                }
-                else {
-                  Navigator.of(context).push(MaterialPageRoute(builder: (context)=> MainComponentFill(this.widget.list)))
-                }
-              });
-            }
           ),  
         ),
-        Text(
-          message,
-          style: TextStyle(
-          fontFamily: 'Europa',
-          fontSize: 15,
-          color: const Color(0xffffffff),
-          letterSpacing: -0.3,
-          fontWeight: FontWeight.w700,
+        Padding(
+          padding: const EdgeInsets.fromLTRB(20,0,20,50),
+          child: Text(
+            message,
+            style: TextStyle(
+            fontFamily: 'Europa',
+            fontSize: 15,
+            color: const Color(0xffffffff),
+            letterSpacing: -0.3,
+            fontWeight: FontWeight.w700,
+            ),
+            textAlign: TextAlign.center,
           ),
-          textAlign: TextAlign.center,
         ),
         ],
       ),

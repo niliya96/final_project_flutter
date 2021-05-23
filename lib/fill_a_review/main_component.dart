@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_firebase/fill_a_review/rating_format.dart';
 import 'package:flutter_firebase/fill_a_review/selection_format.dart';
+import 'package:flutter_firebase/fill_a_review/text_format.dart';
 
 class MainComponentFill extends StatefulWidget {
   final List<Map<String, dynamic>> list;
@@ -19,7 +20,7 @@ class MainComponentFillState extends State<MainComponentFill> {
       // rating format
       Widget _child;
       if (this.widget.list[0]['kind'].toString() == 'rating') {
-          _child =  RatingFormat((rating) {
+        _child =  RatingFormat((rating) {
           setState(() {
             _rating = rating;
           });
@@ -28,30 +29,25 @@ class MainComponentFillState extends State<MainComponentFill> {
       // choose format
       else if (this.widget.list[0]['kind'].toString() == 'choose') {
         List<dynamic> options = this.widget.list[0]['options'];
-        _child = SelectionFormat(this.widget.index, this.widget.list, options);
+         _child = SelectionFormat(this.widget.index, this.widget.list, options);
       }
       // text format
       else if (this.widget.list[0]['kind'].toString() == 'text') {
-
+        _child = TextFormat(this.widget.index, this.widget.list);
       }
-      return Scaffold(
-        backgroundColor: const Color(0xff353549),
-        appBar: AppBar(          
-          backgroundColor: Colors.lightBlue,
-        ),
-        body: Stack(children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.fromLTRB(80, 0, 80, 100),
-              child: _child
-          ),
-        ]
-      )
-    );
-
+      return _child;
   }
 
   @override
   Widget build(BuildContext context) {
-    return factory();
+      var scaffold = Scaffold(
+        backgroundColor: const Color(0xff353549),
+        //appBar: AppBar(          
+        //  backgroundColor: Colors.lightBlue,
+        //),
+        body: factory()
+      );
+      return scaffold;
   }
+
 }

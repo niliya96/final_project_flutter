@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_firebase/blocs/auth_bloc_facebook.dart';
 import 'package:flutter_firebase/login/main_component.dart';
+import 'package:flutter_firebase/search/main_component.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_firebase/blocs/auth_bloc_google.dart';
 import 'package:flutter_firebase/UI/HomeUI.dart';
@@ -23,7 +24,8 @@ class _HomeState extends State<Home> {
   void initState() {
     var authBlocFacebook = Provider.of<AuthBlocFacebook>(context, listen: false);
     if (authBlocFacebook.flag == 1) {
-      generalFlag = 1;
+       Navigator.of(context)
+            .pushReplacement(MaterialPageRoute(builder: (context) => MainComponentSearch(this.widget.list)));
     }
     homeStateSubscription = authBlocFacebook.currentUser.listen((fbUser) {
       if (fbUser == null) {
@@ -35,6 +37,8 @@ class _HomeState extends State<Home> {
     var authBlockGoogle =  Provider.of<AuthBlocGoogle>(context, listen: false);
     if (authBlockGoogle.flag == 1) {
       generalFlag = 2;
+       Navigator.of(context)
+            .pushReplacement(MaterialPageRoute(builder: (context) => MainComponentSearch(this.widget.list)));
     }
     // the case that the user loged out
     homeStateSubscription = authBlockGoogle.currentUser.listen((event) {
@@ -60,10 +64,10 @@ class _HomeState extends State<Home> {
      */
     switch(generalFlag) {
       case 1:
-        return getFacebookUI(context);
+        return MainComponentSearch(this.widget.list);
         break;
       case 2:
-        return getGoogleUI(context);
+        return MainComponentSearch(this.widget.list);
         break;
       default:
         return MainComponentLogin(this.widget.list);

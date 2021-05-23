@@ -1,72 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_firebase/fill_a_review/rating_format.dart';
-import 'package:flutter_firebase/fill_a_review/text_format.dart';
+import 'package:flutter_firebase/fill_a_review/selection_format.dart';
 import 'package:flutter_firebase/search/main_component.dart';
- 
- class Option {
-  int id;
-  String name;
- 
-  Option(this.id, this.name);
- 
-  static List<Option> createData(List<dynamic> lst) {
-    int i = 0;
-    List<Option> ret = [];
-    lst.forEach((element) {
-      ret.add(new Option(i, lst[i]));
-      i++;
-    });
-    return ret;
-  }
-}
 
-class SelectionFormat extends StatefulWidget {
+class TextFormat extends StatefulWidget {
   int index;
   final List<Map<String, dynamic>> list;
-  final List<dynamic> options;
   
-  SelectionFormat(this.index, this.list, this.options) : super();
+  TextFormat(this.index, this.list) : super();
 
   @override
-  SelectionFormatState createState() => SelectionFormatState();
+  TextFormatState createState() => TextFormatState();
 }
  
-class SelectionFormatState extends State<SelectionFormat> {
+class TextFormatState extends State<TextFormat> {
   int _rating;
-
-  @override
-  void initState() {
-    List<Option> _options = Option.createData(this.widget.options);
-    _dropdownMenuItems = buildDropdownMenuItems(_options);
-    _selectedOption = _dropdownMenuItems[0].value;
-    super.initState();
-  }
-  
-  List<DropdownMenuItem<Option>> _dropdownMenuItems;
-  Option _selectedOption;
- 
-  List<DropdownMenuItem<Option>> buildDropdownMenuItems(List options) {
-    List<DropdownMenuItem<Option>> items = List();
-    for (Option option in options) {
-      items.add(
-        DropdownMenuItem(
-          value: option,
-          child: Text(option.name),
-        ),
-      );
-    }
-    return items;
-  }
- 
-  onChangeDropdownItem(Option selectedOption) {
-    setState(() {
-      _selectedOption = selectedOption;
-    });
-  }
- 
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
+     return new Scaffold(
         backgroundColor: const Color(0xff353549),
         appBar: new AppBar(
            backgroundColor: Colors.lightBlue,
@@ -99,11 +50,19 @@ class SelectionFormatState extends State<SelectionFormat> {
                   width: 0.0,
                   height: 10.0,
                   ),
-                DropdownButton(
-                  dropdownColor: Colors.amber[700],
-                  value: _selectedOption,
-                  items: _dropdownMenuItems,
-                  onChanged: onChangeDropdownItem,
+                Padding(
+                  padding: const EdgeInsets.only(left: 20, right: 20),
+                  child: TextFormField(
+                    decoration: InputDecoration(
+                    labelText: 'הוסף טקסט חופשי',
+                    border: OutlineInputBorder(),
+                  ),
+                  validator: (value) {
+
+                  },
+              maxLines: 5,
+              maxLength: 500,
+              ),
                 ),
                 SizedBox(
                   width: 0.0,
@@ -180,12 +139,12 @@ class SelectionFormatState extends State<SelectionFormat> {
                               List<dynamic> options = this.widget.list[this.widget.index]['options'];
                               Navigator.of(context).push(MaterialPageRoute(builder: (context)=> SelectionFormat(this.widget.index, this.widget.list, options)),
                               );
-                            } 
+                            }
                             // text format
                             else if (this.widget.list[this.widget.index]['kind'].toString() == 'text') {
                               Navigator.of(context).push(MaterialPageRoute(builder: (context)=> TextFormat(this.widget.index, this.widget.list)),
                               );
-                            }               
+                            }                 
                           }
                           else {
                             print("end");

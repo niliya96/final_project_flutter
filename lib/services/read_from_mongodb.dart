@@ -19,6 +19,9 @@ class Reader {
       await db.open();
       final coll = db.collection('workers');
       var response = await coll.find({"passport": passport, "name": name}).toList();
+      if (response.isEmpty) {
+        return null;
+      }
       // null or not
       return response;
     }

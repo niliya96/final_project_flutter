@@ -34,7 +34,7 @@ class MyApp extends StatelessWidget {
           brightness: Brightness.dark,
           primarySwatch: Colors.blue,
         ),
-        home: MainComponentLogin(this.list),
+        home: MainComponentSearch(this.list),
       ),
     );
   }
