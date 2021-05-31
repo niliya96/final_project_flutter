@@ -28,7 +28,7 @@ class HeadLineSearch extends StatelessWidget {
           ),
           SizedBox(
             width: 0.0,
-            height: 30.0,
+            height: 50.0,
           ),
           Center (
            child: Text(
@@ -36,7 +36,7 @@ class HeadLineSearch extends StatelessWidget {
                 style: TextStyle(
                   fontFamily: 'Europa',
                   fontSize: 30,
-                  color: const Color(0xffffffff),
+                  color: Color.fromRGBO(0, 48, 80, 50),
                   fontWeight: FontWeight.w700,
                   height: 1.1666666666666667,
                 ),

@@ -26,7 +26,7 @@ class ButtonSearchState extends State<ButtonSearch> {
           padding: const EdgeInsets.fromLTRB(0,530,0,0),
           child:   Center(
             child: FlatButton(
-              color: Colors.lightBlue,
+              color: Color.fromRGBO(0, 48, 80, 50),
               child: Icon(
                 Icons.search,
                 color: Colors.white,

@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+/**import 'package:flutter/material.dart';
 
 
 class InputFormatsSearch extends StatefulWidget {
@@ -25,7 +25,7 @@ class InputFormatsSearchState extends State<InputFormatsSearch> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                buildName(),
+                //buildName(),
                 const SizedBox(height: 15),
                 buildPassport(),
               ]
@@ -41,11 +41,6 @@ class InputFormatsSearchState extends State<InputFormatsSearch> {
         decoration: InputDecoration(
           labelText: 'שם מלא',
           border: OutlineInputBorder(),
-            errorBorder:
-               OutlineInputBorder(borderSide: BorderSide(color: Colors.purple)),
-           focusedErrorBorder:
-               OutlineInputBorder(borderSide: BorderSide(color: Colors.purple)),
-           errorStyle: TextStyle(color: Colors.purple),
         ),
         validator: (value) {
           if (value.length < 0) {
@@ -67,14 +62,12 @@ class InputFormatsSearchState extends State<InputFormatsSearch> {
     Widget buildPassport() { 
      return TextFormField(
         decoration: InputDecoration(
+          fillColor: Color.fromRGBO(0, 48, 80, 50),
+          focusColor: Color.fromRGBO(0, 48, 80, 50),
+          hoverColor: Color.fromRGBO(0, 48, 80, 50),
           labelText: 'מספר דרכון',
           border: OutlineInputBorder(
           ),
-          errorBorder:
-               OutlineInputBorder(borderSide: BorderSide(color: Colors.purple)),
-          focusedErrorBorder:
-               OutlineInputBorder(borderSide: BorderSide(color: Colors.purple)),
-          errorStyle: TextStyle(color: Colors.purple),
         ),
         validator: (value) {
           if (value.length < 9) {
@@ -92,3 +85,4 @@ class InputFormatsSearchState extends State<InputFormatsSearch> {
       );
     }
 }
+**/
