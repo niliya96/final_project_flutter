@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_firebase/fill_a_review/selection_format.dart';
 import 'package:flutter_firebase/fill_a_review/text_format.dart';
+import 'package:flutter_firebase/home/home.dart';
 import 'package:flutter_firebase/search/main_component.dart';
 
 class RatingFormat extends StatefulWidget {
@@ -18,6 +19,7 @@ class RatingFormat extends StatefulWidget {
 class RatingFormatState extends State<RatingFormat> {
   int _currentRating = 0;
   int _rating;
+  int _currentIndex = 0;
 
   Widget _buildRatingStar(int index) {
     if (index < _currentRating) {
@@ -50,10 +52,65 @@ class RatingFormatState extends State<RatingFormat> {
         ),
       );
     });
-      return Scaffold(
-        backgroundColor: const Color(0xff353549),
+    return Scaffold(
+        backgroundColor: const Color(0xffffffff),
         appBar: AppBar(          
-          backgroundColor: Colors.lightBlue,
+          backgroundColor: Color.fromRGBO(67, 232, 137, 50),
+        ),
+        bottomNavigationBar: BottomNavigationBar(
+          backgroundColor: Color.fromRGBO(67, 232, 137, 50),
+          currentIndex: _currentIndex,
+          iconSize: 30,
+          selectedFontSize: 15,
+          unselectedFontSize: 10,
+          type: BottomNavigationBarType.fixed,
+          items: [
+            BottomNavigationBarItem(
+              icon: Icon(Icons.home,
+              color: Color.fromRGBO(0, 48, 80, 50)),
+              title: Text(
+                "בית",
+                style: TextStyle(color: Color.fromRGBO(0, 48, 80, 50)),
+              ),
+              backgroundColor: Color.fromRGBO(67, 232, 137, 50),
+            ),
+                BottomNavigationBarItem(
+              icon: Icon(Icons.save,
+              color: Color.fromRGBO(0, 48, 80, 50)),
+              title: Text(
+                "שמור",
+                style: TextStyle(color: Color.fromRGBO(0, 48, 80, 50)),
+              ),
+              backgroundColor: Color.fromRGBO(67, 232, 137, 50),
+            ),
+          ],
+          onTap: (index) async{
+            setState(() {
+              _currentIndex = index;
+            });
+            if (_currentIndex == 0) {
+              await showDialog(
+                context: context,
+                builder: (ctx) => AlertDialog(
+                  title: Text("חזור למסך הבית",
+                  textAlign: TextAlign.right,),
+                  content: Text('האם אתה בטוח שברצונך למחוק את החוו"ד שמילאת?',
+                  textAlign: TextAlign.right),
+                  actions: <Widget>[
+                    FlatButton(
+                      onPressed: () {
+                        Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context)=> HomeScreen(this.widget.list)));
+                      },
+                      child: Text("חזור למסך הבית"),
+                    ),
+                  ],
+                ),
+              );
+            }
+            else if (_currentIndex == 1) {
+              Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context)=> MainComponentSearch(this.widget.list)));
+            }
+          },
         ),
         body: Padding(
           padding: const EdgeInsets.only(top: 200),
@@ -64,7 +121,7 @@ class RatingFormatState extends State<RatingFormat> {
                 style: TextStyle(
                   fontFamily: 'Europa',
                   fontSize: 30,
-                  color: const Color(0xffffffff),
+                  color: const Color.fromRGBO(0, 48, 80, 50),
                   fontWeight: FontWeight.w700,
                   height: 1.1666666666666667,
                 ),
@@ -72,7 +129,7 @@ class RatingFormatState extends State<RatingFormat> {
                 textAlign: TextAlign.center,
               ),
             Divider(
-                color: const Color(0xffffffff),
+                color: const Color.fromRGBO(0, 48, 80, 50),
                 thickness: 1,
                 indent: 60,
                 endIndent: 60,
@@ -93,7 +150,7 @@ class RatingFormatState extends State<RatingFormat> {
                 style: TextStyle(
                   fontFamily: 'Europa',
                   fontSize: 18,
-                  color: const Color(0xffffffff),
+                  color: const Color.fromRGBO(0, 48, 80, 50),
                   height: 1.3888888888888888,
                   )
                 ),
@@ -114,7 +171,7 @@ class RatingFormatState extends State<RatingFormat> {
                Padding(
                  padding: const EdgeInsets.only(left:50),
                  child: FlatButton(
-                      color: Colors.lightBlue,
+                      color: const Color.fromRGBO(0, 48, 80, 50),
                       child: Icon(
                       Icons.arrow_back_ios,
                       color: Colors.white,
@@ -156,7 +213,7 @@ class RatingFormatState extends State<RatingFormat> {
                     Padding(
                       padding: const EdgeInsets.only(right: 50),
                       child: FlatButton(
-                      color: Colors.lightBlue,
+                      color: const Color.fromRGBO(0, 48, 80, 50),
                       child: Icon(
                       Icons.arrow_forward_ios,
                       color: Colors.white,

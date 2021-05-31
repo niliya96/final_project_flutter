@@ -22,9 +22,10 @@ class MainComponentSearchState extends State<MainComponentSearch> {
   @override
   Widget build(BuildContext context) {
       //InputFormatsSearch input= new InputFormatsSearch("", "");
-      int _currentIndex = 0;
+      int _currentIndex = 1;
       // main Scaffold 
-      var scaffold = Scaffold(
+        var scaffold = Scaffold(
+        resizeToAvoidBottomInset: false,
             backgroundColor: Colors.white,
             appBar: AppBar(
               backgroundColor: Color.fromRGBO(67, 232, 137, 50)
@@ -37,6 +38,7 @@ class MainComponentSearchState extends State<MainComponentSearch> {
                   child: Container(child: Column(
                     children: [
                       buildPassport(),
+                      auth()
                     ],
                   )),
                 ),
@@ -49,6 +51,7 @@ class MainComponentSearchState extends State<MainComponentSearch> {
                 iconSize: 30,
                 selectedFontSize: 15,
                 unselectedFontSize: 10,
+                type: BottomNavigationBarType.fixed,
                 items: [
                   BottomNavigationBarItem(
                     icon: Icon(Icons.home,
@@ -114,6 +117,34 @@ class MainComponentSearchState extends State<MainComponentSearch> {
           hoverColor: Color.fromRGBO(0, 48, 80, 50),
           filled: true,
           labelText: 'מספר דרכון',
+          border: OutlineInputBorder(
+              
+          ),
+        ),
+        validator: (value) {
+          if (value.length < 9) {
+            return 'מספר דרכון חייב להכיל בדיוק 9 ספרות';
+          } else {
+            return null;
+          }
+        },
+        maxLength: 9,
+         onChanged: (value) => setState(() {
+            passport = value;
+            this.widget.passportTyped = value;
+          }
+        ),
+      );
+    }
+
+     Widget auth() { 
+     return TextFormField(
+        decoration: InputDecoration(
+          fillColor: Color.fromRGBO(0, 48, 80, 50),
+          focusColor: Color.fromRGBO(0, 48, 80, 50),
+          hoverColor: Color.fromRGBO(0, 48, 80, 50),
+          filled: true,
+          labelText: 'אימות',
           border: OutlineInputBorder(
               
           ),

@@ -41,7 +41,7 @@ class MainComponentFillState extends State<MainComponentFill> {
   @override
   Widget build(BuildContext context) {
       var scaffold = Scaffold(
-        backgroundColor: const Color(0xff353549),
+        backgroundColor: const Color(0xffffffff),
         //appBar: AppBar(          
         //  backgroundColor: Colors.lightBlue,
         //),

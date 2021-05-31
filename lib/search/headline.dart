@@ -20,30 +20,29 @@ class HeadLineSearch extends StatelessWidget {
                 height: 270.0,
                 decoration: BoxDecoration(
                   image: DecorationImage(
-                    image: const AssetImage('assets/images/image2.jfif'),
+                    image: const AssetImage('assets/images/search.jfif'),
                     fit: BoxFit.fill,
                   ),
                 ),
             ),
           ),
-          SizedBox(
-            width: 0.0,
-            height: 50.0,
-          ),
-          Center (
-           child: Text(
-                'חפש עובד',
-                style: TextStyle(
-                  fontFamily: 'Europa',
-                  fontSize: 30,
-                  color: Color.fromRGBO(0, 48, 80, 50),
-                  fontWeight: FontWeight.w700,
-                  height: 1.1666666666666667,
+          Padding(
+            padding: const EdgeInsets.only(top:80),
+            child: Center (
+             child: Text(
+                  'חפש עובד',
+                  style: TextStyle(
+                    fontFamily: 'Europa',
+                    fontSize: 30,
+                    color: Color.fromRGBO(0, 48, 80, 50),
+                    fontWeight: FontWeight.w700,
+                    height: 1.1666666666666667,
+                  ),
+                  textHeightBehavior:
+                      TextHeightBehavior(applyHeightToFirstAscent: false),
+                  textAlign: TextAlign.center,
                 ),
-                textHeightBehavior:
-                    TextHeightBehavior(applyHeightToFirstAscent: false),
-                textAlign: TextAlign.center,
-              ),
+            ),
           ),
       ]
     );

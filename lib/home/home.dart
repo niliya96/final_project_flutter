@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_firebase/fill_a_review/main_component.dart';
 import 'package:flutter_firebase/search/main_component.dart';
 
 import 'home_UI.dart';
@@ -18,6 +19,7 @@ class HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
       var scaffold = Scaffold(
+        resizeToAvoidBottomInset: false,
         backgroundColor: Colors.white,
         appBar: AppBar(          
           backgroundColor: Color.fromRGBO(67, 232, 137, 50)
@@ -29,6 +31,7 @@ class HomeScreenState extends State<HomeScreen> {
           iconSize: 30,
           selectedFontSize: 15,
           unselectedFontSize: 10,
+          type: BottomNavigationBarType.fixed,
           items: [
             BottomNavigationBarItem(
               icon: Icon(Icons.home,
@@ -78,7 +81,7 @@ class HomeScreenState extends State<HomeScreen> {
               Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context)=> MainComponentSearch(this.widget.list)));
             }
             else if (_currentIndex == 2) {
-              print(2);
+              Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context)=> MainComponentFill(this.widget.list)));
             }
           },
         ),

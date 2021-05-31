@@ -18,9 +18,9 @@ class TextFormatState extends State<TextFormat> {
   @override
   Widget build(BuildContext context) {
      return new Scaffold(
-        backgroundColor: const Color(0xff353549),
+        backgroundColor: const Color(0xffffffff),
         appBar: new AppBar(
-           backgroundColor: Colors.lightBlue,
+           backgroundColor: Color.fromRGBO(67, 232, 137, 50),
         ),
         body: new Container(
           child: Center(
@@ -33,7 +33,7 @@ class TextFormatState extends State<TextFormat> {
                       style: TextStyle(
                         fontFamily: 'Europa',
                         fontSize: 30,
-                        color: const Color(0xffffffff),
+                        color: const Color.fromRGBO(0, 48, 80, 50),
                         fontWeight: FontWeight.w700,
                         height: 1.1666666666666667,
                       ),
@@ -41,7 +41,7 @@ class TextFormatState extends State<TextFormat> {
                       textAlign: TextAlign.center,
                     ),
                 Divider(
-                      color: const Color(0xffffffff),
+                      color: const Color.fromRGBO(0, 48, 80, 50),
                       thickness: 1,
                       indent: 120,
                       endIndent: 120,
@@ -74,7 +74,7 @@ class TextFormatState extends State<TextFormat> {
                Padding(
                  padding: const EdgeInsets.only(left:50),
                  child: FlatButton(
-                      color: Colors.lightBlue,
+                      color: const Color.fromRGBO(0, 48, 80, 50),
                       child: Icon(
                       Icons.arrow_back_ios,
                       color: Colors.white,
@@ -116,7 +116,7 @@ class TextFormatState extends State<TextFormat> {
                     Padding(
                       padding: const EdgeInsets.only(right: 50),
                       child: FlatButton(
-                      color: Colors.lightBlue,
+                      color: const Color.fromRGBO(0, 48, 80, 50),
                       child: Icon(
                       Icons.arrow_forward_ios,
                       color: Colors.white,
