@@ -21,7 +21,8 @@ class HomeScreenState extends State<HomeScreen> {
       var scaffold = Scaffold(
         resizeToAvoidBottomInset: false,
         backgroundColor: Colors.white,
-        appBar: AppBar(          
+        appBar: AppBar(    
+          automaticallyImplyLeading: false,        
           backgroundColor: Color.fromRGBO(67, 232, 137, 50)
         ),
         body: createHeadline(),
