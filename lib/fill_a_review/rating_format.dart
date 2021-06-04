@@ -1,17 +1,20 @@
+import 'dart:collection';
 import 'package:flutter/material.dart';
+import 'package:flutter_firebase/fill_a_review/details_fill.dart';
 import 'package:flutter_firebase/fill_a_review/selection_format.dart';
 import 'package:flutter_firebase/fill_a_review/text_format.dart';
 import 'package:flutter_firebase/home/home.dart';
-import 'package:flutter_firebase/search/main_component.dart';
+import 'complete_fill.dart';
 
 class RatingFormat extends StatefulWidget {
-  final int maximumRating;
+  final int maximumRating = 5;
   final Function(int) onRatingSelected;
   final List<Map<String, dynamic>> list;
+  List<Map<String, String>> answers;
   int current_question;
 
-  RatingFormat(this.onRatingSelected, this.list, this.current_question,
-      [this.maximumRating = 5]);
+  RatingFormat(
+      this.onRatingSelected, this.list, this.current_question, this.answers);
 
   @override
   RatingFormatState createState() => RatingFormatState();
@@ -28,6 +31,19 @@ class RatingFormatState extends State<RatingFormat> {
       return Icon(Icons.star, size: 50, color: Colors.amber[700]);
     } else {
       return Icon(Icons.star, size: 50, color: Colors.amber[100]);
+    }
+  }
+
+  void addAnswer() {
+    Map<String, String> answer = new HashMap<String, String>();
+    answer.putIfAbsent(this.widget.current_question.toString(),
+        () => _currentRating.toString());
+    this.widget.answers.add(answer);
+  }
+
+  void deleteAnswer() {
+    if (!this.widget.answers.isEmpty) {
+      this.widget.answers.removeLast();
     }
   }
 
@@ -52,6 +68,10 @@ class RatingFormatState extends State<RatingFormat> {
                   ),
                 ),
                 onPressed: () {
+                  /**
+                   * update list of answers
+                   */
+                  addAnswer();
                   // not first format
                   if (this.widget.current_question > 0) {
                     this.widget.current_question--;
@@ -61,15 +81,14 @@ class RatingFormatState extends State<RatingFormat> {
                             .list[this.widget.current_question]['kind']
                             .toString() ==
                         'rating') {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                            builder: (context) => RatingFormat((rating) {
-                                  setState(() {
-                                    _rating = rating;
-                                  });
-                                }, this.widget.list,
-                                    this.widget.current_question, 5)),
-                      );
+                      Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => RatingFormat((rating) {
+                          setState(() {
+                            _rating = rating;
+                          });
+                        }, this.widget.list, this.widget.current_question,
+                            this.widget.answers),
+                      ));
                     }
                     // choose case
                     else if (this
@@ -85,7 +104,8 @@ class RatingFormatState extends State<RatingFormat> {
                             builder: (context) => SelectionFormat(
                                 this.widget.current_question,
                                 this.widget.list,
-                                options)),
+                                options,
+                                this.widget.answers)),
                       );
                     }
                     // text format
@@ -98,7 +118,8 @@ class RatingFormatState extends State<RatingFormat> {
                         MaterialPageRoute(
                             builder: (context) => TextFormat(
                                 this.widget.current_question,
-                                this.widget.list)),
+                                this.widget.list,
+                                this.widget.answers)),
                       );
                     }
                   }
@@ -106,7 +127,7 @@ class RatingFormatState extends State<RatingFormat> {
                   else {
                     Navigator.of(context).push(MaterialPageRoute(
                         builder: (context) =>
-                            MainComponentSearch(this.widget.list)));
+                            DetailsFill(this.widget.list, this.widget.answers)));
                   }
                 }),
           ),
@@ -136,6 +157,10 @@ class RatingFormatState extends State<RatingFormat> {
                   ),
                 ),
                 onPressed: () {
+                  /**
+                   * update list of answers
+                   */
+                  deleteAnswer();
                   this.widget.current_question++;
                   if (this.widget.current_question < this.widget.list.length) {
                     // rating bar case
@@ -144,15 +169,14 @@ class RatingFormatState extends State<RatingFormat> {
                             .list[this.widget.current_question]['kind']
                             .toString() ==
                         'rating') {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                            builder: (context) => RatingFormat((rating) {
-                                  setState(() {
-                                    _rating = rating;
-                                  });
-                                }, this.widget.list,
-                                    this.widget.current_question, 5)),
-                      );
+                      Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => RatingFormat((rating) {
+                          setState(() {
+                            _rating = rating;
+                          });
+                        }, this.widget.list, this.widget.current_question,
+                            this.widget.answers),
+                      ));
                     }
                     // choose case
                     else if (this
@@ -168,7 +192,8 @@ class RatingFormatState extends State<RatingFormat> {
                             builder: (context) => SelectionFormat(
                                 this.widget.current_question,
                                 this.widget.list,
-                                options)),
+                                options,
+                                this.widget.answers)),
                       );
                     }
                     // text format
@@ -177,15 +202,16 @@ class RatingFormatState extends State<RatingFormat> {
                             .list[this.widget.current_question]['kind']
                             .toString() ==
                         'text') {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                            builder: (context) => TextFormat(
-                                this.widget.current_question,
-                                this.widget.list)),
-                      );
+                      Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => TextFormat(
+                            this.widget.current_question,
+                            this.widget.list,
+                            this.widget.answers),
+                      ));
                     }
                   } else {
-                    print("end");
+                       Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => CompleteFillReview(this.widget.list, this.widget.answers)));
                   }
                 }),
           ),
@@ -232,7 +258,7 @@ class RatingFormatState extends State<RatingFormat> {
           this.widget.list[this.widget.current_question]['text'].toString(),
           style: TextStyle(
             fontFamily: 'Europa',
-            fontSize: 30,
+            fontSize: 25,
             color: const Color.fromRGBO(0, 48, 80, 50),
             fontWeight: FontWeight.w700,
             height: 1.1666666666666667,
@@ -273,7 +299,7 @@ class RatingFormatState extends State<RatingFormat> {
           },
         ),
         Padding(
-          padding: const EdgeInsets.only(left:80, right:80),
+          padding: const EdgeInsets.only(left: 80, right: 80),
           child: CheckboxListTile(
               value: _checked,
               controlAffinity: ListTileControlAffinity.platform,
@@ -285,7 +311,7 @@ class RatingFormatState extends State<RatingFormat> {
                 style: TextStyle(
                   fontFamily: 'Europa',
                   fontSize: 15,
-                  color:  const Color.fromRGBO(0, 48, 80, 50),
+                  color: const Color.fromRGBO(0, 48, 80, 50),
                   fontWeight: FontWeight.w700,
                   height: 1.3888888888888888,
                 ),
@@ -302,9 +328,19 @@ class RatingFormatState extends State<RatingFormat> {
         ),
         SizedBox(
           width: 0.0,
-          height: 50.0,
+          height: 30.0,
         ),
         createRoute(),
+        SizedBox(height: 25),
+        Padding(
+          padding: const EdgeInsets.only(left: 90, right: 90),
+          child: LinearProgressIndicator(
+            value: (this.widget.current_question+1)/(this.widget.list.length),
+            minHeight: 10,
+            //backgroundColor: Color.fromRGBO(67, 232, 137, 50),
+            valueColor:  AlwaysStoppedAnimation<Color>(Color.fromRGBO(67, 232, 137, 10))
+          ),
+        )
       ],
     );
   }
@@ -369,7 +405,7 @@ class RatingFormatState extends State<RatingFormat> {
             );
           } else if (_currentIndexInBar == 1) {
             Navigator.of(context).pushReplacement(MaterialPageRoute(
-                builder: (context) => MainComponentSearch(this.widget.list)));
+                builder: (context) => DetailsFill(this.widget.list, this.widget.answers)));
           }
         },
       ),

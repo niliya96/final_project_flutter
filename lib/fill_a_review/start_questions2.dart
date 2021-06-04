@@ -5,7 +5,8 @@ import 'details_fill.dart';
 
 class StartQuestions2 extends StatefulWidget {
   final List<Map<String, dynamic>> list;
-  StartQuestions2(this.list);
+  List<Map<String, String>> answers;
+  StartQuestions2(this.list, this.answers);
   int index = 0;
 
   @override
@@ -127,7 +128,7 @@ class StartQuestionsState2 extends State<StartQuestions2> {
               ),
               highlightColor: Color.fromRGBO(0, 48, 80, 30),
               onPressed: () {
-                Navigator.of(context).push(MaterialPageRoute(builder: (context)=> DetailsFill(this.widget.list)));              
+                Navigator.of(context).push(MaterialPageRoute(builder: (context)=> DetailsFill(this.widget.list, this.widget.answers)));              
               }),
             ),
           ),  

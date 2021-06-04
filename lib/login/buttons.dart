@@ -31,7 +31,7 @@ class ButtonsLoginState extends State<ButtonsLogin> {
         authBlocFacebook.currentUser.listen((fbUser) {
       if (fbUser != null) {
         Navigator.of(context).pushReplacement(MaterialPageRoute(
-            builder: (context) => HomeScreen(this.widget.list)));
+            builder: (context) => Home(this.widget.list)));
       }
     });
     // the case that the sign in with google was successful

@@ -3,6 +3,7 @@ import 'package:flutter_firebase/fill_a_review/start_questions.dart';
 
 class MainComponentFill extends StatefulWidget {
   final List<Map<String, dynamic>> list;
+  List<Map<String, String>> answers = [];
   MainComponentFill(this.list);
   int index = 0;
 
@@ -16,7 +17,7 @@ class MainComponentFillState extends State<MainComponentFill> {
   Widget build(BuildContext context) {
       var scaffold = Scaffold(
         backgroundColor: const Color(0xffffffff),
-        body: StartQuestions(this.widget.list)
+        body: StartQuestions(this.widget.list, this.widget.answers)
       );
       return scaffold;
   }

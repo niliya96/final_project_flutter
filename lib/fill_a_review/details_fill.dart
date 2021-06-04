@@ -10,7 +10,8 @@ class DetailsFill extends StatefulWidget {
   String nameTyped = '';
   String nationTyped = '';
   final List<Map<String, dynamic>> list;
-  DetailsFill(this.list);
+  List<Map<String, String>> answers;
+  DetailsFill(this.list, this.answers);
   int index = 0;
 
   @override
@@ -171,17 +172,18 @@ class DetailsFillState extends State<DetailsFill> {
                               setState(() {
                                 _rating = rating;
                               });
-                            }, this.widget.list, this.widget.index, 5)),
+                            }, this.widget.list, this.widget.index,
+                                this.widget.answers)),
                   );
                 } else if (this.widget.list[0]['kind'].toString() == 'choose') {
                   List<dynamic> options = this.widget.list[0]['options'];
                   Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => SelectionFormat(
-                          this.widget.index, this.widget.list, options)));
+                      builder: (context) => SelectionFormat(this.widget.index,
+                          this.widget.list, options, this.widget.answers)));
                 } else if (this.widget.list[0]['kind'].toString() == 'text') {
                   Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) =>
-                          TextFormat(this.widget.index, this.widget.list)));
+                      builder: (context) => TextFormat(this.widget.index,
+                          this.widget.list, this.widget.answers)));
                 }
               }),
         ),

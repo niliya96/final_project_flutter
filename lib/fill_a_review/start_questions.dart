@@ -4,7 +4,8 @@ import 'package:flutter_firebase/home/home.dart';
 
 class StartQuestions extends StatefulWidget {
   final List<Map<String, dynamic>> list;
-  StartQuestions(this.list);
+  List<Map<String, String>> answers;
+  StartQuestions(this.list, this.answers);
   int index = 0;
 
   @override
@@ -13,7 +14,16 @@ class StartQuestions extends StatefulWidget {
 
 class StartQuestionsState extends State<StartQuestions> {
   int _currentOptionButtomBar = 0;
-  
+
+  @override
+  void initState() {
+    sortList();
+  }
+
+  void sortList() {
+    this.widget.list.sort((a, b) => a['number'].compareTo(b['number']));
+  }
+
   Widget headLine() {
     return Stack(
       children: <Widget>[
@@ -94,7 +104,7 @@ class StartQuestionsState extends State<StartQuestions> {
               ),
               highlightColor: Color.fromRGBO(0, 48, 80, 30),
               onPressed: () {
-                Navigator.of(context).push(MaterialPageRoute(builder: (context)=> StartQuestions2(this.widget.list)));              
+                Navigator.of(context).push(MaterialPageRoute(builder: (context)=> StartQuestions2(this.widget.list, this.widget.answers)));           
               }),
             ),
           ),  

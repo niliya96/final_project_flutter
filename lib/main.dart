@@ -13,9 +13,7 @@ import 'login/main_component.dart';
 
 void main() {
   Reader reader = new Reader();
-  reader.read().then((value) => {
-    runApp(MyApp(value))
-  });
+  reader.read().then((value) => {runApp(MyApp(value))});
 }
 
 class MyApp extends StatelessWidget {
