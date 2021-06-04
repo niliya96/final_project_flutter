@@ -5,7 +5,7 @@ import 'package:flutter_firebase/fill_a_review/complete_fill.dart';
 import 'package:flutter_firebase/fill_a_review/details_fill.dart';
 import 'package:flutter_firebase/fill_a_review/rating_format.dart';
 import 'package:flutter_firebase/fill_a_review/text_format.dart';
-import 'package:flutter_firebase/home/home.dart';
+import 'package:flutter_firebase/home/home_screen.dart';
 import 'package:flutter_firebase/search/main_component.dart';
 
 class Option {

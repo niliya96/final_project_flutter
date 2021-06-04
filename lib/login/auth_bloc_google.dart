@@ -1,11 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter_firebase/services/auth_service_google.dart';
+import 'package:flutter_firebase/login/auth_service_google.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class AuthBlocGoogle {
   final authService = AuthServiceGoogle();
   final googleSignin = GoogleSignIn(scopes: ['email']);
-  int flag = 0;
+  //int flag = 0;
   Stream<FirebaseUser> get currentUser => authService.currentUser;
   // login function
   loginGoogle() async {
@@ -17,7 +17,7 @@ class AuthBlocGoogle {
         idToken: googleAuth.idToken,
         accessToken: googleAuth.accessToken
       );
-      flag = 1;
+      //flag = 1;
       //Firebase Sign in
       final result = await authService.signInWithCredential(credential);
 

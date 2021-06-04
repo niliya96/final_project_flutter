@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_firebase/fill_a_review/details_fill.dart';
 import 'package:flutter_firebase/fill_a_review/selection_format.dart';
 import 'package:flutter_firebase/fill_a_review/text_format.dart';
-import 'package:flutter_firebase/home/home.dart';
+import 'package:flutter_firebase/home/home_screen.dart';
 import 'complete_fill.dart';
 
 class RatingFormat extends StatefulWidget {

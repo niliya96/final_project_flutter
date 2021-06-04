@@ -79,6 +79,8 @@ flutter:
       - assets/images/text.jfif
       - assets/images/complete_fill.jfif
       - assets/images/complete.jfif
+      - assets/images/open1.jfif
+      - assets/images/open2.jfif
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

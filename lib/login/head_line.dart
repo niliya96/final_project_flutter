@@ -21,7 +21,7 @@ class HeadLineLogin extends StatelessWidget {
                 style: TextStyle(
                   fontFamily: 'Europa',
                   fontSize: 30,
-                  color: const Color(0xffffffff),
+                  color: Color.fromRGBO(0, 48, 80, 50),
                   fontWeight: FontWeight.w700,
                   height: 1.1666666666666667,
                 ),
@@ -39,7 +39,7 @@ class HeadLineLogin extends StatelessWidget {
                 height: 270.0,
                 decoration: BoxDecoration(
                   image: DecorationImage(
-                    image: const AssetImage('assets/images/image1.jfif'),
+                    image: const AssetImage('assets/images/open1.jfif'),
                     fit: BoxFit.fill,
                   ),
                 ),

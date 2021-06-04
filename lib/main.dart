@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_firebase/blocs/auth_bloc_facebook.dart';
-import 'package:flutter_firebase/blocs/auth_bloc_google.dart';
-import 'package:flutter_firebase/home/home.dart';
+import 'package:flutter_firebase/login/auth_bloc_google.dart';
+import 'package:flutter_firebase/home/home_screen.dart';
 import 'package:flutter_firebase/search/main_component.dart';
 import 'package:flutter_firebase/services/read_from_mongodb.dart';
 import 'package:provider/provider.dart';
@@ -33,7 +33,7 @@ class MyApp extends StatelessWidget {
           brightness: Brightness.dark,
           primarySwatch: Colors.blue,
         ),
-        home: HomeScreen(this.list),
+        home: MainComponentLogin(this.list),
       ),
     );
   }

@@ -16,47 +16,16 @@ class MainComponentLoginState extends State<MainComponentLogin> {
 
   @override
   Widget build(BuildContext context) {
-      const String button_line ='<svg viewBox="0.0 590.0 188.0 1.0" ><path transform="translate(0.0, 590.0)" d="M 0 0 L 188 0" fill="none" stroke="#d97d54" stroke-width="2" stroke-miterlimit="4" stroke-linecap="butt" /></svg>';  
       // main Scaffold 
       return Scaffold(
-      backgroundColor: const Color(0xff353549),
+      backgroundColor:  Colors.white,
       appBar: AppBar(
-        backgroundColor: Colors.lightBlue,
+         automaticallyImplyLeading: false,
+        backgroundColor:  Color.fromRGBO(67, 232, 137, 50),
       ),
       body:  Stack(
         children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.fromLTRB(0, 0, 0, 250),
-            child: Container(
-                decoration: BoxDecoration(
-                  color: Color.fromRGBO(67, 67, 89, 120)
-                ),
-            ),
-          ),  
           HeadLineLogin(),
-          Padding (
-            padding: const EdgeInsets.fromLTRB(60,430,0,200),
-            child: Text(
-              'התחבר',
-              style: TextStyle(
-                fontFamily: 'Europa',
-                fontSize: 15,
-                color: const Color(0xffffffff),
-                letterSpacing: -0.3,
-                fontWeight: FontWeight.w700,
-              ),
-              textAlign: TextAlign.center,
-            ),
-          ),
-            Pinned.fromPins(
-            Pin(size: 188.0, start: 0.0),
-            Pin(size: 1.0, middle: 0.66),
-            child: SvgPicture.string(
-              button_line,
-              allowDrawingOutsideViewBox: true,
-              fit: BoxFit.fill,
-            ),
-          ),
           Padding(
             padding: const EdgeInsets.fromLTRB(0,500,0,70),
             child: ButtonsLogin(this.widget.list),

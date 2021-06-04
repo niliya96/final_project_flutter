@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_firebase/home/home.dart';
+import 'package:flutter_firebase/home/home_screen.dart';
 import 'button_search.dart';
 import 'headline.dart';
 import 'input_formats.dart';

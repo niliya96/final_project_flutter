@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_firebase/fill_a_review/rating_format.dart';
 import 'package:flutter_firebase/fill_a_review/selection_format.dart';
 import 'package:flutter_firebase/fill_a_review/text_format.dart';
-import 'package:flutter_firebase/home/home.dart';
+import 'package:flutter_firebase/home/home_screen.dart';
 
 class DetailsFill extends StatefulWidget {
   String authTyped = '';
