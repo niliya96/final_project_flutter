@@ -1,12 +1,17 @@
+import 'dart:async';
 import 'dart:collection';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_firebase/fill_a_review/complete_fill.dart';
 import 'package:flutter_firebase/fill_a_review/details_fill.dart';
 import 'package:flutter_firebase/fill_a_review/rating_format.dart';
 import 'package:flutter_firebase/fill_a_review/text_format.dart';
 import 'package:flutter_firebase/home/home_screen.dart';
+import 'package:flutter_firebase/login/auth_bloc_google.dart';
+import 'package:flutter_firebase/login/main_component.dart';
 import 'package:flutter_firebase/search/main_component.dart';
+import 'package:provider/provider.dart';
 
 class Option {
   int id;
@@ -42,13 +47,30 @@ class SelectionFormatState extends State<SelectionFormat> {
   int _rating;
   int _currentIndexInBar = 0;
   bool _checked = false;
+  StreamSubscription<FirebaseUser> loginStateSubscription;
 
   @override
   void initState() {
     List<Option> _options = Option.createData(this.widget.options);
     _dropdownMenuItems = buildDropdownMenuItems(_options);
     _selectedOption = _dropdownMenuItems[0].value;
+    var authBloc = Provider.of<AuthBlocGoogle>(context, listen: false);
+    loginStateSubscription = authBloc.currentUser.listen((fbUser) {
+      if (fbUser == null) {
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(
+            builder: (context) => MainComponentLogin(this.widget.list),
+          ),
+        );
+      }
+    });
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    loginStateSubscription.cancel();
+    super.dispose();
   }
 
   List<DropdownMenuItem<Option>> _dropdownMenuItems;
@@ -165,8 +187,8 @@ class SelectionFormatState extends State<SelectionFormat> {
                   // first format
                   else {
                     Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) =>
-                            DetailsFill(this.widget.list, this.widget.answers)));
+                        builder: (context) => DetailsFill(
+                            this.widget.list, this.widget.answers)));
                   }
                 }),
           ),
@@ -250,7 +272,8 @@ class SelectionFormatState extends State<SelectionFormat> {
                     }
                   } else {
                     Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => CompleteFillReview(this.widget.list, this.widget.answers)));
+                        builder: (context) => CompleteFillReview(
+                            this.widget.list, this.widget.answers)));
                   }
                 }),
           ),
@@ -284,7 +307,10 @@ class SelectionFormatState extends State<SelectionFormat> {
             Padding(
               padding: const EdgeInsets.only(left: 20, right: 20),
               child: Text(
-                this.widget.list[this.widget.current_question]['text'].toString(),
+                this
+                    .widget
+                    .list[this.widget.current_question]['text']
+                    .toString(),
                 style: TextStyle(
                   fontFamily: 'Europa',
                   fontSize: 25,
@@ -342,13 +368,50 @@ class SelectionFormatState extends State<SelectionFormat> {
   }
 
   Widget _buildBody() {
+    final authBloc = Provider.of<AuthBlocGoogle>(context);
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: const Color(0xffffffff),
       appBar: AppBar(
-        automaticallyImplyLeading: false,
-        backgroundColor: Color.fromRGBO(67, 232, 137, 50),
-      ),
+          actions: [
+            Padding(
+              padding: const EdgeInsets.only(bottom: 8),
+              child: Row(
+                children: <Widget>[
+                  Text(
+                    "ברוך הבא",
+                    style: TextStyle(
+                      fontFamily: 'Europa',
+                      fontSize: 17,
+                      color: Color.fromRGBO(0, 48, 80, 50),
+                      fontWeight: FontWeight.w700,
+                      height: 1.1666666666666667,
+                    ),
+                  ),
+                  RaisedButton(
+                    onPressed: () => authBloc.logoutGoogle(),
+                    child: Text(
+                      'התנתק',
+                      style: TextStyle(
+                        fontFamily: 'Europa',
+                        fontSize: 13,
+                        color: Colors.white,
+                        fontWeight: FontWeight.w100,
+                        height: 1.1666666666666667,
+                      ),
+                    ),
+                    color: Color.fromRGBO(0, 48, 80, 50),
+                    padding: EdgeInsets.all(16),
+                    shape: CircleBorder(),
+                    //bottomOpthpacity: 0,
+                    elevation: 0,
+                  ),
+                ],
+              ),
+            ),
+          ],
+          automaticallyImplyLeading: false,
+          backgroundColor: Color.fromRGBO(67, 232, 137, 50)),
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: Color.fromRGBO(67, 232, 137, 50),
         currentIndex: _currentIndexInBar,
@@ -401,7 +464,8 @@ class SelectionFormatState extends State<SelectionFormat> {
             );
           } else if (_currentIndexInBar == 1) {
             Navigator.of(context).pushReplacement(MaterialPageRoute(
-                builder: (context) => DetailsFill(this.widget.list, this.widget.answers)));
+                builder: (context) =>
+                    DetailsFill(this.widget.list, this.widget.answers)));
           }
         },
       ),

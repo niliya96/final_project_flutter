@@ -1,9 +1,14 @@
+import 'dart:async';
 import 'dart:collection';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_firebase/fill_a_review/details_fill.dart';
 import 'package:flutter_firebase/fill_a_review/selection_format.dart';
 import 'package:flutter_firebase/fill_a_review/text_format.dart';
 import 'package:flutter_firebase/home/home_screen.dart';
+import 'package:flutter_firebase/login/auth_bloc_google.dart';
+import 'package:flutter_firebase/login/main_component.dart';
+import 'package:provider/provider.dart';
 import 'complete_fill.dart';
 
 class RatingFormat extends StatefulWidget {
@@ -25,6 +30,27 @@ class RatingFormatState extends State<RatingFormat> {
   int _rating;
   int _currentIndexInBar = 0;
   bool _checked = false;
+  StreamSubscription<FirebaseUser> loginStateSubscription;
+  @override
+  void initState() {
+    var authBloc = Provider.of<AuthBlocGoogle>(context, listen: false);
+    loginStateSubscription = authBloc.currentUser.listen((fbUser) {
+      if (fbUser == null) {
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(
+            builder: (context) => MainComponentLogin(this.widget.list),
+          ),
+        );
+      }
+    });
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    loginStateSubscription.cancel();
+    super.dispose();
+  }
 
   Widget _buildRatingStar(int index) {
     if (index < _currentRating) {
@@ -126,8 +152,8 @@ class RatingFormatState extends State<RatingFormat> {
                   // first format
                   else {
                     Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) =>
-                            DetailsFill(this.widget.list, this.widget.answers)));
+                        builder: (context) => DetailsFill(
+                            this.widget.list, this.widget.answers)));
                   }
                 }),
           ),
@@ -210,8 +236,9 @@ class RatingFormatState extends State<RatingFormat> {
                       ));
                     }
                   } else {
-                       Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => CompleteFillReview(this.widget.list, this.widget.answers)));
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => CompleteFillReview(
+                            this.widget.list, this.widget.answers)));
                   }
                 }),
           ),
@@ -335,24 +362,62 @@ class RatingFormatState extends State<RatingFormat> {
         Padding(
           padding: const EdgeInsets.only(left: 90, right: 90),
           child: LinearProgressIndicator(
-            value: (this.widget.current_question+1)/(this.widget.list.length),
-            minHeight: 10,
-            //backgroundColor: Color.fromRGBO(67, 232, 137, 50),
-            valueColor:  AlwaysStoppedAnimation<Color>(Color.fromRGBO(67, 232, 137, 10))
-          ),
+              value: (this.widget.current_question + 1) /
+                  (this.widget.list.length),
+              minHeight: 10,
+              //backgroundColor: Color.fromRGBO(67, 232, 137, 50),
+              valueColor: AlwaysStoppedAnimation<Color>(
+                  Color.fromRGBO(67, 232, 137, 10))),
         )
       ],
     );
   }
 
   Widget _buildBody() {
+    final authBloc = Provider.of<AuthBlocGoogle>(context);
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: const Color(0xffffffff),
       appBar: AppBar(
-        automaticallyImplyLeading: false,
-        backgroundColor: Color.fromRGBO(67, 232, 137, 50),
-      ),
+          actions: [
+            Padding(
+              padding: const EdgeInsets.only(bottom: 8),
+              child: Row(
+                children: <Widget>[
+                  Text(
+                    "ברוך הבא",
+                    style: TextStyle(
+                      fontFamily: 'Europa',
+                      fontSize: 17,
+                      color: Color.fromRGBO(0, 48, 80, 50),
+                      fontWeight: FontWeight.w700,
+                      height: 1.1666666666666667,
+                    ),
+                  ),
+                  RaisedButton(
+                    onPressed: () => authBloc.logoutGoogle(),
+                    child: Text(
+                      'התנתק',
+                      style: TextStyle(
+                        fontFamily: 'Europa',
+                        fontSize: 13,
+                        color: Colors.white,
+                        fontWeight: FontWeight.w100,
+                        height: 1.1666666666666667,
+                      ),
+                    ),
+                    color: Color.fromRGBO(0, 48, 80, 50),
+                    padding: EdgeInsets.all(16),
+                    shape: CircleBorder(),
+                    //bottomOpthpacity: 0,
+                    elevation: 0,
+                  ),
+                ],
+              ),
+            ),
+          ],
+          automaticallyImplyLeading: false,
+          backgroundColor: Color.fromRGBO(67, 232, 137, 50)),
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: Color.fromRGBO(67, 232, 137, 50),
         currentIndex: _currentIndexInBar,
@@ -405,7 +470,8 @@ class RatingFormatState extends State<RatingFormat> {
             );
           } else if (_currentIndexInBar == 1) {
             Navigator.of(context).pushReplacement(MaterialPageRoute(
-                builder: (context) => DetailsFill(this.widget.list, this.widget.answers)));
+                builder: (context) =>
+                    DetailsFill(this.widget.list, this.widget.answers)));
           }
         },
       ),

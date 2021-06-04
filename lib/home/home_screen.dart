@@ -50,26 +50,49 @@ class HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     final authBloc = Provider.of<AuthBlocGoogle>(context);
     var scaffold = Scaffold(
+      body: createHeadline(),
       resizeToAvoidBottomInset: false,
       backgroundColor: Colors.white,
       appBar: AppBar(
           actions: [
             Padding(
-              padding: const EdgeInsets.only(right: 320, bottom: 8),
-              child: RaisedButton(
-                onPressed: () => authBloc.logoutGoogle(),
-                child: Text('התנתק'),
-                color: Color.fromRGBO(0, 48, 80, 50),
-                padding: EdgeInsets.all(16),
-                shape: CircleBorder(),
-                //bottomOpthpacity: 0,
-                elevation: 0,
+              padding: const EdgeInsets.only(bottom: 8),
+              child: Row(
+                children: <Widget>[
+                  Text(
+                    "ברוך הבא",
+                    style: TextStyle(
+                      fontFamily: 'Europa',
+                      fontSize: 17,
+                      color: Color.fromRGBO(0, 48, 80, 50),
+                      fontWeight: FontWeight.w700,
+                      height: 1.1666666666666667,
+                    ),
+                  ),
+                  RaisedButton(
+                    onPressed: () => authBloc.logoutGoogle(),
+                    child: Text(
+                      'התנתק',
+                      style: TextStyle(
+                        fontFamily: 'Europa',
+                        fontSize: 13,
+                        color: Colors.white,
+                        fontWeight: FontWeight.w100,
+                        height: 1.1666666666666667,
+                      ),
+                    ),
+                    color: Color.fromRGBO(0, 48, 80, 50),
+                    padding: EdgeInsets.all(16),
+                    shape: CircleBorder(),
+                    //bottomOpthpacity: 0,
+                    elevation: 0,
+                  ),
+                ],
               ),
             ),
           ],
           automaticallyImplyLeading: false,
           backgroundColor: Color.fromRGBO(67, 232, 137, 50)),
-      body: createHeadline(),
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: Color.fromRGBO(67, 232, 137, 50),
         currentIndex: _currentIndex,

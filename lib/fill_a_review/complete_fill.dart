@@ -1,5 +1,11 @@
+import 'dart:async';
+
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_firebase/home/home_screen.dart';
+import 'package:flutter_firebase/login/auth_bloc_google.dart';
+import 'package:flutter_firebase/login/main_component.dart';
+import 'package:provider/provider.dart';
 import 'details_fill.dart';
 
 class CompleteFillReview extends StatefulWidget {
@@ -14,6 +20,27 @@ class CompleteFillReview extends StatefulWidget {
 
 class CompleteFillReviewState extends State<CompleteFillReview> {
   int _currentOptionButtomBar = 0;
+  StreamSubscription<FirebaseUser> loginStateSubscription;
+  @override
+  void initState() {
+    var authBloc = Provider.of<AuthBlocGoogle>(context, listen: false);
+    loginStateSubscription = authBloc.currentUser.listen((fbUser) {
+      if (fbUser == null) {
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(
+            builder: (context) => MainComponentLogin(this.widget.list),
+          ),
+        );
+      }
+    });
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    loginStateSubscription.cancel();
+    super.dispose();
+  }
 
   Widget headLine() {
     return Stack(children: <Widget>[
@@ -128,8 +155,7 @@ class CompleteFillReviewState extends State<CompleteFillReview> {
               highlightColor: Color.fromRGBO(0, 48, 80, 30),
               onPressed: () {
                 Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) =>
-                        HomeScreen(this.widget.list)));
+                    builder: (context) => HomeScreen(this.widget.list)));
               }),
         ),
       ),
@@ -138,10 +164,48 @@ class CompleteFillReviewState extends State<CompleteFillReview> {
 
   @override
   Widget build(BuildContext context) {
+    final authBloc = Provider.of<AuthBlocGoogle>(context);
     var scaffold = Scaffold(
         resizeToAvoidBottomInset: false,
         backgroundColor: Colors.white,
         appBar: AppBar(
+            actions: [
+              Padding(
+                padding: const EdgeInsets.only(bottom: 8),
+                child: Row(
+                  children: <Widget>[
+                    Text(
+                      "ברוך הבא",
+                      style: TextStyle(
+                        fontFamily: 'Europa',
+                        fontSize: 17,
+                        color: Color.fromRGBO(0, 48, 80, 50),
+                        fontWeight: FontWeight.w700,
+                        height: 1.1666666666666667,
+                      ),
+                    ),
+                    RaisedButton(
+                      onPressed: () => authBloc.logoutGoogle(),
+                      child: Text(
+                        'התנתק',
+                        style: TextStyle(
+                          fontFamily: 'Europa',
+                          fontSize: 13,
+                          color: Colors.white,
+                          fontWeight: FontWeight.w100,
+                          height: 1.1666666666666667,
+                        ),
+                      ),
+                      color: Color.fromRGBO(0, 48, 80, 50),
+                      padding: EdgeInsets.all(16),
+                      shape: CircleBorder(),
+                      //bottomOpthpacity: 0,
+                      elevation: 0,
+                    ),
+                  ],
+                ),
+              ),
+            ],
             automaticallyImplyLeading: false,
             backgroundColor: Color.fromRGBO(67, 232, 137, 50)),
         bottomNavigationBar: BottomNavigationBar(
