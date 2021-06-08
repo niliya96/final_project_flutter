@@ -96,17 +96,27 @@ class MainComponentSearchState extends State<MainComponentSearch> {
           ],
           automaticallyImplyLeading: false,
           backgroundColor: Color.fromRGBO(67, 232, 137, 50)),
-      body: Stack(children: <Widget>[
-        HeadLineSearch(),
-        Padding(
-          padding: const EdgeInsets.fromLTRB(20, 400, 20, 0),
-          child: Container(
-              child: Column(
-            children: [buildPassport(), auth()],
-          )),
+      body: Column(children: <Widget>[
+        Expanded(
+          flex: 12,
+          child: HeadLineSearch(),
         ),
-        ButtonSearch(
-            this.widget.nameTyped, this.widget.passportTyped, this.widget.list)
+        Expanded(
+          flex: 5,
+          child: Padding(
+            padding: const EdgeInsets.only(right: 15, left: 15),
+            child: Column(
+              children: <Widget>[
+                Expanded(flex: 3, child: buildPassport()),
+                Expanded(flex: 3, child: auth()),
+              ],
+            ),
+          ),
+        ),
+        Expanded(
+            flex: 5,
+            child: ButtonSearch(this.widget.nameTyped,
+                this.widget.passportTyped, this.widget.list)),
       ]),
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: Color.fromRGBO(67, 232, 137, 50),

@@ -87,7 +87,7 @@ class TextFormatState extends State<TextFormat> {
                   /**
                    * update list of answers
                    */
-                  addAnswer();
+                  deleteAnswer();
                   // not first format
                   if (this.widget.current_question > 0) {
                     this.widget.current_question--;
@@ -176,7 +176,7 @@ class TextFormatState extends State<TextFormat> {
                   /**
                    * update list of answers
                    */
-                  deleteAnswer();
+                  addAnswer();
                   this.widget.current_question++;
                   if (this.widget.current_question < this.widget.list.length) {
                     // rating bar case

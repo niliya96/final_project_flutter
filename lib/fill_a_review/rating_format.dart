@@ -62,7 +62,7 @@ class RatingFormatState extends State<RatingFormat> {
 
   void addAnswer() {
     Map<String, String> answer = new HashMap<String, String>();
-    answer.putIfAbsent(this.widget.current_question.toString(),
+    answer.putIfAbsent(this.widget.list[this.widget.current_question]['text'].toString(),
         () => _currentRating.toString());
     this.widget.answers.add(answer);
   }
@@ -97,7 +97,7 @@ class RatingFormatState extends State<RatingFormat> {
                   /**
                    * update list of answers
                    */
-                  addAnswer();
+                  deleteAnswer();
                   // not first format
                   if (this.widget.current_question > 0) {
                     this.widget.current_question--;
@@ -186,7 +186,7 @@ class RatingFormatState extends State<RatingFormat> {
                   /**
                    * update list of answers
                    */
-                  deleteAnswer();
+                  addAnswer();
                   this.widget.current_question++;
                   if (this.widget.current_question < this.widget.list.length) {
                     // rating bar case

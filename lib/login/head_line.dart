@@ -8,15 +8,14 @@ class HeadLineLogin extends StatelessWidget {
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return Stack(children: <Widget>[
-      // text
-      Container(
-        decoration: BoxDecoration(
-          
-          color: const Color(0xff7c94b6),
-          ),
-        child: Padding(
-          padding: const EdgeInsets.fromLTRB(75, 40, 75, 40),
+    return Column(children: <Widget>[
+      Expanded(
+        flex: 1,
+        child: SizedBox(),
+      ),
+      Expanded(
+        flex: 10,
+        child: Center(
           child: Text(
             'ExWorkerReviewer',
             style: TextStyle(
@@ -32,12 +31,9 @@ class HeadLineLogin extends StatelessWidget {
           ),
         ),
       ),
-      // image
-      Padding(
-        padding: const EdgeInsets.fromLTRB(0, 90, 0, 100),
+      Expanded(
+        flex: 25,
         child: Container(
-          width: 430.0,
-          height: 270.0,
           decoration: BoxDecoration(
             image: DecorationImage(
               image: const AssetImage('assets/images/open1.jfif'),
@@ -45,6 +41,10 @@ class HeadLineLogin extends StatelessWidget {
             ),
           ),
         ),
+      ),
+      Expanded(
+        flex: 10,
+        child: SizedBox(),
       ),
     ]);
   }

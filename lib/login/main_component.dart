@@ -13,26 +13,24 @@ class MainComponentLogin extends StatefulWidget {
 }
 
 class MainComponentLoginState extends State<MainComponentLogin> {
-
   @override
   Widget build(BuildContext context) {
-      // main Scaffold 
-      return Scaffold(
-      backgroundColor:  Colors.white,
-      appBar: AppBar(
-         automaticallyImplyLeading: false,
-        backgroundColor:  Color.fromRGBO(67, 232, 137, 50),
-      ),
-      body:  Stack(
-        children: <Widget>[
-          HeadLineLogin(),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(0,500,0,70),
+    // main Scaffold
+    return Scaffold(
+        backgroundColor: Colors.white,
+        appBar: AppBar(
+          automaticallyImplyLeading: false,
+          backgroundColor: Color.fromRGBO(67, 232, 137, 50),
+        ),
+        body: Column(children: <Widget>[
+          Expanded(
+            flex: 5,
+            child: HeadLineLogin(),
+          ),
+          Expanded(
+            flex: 2,
             child: ButtonsLogin(this.widget.list),
-          )
-        ]
-      )
-    );
+          ),
+        ]));
   }
 }
-

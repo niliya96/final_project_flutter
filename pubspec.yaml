@@ -44,6 +44,7 @@ dependencies:
   sevr: ^1.0.4
   dio: ^3.0.10
   faker: ^1.2.1
+  sizer: ^2.0.10
 
 dev_dependencies:
   flutter_test:

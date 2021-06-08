@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_firebase/home/home_screen.dart';
 import 'package:flutter_firebase/login/auth_bloc_google.dart';
 import 'package:flutter_firebase/login/main_component.dart';
+import 'package:flutter_firebase/services/submit_review.dart';
 import 'package:provider/provider.dart';
 import 'details_fill.dart';
 
@@ -32,6 +33,20 @@ class CompleteFillReviewState extends State<CompleteFillReview> {
           ),
         );
       }
+      /**
+       * write the data to the db
+       */
+      int index;
+      List<String> lst = [];
+      lst.add("name_of_user");
+      lst.add(authBloc.currentUser.first.toString());
+      this.widget.answers.forEach((e) {
+        e.forEach((key, value) {
+          lst.add(key.toString());
+          lst.add(value.toString());
+        });
+      });
+      onSubmitReview(lst);
     });
     super.initState();
   }

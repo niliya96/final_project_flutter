@@ -1,18 +1,15 @@
 import 'package:mongo_dart/mongo_dart.dart';
 import 'package:flutter_firebase/services/mongodb_server.dart' as server;
 
-List<String> parser(String data) {
-  List<String> lst = data.split("#");
-  return lst;
-
-}
-
-void onSubmitReview(List<String> json) async{
+void onSubmitReview(List<String> json) async {
   final db = await Db.create(
-    'mongodb+srv://muser:mbuser@cluster0.f1hwb.mongodb.net/finalProject?retryWrites=true&w=majority');
+      'mongodb+srv://muser:Aa123456@cluster0.f1hwb.mongodb.net/finalProject?retryWrites=true&w=majority');
   await db.open();
   final coll = db.collection('reviews');
   var data = <Map<String, dynamic>>[];
-  data.add({ json[0]: json[1], json[2]: json[3], json[4]: json[5]});
+  int i;
+  for (i=0; i<json.length; i+=2) {
+    data.add({json[i]: json[i+1]});
+  }
   await coll.insert(data[0], writeConcern: WriteConcern.ACKNOWLEDGED);
 }
