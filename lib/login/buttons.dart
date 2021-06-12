@@ -48,7 +48,7 @@ class ButtonsLoginState extends State<ButtonsLogin> {
 
   @override
   void dispose() {
-    loginStateSubscriptionForFacebook.cancel();
+    //loginStateSubscriptionForFacebook.cancel();
     loginStateSubscriptionForGoogle.cancel();
     super.dispose();
   }
@@ -56,7 +56,7 @@ class ButtonsLoginState extends State<ButtonsLogin> {
   @override
   Widget build(BuildContext context) {
     // variables for log in service
-    var authBlocFacebook = Provider.of<AuthBlocFacebook>(context);
+    //var authBlocFacebook = Provider.of<AuthBlocFacebook>(context);
     final authBlocGoogle = Provider.of<AuthBlocGoogle>(context);
     // logic
     return Stack(children: <Widget>[
