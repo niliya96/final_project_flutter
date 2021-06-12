@@ -82,6 +82,10 @@ flutter:
       - assets/images/complete.jfif
       - assets/images/open1.jfif
       - assets/images/open2.jfif
+      - assets/images/clean.jfif
+      - assets/images/tolarence.jfif
+      - assets/images/spare_time.jfif
+      - assets/images/cosher.jfif
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

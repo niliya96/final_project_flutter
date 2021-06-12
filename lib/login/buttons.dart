@@ -22,8 +22,8 @@ class ButtonsLoginState extends State<ButtonsLogin> {
   @override
   void initState() {
     // listener for facebook and google
-    //var authBlocFacebook =
-    //    Provider.of<AuthBlocFacebook>(context, listen: false);
+    var authBlocFacebook =
+        Provider.of<AuthBlocFacebook>(context, listen: false);
     var authBlockGoogle = Provider.of<AuthBlocGoogle>(context, listen: false);
     // the case that the sign in with facebook was successful
     /**
@@ -34,7 +34,7 @@ class ButtonsLoginState extends State<ButtonsLogin> {
             builder: (context) => Home(this.widget.list)));
       }
     });
-    **/
+    */
     // the case that the sign in with google was successful
     loginStateSubscriptionForGoogle =
         authBlockGoogle.currentUser.listen((fbUser) {
@@ -48,7 +48,7 @@ class ButtonsLoginState extends State<ButtonsLogin> {
 
   @override
   void dispose() {
-    //loginStateSubscriptionForFacebook.cancel();
+    loginStateSubscriptionForFacebook.cancel();
     loginStateSubscriptionForGoogle.cancel();
     super.dispose();
   }
@@ -56,7 +56,7 @@ class ButtonsLoginState extends State<ButtonsLogin> {
   @override
   Widget build(BuildContext context) {
     // variables for log in service
-    //var authBlocFacebook = Provider.of<AuthBlocFacebook>(context);
+    var authBlocFacebook = Provider.of<AuthBlocFacebook>(context);
     final authBlocGoogle = Provider.of<AuthBlocGoogle>(context);
     // logic
     return Stack(children: <Widget>[

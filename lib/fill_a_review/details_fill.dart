@@ -332,8 +332,7 @@ class DetailsFillState extends State<DetailsFill> {
       ),
       validator: (value) {
         if (value.length < 9) {
-          return 'מספר דרכון חייב להכיל בדיוק 9 ספרות';
-        } else {
+          print('123');
           return null;
         }
       },
