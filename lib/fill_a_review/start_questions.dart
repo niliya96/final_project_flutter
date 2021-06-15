@@ -45,7 +45,7 @@ class StartQuestionsState extends State<StartQuestions> {
   }
 
   void sortList() {
-    this.widget.list.sort((a, b) => a['number'].compareTo(b['number']));
+    this.widget.list.sort((a, b) => a['numbers'].toString().compareTo(b['numbers'].toString()));
   }
 
   Widget headLine() {

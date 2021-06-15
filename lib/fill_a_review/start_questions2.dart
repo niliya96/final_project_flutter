@@ -89,7 +89,7 @@ class StartQuestionsState2 extends State<StartQuestions2> {
       Padding(
         padding: const EdgeInsets.only(top: 360, left: 20, right: 20),
         child: Text(
-          'בכל שלב, תוכל לשמור את מה שכבר מילאת ע"י כפתור שמור, או לחזור למסך הבית ללא שמירה',
+          'בכל שלב, תוכל לשמור את מה שכבר מילאת על ידי כפתור שמור, או לחזור למסך הבית ללא שמירה',
           style: TextStyle(
             fontFamily: 'Europa',
             fontSize: 17,
@@ -105,7 +105,7 @@ class StartQuestionsState2 extends State<StartQuestions2> {
       Padding(
         padding: const EdgeInsets.only(top: 420, left: 20, right: 20),
         child: Text(
-          'תוכל לנווט קדימה ואחורה, ובסוף המילוי יופיע סיכום החוו"ד שמילאת, אותו תוכל לערוך',
+          'תוכל לנווט קדימה ואחורה, ובסוף המילוי יופיע סיכום של חוות הדעת שמילאת, אותו תוכל לערוך',
           style: TextStyle(
             fontFamily: 'Europa',
             fontSize: 17,
@@ -122,7 +122,7 @@ class StartQuestionsState2 extends State<StartQuestions2> {
         padding: const EdgeInsets.only(top: 330, left: 20, right: 20),
         child: Center(
           child: Text(
-            'שים לב לשדות חובה',
+            '.חוות הדעת היא אנונימית',
             style: TextStyle(
               fontFamily: 'Europa',
               fontSize: 15,
@@ -144,7 +144,7 @@ class StartQuestionsState2 extends State<StartQuestions2> {
               minWidth: 70,
               color: Color.fromRGBO(0, 48, 80, 50),
               child: Text(
-                "?שנמשיך",
+                "?שנתחיל במעשה טוב",
                 style: TextStyle(
                   fontFamily: 'Europa',
                   fontSize: 25,
@@ -247,7 +247,7 @@ class StartQuestionsState2 extends State<StartQuestions2> {
                     "חזור למסך הבית",
                     textAlign: TextAlign.right,
                   ),
-                  content: Text('האם אתה בטוח שברצונך למחוק את החוו"ד שמילאת?',
+                  content: Text('?האם אתה בטוח שברצונך למחוק את חוות הדעת שמילאת',
                       textAlign: TextAlign.right),
                   actions: <Widget>[
                     FlatButton(

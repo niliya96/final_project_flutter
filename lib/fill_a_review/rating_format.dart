@@ -62,7 +62,8 @@ class RatingFormatState extends State<RatingFormat> {
 
   void addAnswer() {
     Map<String, String> answer = new HashMap<String, String>();
-    answer.putIfAbsent(this.widget.list[this.widget.current_question]['text'].toString(),
+    answer.putIfAbsent(
+        this.widget.list[this.widget.current_question]['text'].toString(),
         () => _currentRating.toString());
     this.widget.answers.add(answer);
   }
@@ -77,8 +78,93 @@ class RatingFormatState extends State<RatingFormat> {
     return Center(
       child: Row(
         children: [
+          /**
+           * start of next button
+           */
           Padding(
             padding: const EdgeInsets.only(left: 50),
+            child: FlatButton(
+                height: 60,
+                minWidth: 110,
+                color: Color.fromRGBO(0, 48, 80, 50),
+                child: Text(
+                  "הבא",
+                  style: TextStyle(
+                    fontFamily: 'Europa',
+                    fontSize: 25,
+                    color: Colors.white,
+                    fontWeight: FontWeight.w700,
+                    height: 1.1666666666666667,
+                  ),
+                ),
+                onPressed: () {
+                  /**
+                   * update list of answers
+                   */
+                  addAnswer();
+                  this.widget.current_question++;
+                  if (this.widget.current_question < this.widget.list.length) {
+                    // rating bar case
+                    if (this
+                            .widget
+                            .list[this.widget.current_question]['kind']
+                            .toString() ==
+                        'rating') {
+                      Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => RatingFormat((rating) {
+                          setState(() {
+                            _rating = rating;
+                          });
+                        }, this.widget.list, this.widget.current_question,
+                            this.widget.answers),
+                      ));
+                    }
+                    // choose case
+                    else if (this
+                            .widget
+                            .list[this.widget.current_question]['kind']
+                            .toString() ==
+                        'choose') {
+                      List<dynamic> options = this
+                          .widget
+                          .list[this.widget.current_question]['options'];
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                            builder: (context) => SelectionFormat(
+                                this.widget.current_question,
+                                this.widget.list,
+                                options,
+                                this.widget.answers)),
+                      );
+                    }
+                    // text format
+                    else if (this
+                            .widget
+                            .list[this.widget.current_question]['kind']
+                            .toString() ==
+                        'text') {
+                      Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => TextFormat(
+                            this.widget.current_question,
+                            this.widget.list,
+                            this.widget.answers),
+                      ));
+                    }
+                  } else {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => CompleteFillReview(
+                            this.widget.list, this.widget.answers)));
+                  }
+                }),
+          ),
+          SizedBox(
+            width: 90,
+          ),
+          /**
+           * start of previous button
+           */
+          Padding(
+            padding: const EdgeInsets.only(right: 50),
             child: FlatButton(
                 height: 60,
                 minWidth: 110,
@@ -157,91 +243,6 @@ class RatingFormatState extends State<RatingFormat> {
                   }
                 }),
           ),
-          /**
-           * end of previous button
-           */
-          SizedBox(
-            width: 90,
-          ),
-          /**
-           * start of next button
-           */
-          Padding(
-            padding: const EdgeInsets.only(right: 50),
-            child: FlatButton(
-                height: 60,
-                minWidth: 110,
-                color: Color.fromRGBO(0, 48, 80, 50),
-                child: Text(
-                  "הבא",
-                  style: TextStyle(
-                    fontFamily: 'Europa',
-                    fontSize: 25,
-                    color: Colors.white,
-                    fontWeight: FontWeight.w700,
-                    height: 1.1666666666666667,
-                  ),
-                ),
-                onPressed: () {
-                  /**
-                   * update list of answers
-                   */
-                  addAnswer();
-                  this.widget.current_question++;
-                  if (this.widget.current_question < this.widget.list.length) {
-                    // rating bar case
-                    if (this
-                            .widget
-                            .list[this.widget.current_question]['kind']
-                            .toString() ==
-                        'rating') {
-                      Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => RatingFormat((rating) {
-                          setState(() {
-                            _rating = rating;
-                          });
-                        }, this.widget.list, this.widget.current_question,
-                            this.widget.answers),
-                      ));
-                    }
-                    // choose case
-                    else if (this
-                            .widget
-                            .list[this.widget.current_question]['kind']
-                            .toString() ==
-                        'choose') {
-                      List<dynamic> options = this
-                          .widget
-                          .list[this.widget.current_question]['options'];
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                            builder: (context) => SelectionFormat(
-                                this.widget.current_question,
-                                this.widget.list,
-                                options,
-                                this.widget.answers)),
-                      );
-                    }
-                    // text format
-                    else if (this
-                            .widget
-                            .list[this.widget.current_question]['kind']
-                            .toString() ==
-                        'text') {
-                      Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => TextFormat(
-                            this.widget.current_question,
-                            this.widget.list,
-                            this.widget.answers),
-                      ));
-                    }
-                  } else {
-                    Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => CompleteFillReview(
-                            this.widget.list, this.widget.answers)));
-                  }
-                }),
-          ),
         ],
       ),
     );
@@ -267,108 +268,137 @@ class RatingFormatState extends State<RatingFormat> {
     });
     return Column(
       children: <Widget>[
-        Padding(
-          padding: const EdgeInsets.fromLTRB(0, 30, 0, 0),
-          child: Container(
-            width: 430.0,
-            height: 230.0,
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage(
-                    this.widget.list[this.widget.current_question]['image']),
-                fit: BoxFit.fill,
-              ),
+        Expanded(
+          flex: 4,
+          child: SizedBox(),
+        ),
+        Expanded(
+          flex: 1,
+          child: Text(
+            this.widget.list[this.widget.current_question]['text'].toString(),
+            style: TextStyle(
+              fontFamily: 'Europa',
+              fontSize: 25,
+              color: const Color.fromRGBO(0, 48, 80, 50),
+              fontWeight: FontWeight.w700,
+              height: 1.1666666666666667,
             ),
+            textHeightBehavior:
+                TextHeightBehavior(applyHeightToFirstAscent: false),
+            textAlign: TextAlign.center,
           ),
         ),
-        Text(
-          this.widget.list[this.widget.current_question]['text'].toString(),
-          style: TextStyle(
-            fontFamily: 'Europa',
-            fontSize: 25,
+        Expanded(
+          flex: 1,
+          child: Divider(
             color: const Color.fromRGBO(0, 48, 80, 50),
-            fontWeight: FontWeight.w700,
-            height: 1.1666666666666667,
+            thickness: 1,
+            indent: 60,
+            endIndent: 60,
           ),
-          textHeightBehavior:
-              TextHeightBehavior(applyHeightToFirstAscent: false),
-          textAlign: TextAlign.center,
         ),
-        Divider(
-          color: const Color.fromRGBO(0, 48, 80, 50),
-          thickness: 1,
-          indent: 60,
-          endIndent: 60,
-        ),
-        SizedBox(
-          width: 0.0,
-          height: 10.0,
-        ),
-        Padding(
-          padding: const EdgeInsets.only(left: 80, right: 80),
+        Expanded(
+          flex: 1,
           child: Row(
-            children: stars,
+            children: <Widget>[
+              Expanded(
+                flex: 10,
+                child: SizedBox(),
+              ),
+              Container(
+                child: Row(
+                  children: stars,
+                ),
+              ),
+              Expanded(
+                flex: 10,
+                child: SizedBox(),
+              ),
+            ],
           ),
         ),
-        FlatButton(
-          child: Text("נקה",
-              style: TextStyle(
-                fontFamily: 'Europa',
-                fontSize: 18,
-                color: const Color.fromRGBO(0, 48, 80, 50),
-                height: 1.3888888888888888,
-              )),
-          onPressed: () {
-            setState(() {
-              _currentRating = 0;
-            });
-            this.widget.onRatingSelected(_currentRating);
-          },
-        ),
-        Padding(
-          padding: const EdgeInsets.only(left: 80, right: 80),
-          child: CheckboxListTile(
-              value: _checked,
-              controlAffinity: ListTileControlAffinity.platform,
-              activeColor: const Color.fromRGBO(0, 48, 80, 50),
-              checkColor: Colors.white,
-              tileColor: Color.fromRGBO(67, 232, 137, 50),
-              title: Text(
-                "סמן כלא רלוונטי",
+        Expanded(
+          flex: 1,
+          child: FlatButton(
+            child: Text("נקה",
                 style: TextStyle(
                   fontFamily: 'Europa',
-                  fontSize: 15,
+                  fontSize: 18,
                   color: const Color.fromRGBO(0, 48, 80, 50),
-                  fontWeight: FontWeight.w700,
                   height: 1.3888888888888888,
+                )),
+            onPressed: () {
+              setState(() {
+                _currentRating = 0;
+              });
+              this.widget.onRatingSelected(_currentRating);
+            },
+          ),
+        ),
+        Expanded(
+          flex: 1,
+          child: SizedBox(),
+        ),
+        Expanded(
+          flex: 1,
+          child: Padding(
+            padding: const EdgeInsets.only(left: 70, right: 70),
+            child: CheckboxListTile(
+                value: _checked,
+                dense: true,
+                controlAffinity: ListTileControlAffinity.platform,
+                contentPadding: EdgeInsets.only(right: 40),
+                activeColor: const Color.fromRGBO(0, 48, 80, 50),
+                checkColor: Colors.white,
+                tileColor: Color.fromRGBO(67, 232, 137, 50),
+                title: Text(
+                  "סמן כלא רלוונטי",
+                  style: TextStyle(
+                    fontFamily: 'Europa',
+                    fontSize: 15,
+                    color: const Color.fromRGBO(0, 48, 80, 50),
+                    fontWeight: FontWeight.w700,
+                    height: 1.3888888888888888,
+                  ),
+                  textAlign: TextAlign.right,
                 ),
-                textAlign: TextAlign.right,
-              ),
-              onChanged: (bool value) {
-                setState(() {
-                  _checked = value;
-                });
-                if (_checked) {
-                  _currentRating = 0;
-                }
-              }),
+                onChanged: (bool value) {
+                  setState(() {
+                    _checked = value;
+                  });
+                  if (_checked) {
+                    _currentRating = 0;
+                  }
+                }),
+          ),
         ),
-        SizedBox(
-          width: 0.0,
-          height: 30.0,
+        Expanded(
+          flex: 3,
+          child: SizedBox(),
         ),
-        createRoute(),
-        SizedBox(height: 25),
-        Padding(
-          padding: const EdgeInsets.only(left: 90, right: 90),
-          child: LinearProgressIndicator(
-              value: (this.widget.current_question + 1) /
-                  (this.widget.list.length),
-              minHeight: 10,
-              //backgroundColor: Color.fromRGBO(67, 232, 137, 50),
-              valueColor: AlwaysStoppedAnimation<Color>(
-                  Color.fromRGBO(67, 232, 137, 10))),
-        )
+        Expanded(
+          flex: 1,
+          child: createRoute(),
+        ),
+        Expanded(
+          flex: 1,
+          child: SizedBox(),
+        ),
+        Expanded(
+          flex: 1,
+          child: Padding(
+            padding: const EdgeInsets.only(left: 30, right: 30, top: 10, bottom: 10),
+            child: LinearProgressIndicator(
+                value: (this.widget.current_question + 1) /
+                    (this.widget.list.length),
+                valueColor: AlwaysStoppedAnimation<Color>(
+                    Color.fromRGBO(67, 232, 137, 10))),
+          ),
+        ),
+        Expanded(
+          flex: 1,
+          child: SizedBox(),
+        ),
       ],
     );
   }

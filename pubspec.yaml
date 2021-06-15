@@ -86,6 +86,20 @@ flutter:
       - assets/images/tolarence.jfif
       - assets/images/spare_time.jfif
       - assets/images/cosher.jfif
+      - assets/images/kind.jfif
+      - assets/images/clean_house.jfif
+      - assets/images/pharm.jfif
+      - assets/images/cook.jfif
+      - assets/images/reporting.jfif
+      - assets/images/mood.jfif
+      - assets/images/heavy.jfif
+      - assets/images/technical.jfif
+      - assets/images/honest.jfif
+      - assets/images/food_request.jfif
+      - assets/images/salary.jfif
+      - assets/images/dilligent.jfif
+
+
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

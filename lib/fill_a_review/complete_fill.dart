@@ -119,7 +119,7 @@ class CompleteFillReviewState extends State<CompleteFillReview> {
       Padding(
         padding: const EdgeInsets.only(top: 420, left: 20, right: 20),
         child: Text(
-          'חוות הדעת שלך נקלטה במערכת, וכעת תתאפשר צפייה בה',
+          '.חוות הדעת שלך נקלטה במערכת. כל חוות דעת עוברת בדיקה לפני פרסום',
           style: TextStyle(
             fontFamily: 'Europa',
             fontSize: 17,

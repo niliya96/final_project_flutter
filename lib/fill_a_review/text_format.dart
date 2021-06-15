@@ -67,8 +67,93 @@ class TextFormatState extends State<TextFormat> {
     return Center(
       child: Row(
         children: [
+          /**
+           * start of next button
+           */
           Padding(
             padding: const EdgeInsets.only(left: 50),
+            child: FlatButton(
+                height: 60,
+                minWidth: 110,
+                color: Color.fromRGBO(0, 48, 80, 50),
+                child: Text(
+                  "הבא",
+                  style: TextStyle(
+                    fontFamily: 'Europa',
+                    fontSize: 25,
+                    color: Colors.white,
+                    fontWeight: FontWeight.w700,
+                    height: 1.1666666666666667,
+                  ),
+                ),
+                onPressed: () {
+                  /**
+                   * update list of answers
+                   */
+                  addAnswer();
+                  this.widget.current_question++;
+                  if (this.widget.current_question < this.widget.list.length) {
+                    // rating bar case
+                    if (this
+                            .widget
+                            .list[this.widget.current_question]['kind']
+                            .toString() ==
+                        'rating') {
+                      Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => RatingFormat((rating) {
+                          setState(() {
+                            _rating = rating;
+                          });
+                        }, this.widget.list, this.widget.current_question,
+                            this.widget.answers),
+                      ));
+                    }
+                    // choose case
+                    else if (this
+                            .widget
+                            .list[this.widget.current_question]['kind']
+                            .toString() ==
+                        'choose') {
+                      List<dynamic> options = this
+                          .widget
+                          .list[this.widget.current_question]['options'];
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                            builder: (context) => SelectionFormat(
+                                this.widget.current_question,
+                                this.widget.list,
+                                options,
+                                this.widget.answers)),
+                      );
+                    }
+                    // text format
+                    else if (this
+                            .widget
+                            .list[this.widget.current_question]['kind']
+                            .toString() ==
+                        'text') {
+                      Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => TextFormat(
+                            this.widget.current_question,
+                            this.widget.list,
+                            this.widget.answers),
+                      ));
+                    }
+                  } else {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => CompleteFillReview(
+                            this.widget.list, this.widget.answers)));
+                  }
+                }),
+          ),
+          SizedBox(
+            width: 90,
+          ),
+          /**
+           * start of previous button
+           */
+          Padding(
+            padding: const EdgeInsets.only(right: 50),
             child: FlatButton(
                 height: 60,
                 minWidth: 110,
@@ -147,91 +232,6 @@ class TextFormatState extends State<TextFormat> {
                   }
                 }),
           ),
-          /**
-           * end of previous button
-           */
-          SizedBox(
-            width: 90,
-          ),
-          /**
-           * start of next button
-           */
-          Padding(
-            padding: const EdgeInsets.only(right: 50),
-            child: FlatButton(
-                height: 60,
-                minWidth: 110,
-                color: Color.fromRGBO(0, 48, 80, 50),
-                child: Text(
-                  "הבא",
-                  style: TextStyle(
-                    fontFamily: 'Europa',
-                    fontSize: 25,
-                    color: Colors.white,
-                    fontWeight: FontWeight.w700,
-                    height: 1.1666666666666667,
-                  ),
-                ),
-                onPressed: () {
-                  /**
-                   * update list of answers
-                   */
-                  addAnswer();
-                  this.widget.current_question++;
-                  if (this.widget.current_question < this.widget.list.length) {
-                    // rating bar case
-                    if (this
-                            .widget
-                            .list[this.widget.current_question]['kind']
-                            .toString() ==
-                        'rating') {
-                      Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => RatingFormat((rating) {
-                          setState(() {
-                            _rating = rating;
-                          });
-                        }, this.widget.list, this.widget.current_question,
-                            this.widget.answers),
-                      ));
-                    }
-                    // choose case
-                    else if (this
-                            .widget
-                            .list[this.widget.current_question]['kind']
-                            .toString() ==
-                        'choose') {
-                      List<dynamic> options = this
-                          .widget
-                          .list[this.widget.current_question]['options'];
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                            builder: (context) => SelectionFormat(
-                                this.widget.current_question,
-                                this.widget.list,
-                                options,
-                                this.widget.answers)),
-                      );
-                    }
-                    // text format
-                    else if (this
-                            .widget
-                            .list[this.widget.current_question]['kind']
-                            .toString() ==
-                        'text') {
-                      Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => TextFormat(
-                            this.widget.current_question,
-                            this.widget.list,
-                            this.widget.answers),
-                      ));
-                    }
-                  } else {
-                    Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => CompleteFillReview(
-                            this.widget.list, this.widget.answers)));
-                  }
-                }),
-          ),
         ],
       ),
     );
@@ -244,21 +244,21 @@ class TextFormatState extends State<TextFormat> {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
-              child: Container(
-                width: 430.0,
-                height: 230.0,
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: AssetImage(this
-                        .widget
-                        .list[this.widget.current_question]['image']),
-                    fit: BoxFit.fill,
-                  ),
-                ),
-              ),
-            ),
+            // Padding(
+            //   padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+            //   child: Container(
+            //     width: 430.0,
+            //     height: 230.0,
+            //     decoration: BoxDecoration(
+            //       image: DecorationImage(
+            //         image: AssetImage(this
+            //             .widget
+            //             .list[this.widget.current_question]['image']),
+            //         fit: BoxFit.fill,
+            //       ),
+            //     ),
+            //   ),
+            // ),
             Text(
               this.widget.list[this.widget.current_question]['text'].toString(),
               style: TextStyle(
