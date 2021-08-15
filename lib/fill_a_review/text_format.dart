@@ -5,23 +5,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_firebase/Utils/app_bar.dart';
 import 'package:flutter_firebase/Utils/buttom_bar_fill.dart';
 import 'package:flutter_firebase/Utils/headers.dart';
-import 'package:flutter_firebase/fill_a_review/rating_format.dart';
-import 'package:flutter_firebase/fill_a_review/selection_format.dart';
-import 'package:flutter_firebase/home/home_screen.dart';
 import 'package:flutter_firebase/login/auth_bloc_google.dart';
 import 'package:flutter_firebase/login/main_component_login.dart';
 import 'package:provider/provider.dart';
-
-import 'complete_fill.dart';
 import 'create_route_page.dart';
-import 'details_fill.dart';
 
 class TextFormat extends StatefulWidget {
   int current_question;
-  final List<Map<String, dynamic>> list;
+  final List<Map<String, dynamic>> questions;
   List<Map<String, String>> answers;
 
-  TextFormat(this.current_question, this.list, this.answers) : super();
+  TextFormat(this.current_question, this.questions, this.answers) : super();
 
   @override
   TextFormatState createState() => TextFormatState();
@@ -40,7 +34,7 @@ class TextFormatState extends State<TextFormat> {
       if (fbUser == null) {
         Navigator.of(context).pushReplacement(
           MaterialPageRoute(
-            builder: (context) => MainComponentLogin(this.widget.list),
+            builder: (context) => MainComponentLogin(this.widget.questions),
           ),
         );
       }
@@ -73,27 +67,30 @@ class TextFormatState extends State<TextFormat> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
         Expanded(
-          flex: 3,
+          flex: 10,
           child: SizedBox(),
         ),
         Expanded(
-          flex: 3,
-          child: Text(
-            this.widget.list[this.widget.current_question]['text'].toString(),
-            style: TextStyle(
-              fontFamily: 'Europa',
-              fontSize: 30,
-              color: DARK_BLUE,
-              fontWeight: FontWeight.w700,
-              height: 1.1666666666666667,
+          flex: 5,
+          child: Padding(
+            padding: const EdgeInsets.only(left:10, right:10),
+            child: Text(
+              this.widget.questions[this.widget.current_question][TEXT].toString(),
+              style: TextStyle(
+                fontFamily: EUROPA_FONT,
+                fontSize: 22,
+                color: DARK_BLUE,
+                fontWeight: FontWeight.w700,
+                height: 1.1666666666666667,
+              ),
+              textHeightBehavior:
+                  TextHeightBehavior(applyHeightToFirstAscent: false),
+              textAlign: TextAlign.center,
             ),
-            textHeightBehavior:
-                TextHeightBehavior(applyHeightToFirstAscent: false),
-            textAlign: TextAlign.center,
           ),
         ),
         Expanded(
-          flex: 3,
+          flex: 1,
           child: Divider(
             color: DARK_BLUE,
             thickness: 1,
@@ -109,24 +106,27 @@ class TextFormatState extends State<TextFormat> {
           ),
         ),
         Expanded(
-          flex: 3,
-          child: TextFormField(
-            decoration: InputDecoration(
-              fillColor: DARK_BLUE,
-              focusColor: DARK_BLUE,
-              hoverColor: DARK_BLUE,
-              filled: true,
-              labelText: FREE_TEXT,
-              border: OutlineInputBorder(),
+          flex: 10  ,
+          child: Padding(
+            padding: const EdgeInsets.only(left:20, right:20),
+            child: TextFormField(
+              decoration: InputDecoration(
+                fillColor: DARK_BLUE,
+                focusColor: DARK_BLUE,
+                hoverColor: DARK_BLUE,
+                filled: true,
+                labelText: FREE_TEXT,
+                border: OutlineInputBorder(),
+              ),
+              validator: (value) {
+                return null;
+              },
+              maxLength: 500,
+              maxLines: 5,
+              onChanged: (value) => setState(() {
+                text_fill = value;
+              }),
             ),
-            validator: (value) {
-              return null;
-            },
-            maxLength: 500,
-            maxLines: 5,
-            onChanged: (value) => setState(() {
-              text_fill = value;
-            }),
           ),
         ),
         Expanded(
@@ -147,12 +147,15 @@ class TextFormatState extends State<TextFormat> {
           child: SizedBox(height: 25),
         ),
         Expanded(
-          flex: 3,
-          child: LinearProgressIndicator(
-              value: (this.widget.current_question + 1) /
-                  (this.widget.list.length),
-              minHeight: 10,
-              valueColor: AlwaysStoppedAnimation<Color>(DARK_BLUE3)),
+          flex: 1,
+          child: Padding(
+            padding: const EdgeInsets.only(left:20, right: 20),
+            child: LinearProgressIndicator(
+                value: (this.widget.current_question + 1) /
+                    (this.widget.questions.length),
+                minHeight: 10,
+                valueColor: AlwaysStoppedAnimation<Color>(DARK_BLUE3)),
+          ),
         ),
         Expanded(
           flex: 3,

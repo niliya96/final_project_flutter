@@ -115,16 +115,16 @@ class SelectionFormatState extends State<SelectionFormat> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
         Expanded(
-          flex: 3,
+          flex: 10,
           child: SizedBox(),
         ),
         Expanded(
-          flex: 3,
+          flex: 10,
           child: Text(
             this.widget.questions[this.widget.current_question][TEXT].toString(),
             style: TextStyle(
               fontFamily: EUROPA_FONT,
-              fontSize: 25,
+              fontSize: 22,
               color: DARK_BLUE,
               fontWeight: FontWeight.w700,
               height: 1.1666666666666667,
@@ -151,7 +151,7 @@ class SelectionFormatState extends State<SelectionFormat> {
           ),
         ),
         Expanded(
-          flex: 3,
+          flex: 10,
           child: DropdownButton(
             dropdownColor: LIGHT_GREEN,
             iconEnabledColor: LIGHT_GREEN,
@@ -173,7 +173,7 @@ class SelectionFormatState extends State<SelectionFormat> {
           ),
         ),
         Expanded(
-          flex: 3,
+          flex: 15,
           child: Center(child: createRoute(context, this, _rating, 0)),
         ),
         Expanded(
@@ -181,12 +181,15 @@ class SelectionFormatState extends State<SelectionFormat> {
           child: SizedBox(height: 25),
         ),
         Expanded(
-          flex: 3,
-          child: LinearProgressIndicator(
-              value: (this.widget.current_question + 1) /
-                  (this.widget.questions.length),
-              minHeight: 10,
-              valueColor: AlwaysStoppedAnimation<Color>(DARK_BLUE3)),
+          flex: 1,
+          child: Padding(
+            padding: const EdgeInsets.only(left:20, right: 20),
+            child: LinearProgressIndicator(
+                value: (this.widget.current_question + 1) /
+                    (this.widget.questions.length),
+                minHeight: 10,
+                valueColor: AlwaysStoppedAnimation<Color>(DARK_BLUE3)),
+          ),
         ),
         Expanded(
           flex: 3,
