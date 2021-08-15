@@ -110,71 +110,90 @@ class SelectionFormatState extends State<SelectionFormat> {
   }
 
   Widget createBody() {
-    return new Container(
-      child: Center(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.only(left: 20, right: 20),
-              child: Text(
-                this
-                    .widget
-                    .list[this.widget.current_question][TEXT]
-                    .toString(),
-                style: TextStyle(
-                  fontFamily: EUROPA_FONT,
-                  fontSize: 25,
-                  color: DARK_BLUE,
-                  fontWeight: FontWeight.w700,
-                  height: 1.1666666666666667,
-                ),
-                textHeightBehavior:
-                    TextHeightBehavior(applyHeightToFirstAscent: false),
-                textAlign: TextAlign.center,
-              ),
-            ),
-            Divider(
-              color: DARK_BLUE,
-              thickness: 1,
-              indent: 120,
-              endIndent: 120,
-            ),
-            SizedBox(
-              width: 0.0,
-              height: 10.0,
-            ),
-            DropdownButton(
-              dropdownColor: LIGHT_GREEN,
-              iconEnabledColor: LIGHT_GREEN,
-              iconDisabledColor: LIGHT_GREEN,
-              value: _selectedOption,
-              style: new TextStyle(
-                color: DARK_BLUE,
-                fontSize: 18.0,
-              ),
-              items: _dropdownMenuItems,
-              onChanged: onChangeDropdownItem,
-            ),
-            SizedBox(
-              width: 0.0,
-              height: 100.0,
-            ),
-            Center(child: createRoute(context, this, _rating, 0)),
-            SizedBox(height: 25),
-            Padding(
-              padding: const EdgeInsets.only(left: 90, right: 90),
-              child: LinearProgressIndicator(
-                  value: (this.widget.current_question + 1) /
-                      (this.widget.list.length),
-                  minHeight: 10,
-                  valueColor: AlwaysStoppedAnimation<Color>(
-                      DARK_BLUE3)),
-            )
-          ],
+    child:
+    Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        Expanded(
+          flex: 3,
+          child: SizedBox(),
         ),
-      ),
+        Expanded(
+          flex: 3,
+          child: Text(
+            this.widget.list[this.widget.current_question][TEXT].toString(),
+            style: TextStyle(
+              fontFamily: EUROPA_FONT,
+              fontSize: 25,
+              color: DARK_BLUE,
+              fontWeight: FontWeight.w700,
+              height: 1.1666666666666667,
+            ),
+            textHeightBehavior:
+                TextHeightBehavior(applyHeightToFirstAscent: false),
+            textAlign: TextAlign.center,
+          ),
+        ),
+        Expanded(
+          flex: 3,
+          child: Divider(
+            color: DARK_BLUE,
+            thickness: 1,
+            indent: 120,
+            endIndent: 120,
+          ),
+        ),
+        Expanded(
+          flex: 3,
+          child: SizedBox(
+            width: 0.0,
+            height: 10.0,
+          ),
+        ),
+        Expanded(
+          flex: 3,
+          child: DropdownButton(
+            dropdownColor: LIGHT_GREEN,
+            iconEnabledColor: LIGHT_GREEN,
+            iconDisabledColor: LIGHT_GREEN,
+            value: _selectedOption,
+            style: new TextStyle(
+              color: DARK_BLUE,
+              fontSize: 18.0,
+            ),
+            items: _dropdownMenuItems,
+            onChanged: onChangeDropdownItem,
+          ),
+        ),
+        Expanded(
+          flex: 3,
+          child: SizedBox(
+            width: 0.0,
+            height: 100.0,
+          ),
+        ),
+        Expanded(
+          flex: 3,
+          child: Center(child: createRoute(context, this, _rating, 0)),
+        ),
+        Expanded(
+          flex: 3,
+          child: SizedBox(height: 25),
+        ),
+        Expanded(
+          flex: 3,
+          child: LinearProgressIndicator(
+              value: (this.widget.current_question + 1) /
+                  (this.widget.list.length),
+              minHeight: 10,
+              valueColor: AlwaysStoppedAnimation<Color>(DARK_BLUE3)),
+        ),
+        Expanded(
+          flex: 3,
+          child: SizedBox(),
+        ),
+      ],
     );
   }
 }

@@ -67,92 +67,100 @@ class TextFormatState extends State<TextFormat> {
   }
 
   Widget createBody() {
-    return new Container(
-      child: Center(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            // Padding(
-            //   padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
-            //   child: Container(
-            //     width: 430.0,
-            //     height: 230.0,
-            //     decoration: BoxDecoration(
-            //       image: DecorationImage(
-            //         image: AssetImage(this
-            //             .widget
-            //             .list[this.widget.current_question]['image']),
-            //         fit: BoxFit.fill,
-            //       ),
-            //     ),
-            //   ),
-            // ),
-            Text(
-              this.widget.list[this.widget.current_question]['text'].toString(),
-              style: TextStyle(
-                fontFamily: 'Europa',
-                fontSize: 30,
-                color: const Color.fromRGBO(0, 48, 80, 50),
-                fontWeight: FontWeight.w700,
-                height: 1.1666666666666667,
-              ),
-              textHeightBehavior:
-                  TextHeightBehavior(applyHeightToFirstAscent: false),
-              textAlign: TextAlign.center,
-            ),
-            Divider(
-              color: const Color.fromRGBO(0, 48, 80, 50),
-              thickness: 1,
-              indent: 120,
-              endIndent: 120,
-            ),
-            SizedBox(
-              width: 0.0,
-              height: 10.0,
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 20, right: 20),
-              child: TextFormField(
-                decoration: InputDecoration(
-                  fillColor: Color.fromRGBO(0, 48, 80, 50),
-                  focusColor: Color.fromRGBO(0, 48, 80, 50),
-                  hoverColor: Color.fromRGBO(0, 48, 80, 50),
-                  filled: true,
-                  labelText: 'כתוב מלל חופשי',
-                  border: OutlineInputBorder(),
-                ),
-                validator: (value) {
-                  return null;
-                },
-                maxLength: 500,
-                maxLines: 5,
-                onChanged: (value) => setState(() {
-                  text_fill = value;
-                }),
-              ),
-            ),
-            SizedBox(
-              width: 0.0,
-              height: 50.0,
-            ),
-            Center(
-              child: createRoute(context, this, 0, _currentBarOption),
-            ),
-            SizedBox(height: 25),
-            Padding(
-              padding: const EdgeInsets.only(left: 90, right: 90),
-              child: LinearProgressIndicator(
-                  value: (this.widget.current_question + 1) /
-                      (this.widget.list.length),
-                  minHeight: 10,
-                  //backgroundColor: Color.fromRGBO(67, 232, 137, 50),
-                  valueColor: AlwaysStoppedAnimation<Color>(
-                      Color.fromRGBO(67, 232, 137, 10))),
-            )
-          ],
+    child:
+    Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        Expanded(
+          flex: 3,
+          child: SizedBox(),
         ),
-      ),
+        Expanded(
+          flex: 3,
+          child: Text(
+            this.widget.list[this.widget.current_question]['text'].toString(),
+            style: TextStyle(
+              fontFamily: 'Europa',
+              fontSize: 30,
+              color: const Color.fromRGBO(0, 48, 80, 50),
+              fontWeight: FontWeight.w700,
+              height: 1.1666666666666667,
+            ),
+            textHeightBehavior:
+                TextHeightBehavior(applyHeightToFirstAscent: false),
+            textAlign: TextAlign.center,
+          ),
+        ),
+        Expanded(
+          flex: 3,
+          child: Divider(
+            color: const Color.fromRGBO(0, 48, 80, 50),
+            thickness: 1,
+            indent: 120,
+            endIndent: 120,
+          ),
+        ),
+        Expanded(
+          flex: 3,
+          child: SizedBox(
+            width: 0.0,
+            height: 10.0,
+          ),
+        ),
+        Expanded(
+          flex: 3,
+          child: TextFormField(
+            decoration: InputDecoration(
+              fillColor: Color.fromRGBO(0, 48, 80, 50),
+              focusColor: Color.fromRGBO(0, 48, 80, 50),
+              hoverColor: Color.fromRGBO(0, 48, 80, 50),
+              filled: true,
+              labelText: 'כתוב מלל חופשי',
+              border: OutlineInputBorder(),
+            ),
+            validator: (value) {
+              return null;
+            },
+            maxLength: 500,
+            maxLines: 5,
+            onChanged: (value) => setState(() {
+              text_fill = value;
+            }),
+          ),
+        ),
+        Expanded(
+          flex: 3,
+          child: SizedBox(
+            width: 0.0,
+            height: 50.0,
+          ),
+        ),
+        Expanded(
+          flex: 3,
+          child: Center(
+            child: createRoute(context, this, 0, _currentBarOption),
+          ),
+        ),
+        Expanded(
+          flex: 3,
+          child: SizedBox(height: 25),
+        ),
+        Expanded(
+          flex: 3,
+          child: LinearProgressIndicator(
+              value: (this.widget.current_question + 1) /
+                  (this.widget.list.length),
+              minHeight: 10,
+              //backgroundColor: Color.fromRGBO(67, 232, 137, 50),
+              valueColor: AlwaysStoppedAnimation<Color>(
+                  Color.fromRGBO(67, 232, 137, 10))),
+        ),
+        Expanded(
+          flex: 3,
+          child: SizedBox(),
+        ),
+      ],
     );
   }
 
