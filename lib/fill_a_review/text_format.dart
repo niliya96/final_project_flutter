@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_firebase/Utils/app_bar.dart';
 import 'package:flutter_firebase/Utils/buttom_bar_fill.dart';
+import 'package:flutter_firebase/Utils/headers.dart';
 import 'package:flutter_firebase/fill_a_review/rating_format.dart';
 import 'package:flutter_firebase/fill_a_review/selection_format.dart';
 import 'package:flutter_firebase/home/home_screen.dart';
@@ -67,8 +68,7 @@ class TextFormatState extends State<TextFormat> {
   }
 
   Widget createBody() {
-    child:
-    Column(
+    return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
@@ -83,7 +83,7 @@ class TextFormatState extends State<TextFormat> {
             style: TextStyle(
               fontFamily: 'Europa',
               fontSize: 30,
-              color: const Color.fromRGBO(0, 48, 80, 50),
+              color: DARK_BLUE,
               fontWeight: FontWeight.w700,
               height: 1.1666666666666667,
             ),
@@ -95,7 +95,7 @@ class TextFormatState extends State<TextFormat> {
         Expanded(
           flex: 3,
           child: Divider(
-            color: const Color.fromRGBO(0, 48, 80, 50),
+            color: DARK_BLUE,
             thickness: 1,
             indent: 120,
             endIndent: 120,
@@ -112,11 +112,11 @@ class TextFormatState extends State<TextFormat> {
           flex: 3,
           child: TextFormField(
             decoration: InputDecoration(
-              fillColor: Color.fromRGBO(0, 48, 80, 50),
-              focusColor: Color.fromRGBO(0, 48, 80, 50),
-              hoverColor: Color.fromRGBO(0, 48, 80, 50),
+              fillColor: DARK_BLUE,
+              focusColor: DARK_BLUE,
+              hoverColor: DARK_BLUE,
               filled: true,
-              labelText: 'כתוב מלל חופשי',
+              labelText: FREE_TEXT,
               border: OutlineInputBorder(),
             ),
             validator: (value) {
@@ -152,9 +152,7 @@ class TextFormatState extends State<TextFormat> {
               value: (this.widget.current_question + 1) /
                   (this.widget.list.length),
               minHeight: 10,
-              //backgroundColor: Color.fromRGBO(67, 232, 137, 50),
-              valueColor: AlwaysStoppedAnimation<Color>(
-                  Color.fromRGBO(67, 232, 137, 10))),
+              valueColor: AlwaysStoppedAnimation<Color>(DARK_BLUE3)),
         ),
         Expanded(
           flex: 3,
@@ -169,7 +167,7 @@ class TextFormatState extends State<TextFormat> {
     final authBloc = Provider.of<AuthBlocGoogle>(context);
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      backgroundColor: const Color(0xffffffff),
+      backgroundColor: WHITE,
       appBar: createAppBar(authBloc),
       bottomNavigationBar:
           createButtomBarFill(context, _currentBarOption, this),

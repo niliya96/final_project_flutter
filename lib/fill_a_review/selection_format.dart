@@ -32,11 +32,11 @@ class Option {
 
 class SelectionFormat extends StatefulWidget {
   int current_question;
-  final List<Map<String, dynamic>> list;
+  final List<Map<String, dynamic>> questions;
   final List<dynamic> options;
   List<Map<String, String>> answers;
 
-  SelectionFormat(this.current_question, this.list, this.options, this.answers)
+  SelectionFormat(this.current_question, this.questions, this.options, this.answers)
       : super();
 
   @override
@@ -60,7 +60,7 @@ class SelectionFormatState extends State<SelectionFormat> {
       if (fbUser == null) {
         Navigator.of(context).pushReplacement(
           MaterialPageRoute(
-            builder: (context) => MainComponentLogin(this.widget.list),
+            builder: (context) => MainComponentLogin(this.widget.questions),
           ),
         );
       }
@@ -110,8 +110,7 @@ class SelectionFormatState extends State<SelectionFormat> {
   }
 
   Widget createBody() {
-    child:
-    Column(
+    return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
@@ -122,7 +121,7 @@ class SelectionFormatState extends State<SelectionFormat> {
         Expanded(
           flex: 3,
           child: Text(
-            this.widget.list[this.widget.current_question][TEXT].toString(),
+            this.widget.questions[this.widget.current_question][TEXT].toString(),
             style: TextStyle(
               fontFamily: EUROPA_FONT,
               fontSize: 25,
@@ -185,7 +184,7 @@ class SelectionFormatState extends State<SelectionFormat> {
           flex: 3,
           child: LinearProgressIndicator(
               value: (this.widget.current_question + 1) /
-                  (this.widget.list.length),
+                  (this.widget.questions.length),
               minHeight: 10,
               valueColor: AlwaysStoppedAnimation<Color>(DARK_BLUE3)),
         ),
