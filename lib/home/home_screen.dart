@@ -1,21 +1,16 @@
 import 'dart:async';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_firebase/fill_a_review/main_component.dart';
+import 'package:flutter_firebase/Utils/app_bar.dart';
 import 'package:flutter_firebase/login/auth_bloc_google.dart';
-import 'package:flutter_firebase/login/main_component.dart';
-import 'package:flutter_firebase/search/main_component.dart';
-import 'package:flutter_signin_button/button_list.dart';
-import 'package:flutter_signin_button/button_view.dart';
+import 'package:flutter_firebase/login/main_component_login.dart';
 import 'package:provider/provider.dart';
 import 'home_screen_ui.dart';
-import 'package:flutter/services.dart';
+import 'package:flutter_firebase/Utils/buttom_navigation_bar.dart';
 
 class HomeScreen extends StatefulWidget {
   final List<Map<String, dynamic>> list;
   HomeScreen(this.list);
-  int index = 0;
 
   @override
   HomeScreenState createState() => HomeScreenState();
@@ -23,7 +18,7 @@ class HomeScreen extends StatefulWidget {
 
 class HomeScreenState extends State<HomeScreen> {
   StreamSubscription<FirebaseUser> loginStateSubscription;
-  int _currentIndex = 0;
+  int _currentBarOption = 0;
 
   @override
   void initState() {
@@ -50,106 +45,11 @@ class HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     final authBloc = Provider.of<AuthBlocGoogle>(context);
     var scaffold = Scaffold(
-      body: createHeadline(),
+      body: createHomeScreenUI(),
       resizeToAvoidBottomInset: false,
       backgroundColor: Colors.white,
-      appBar: AppBar(
-          actions: [
-            Padding(
-              padding: const EdgeInsets.only(bottom: 8),
-              child: Row(
-                children: <Widget>[
-                  Text(
-                    "ברוך הבא",
-                    style: TextStyle(
-                      fontFamily: 'Europa',
-                      fontSize: 17,
-                      color: Color.fromRGBO(0, 48, 80, 50),
-                      fontWeight: FontWeight.w700,
-                      height: 1.1666666666666667,
-                    ),
-                  ),
-                  RaisedButton(
-                    onPressed: () => authBloc.logoutGoogle(),
-                    child: Text(
-                      'התנתק',
-                      style: TextStyle(
-                        fontFamily: 'Europa',
-                        fontSize: 13,
-                        color: Colors.white,
-                        fontWeight: FontWeight.w100,
-                        height: 1.1666666666666667,
-                      ),
-                    ),
-                    color: Color.fromRGBO(0, 48, 80, 50),
-                    padding: EdgeInsets.all(16),
-                    shape: CircleBorder(),
-                    //bottomOpthpacity: 0,
-                    elevation: 0,
-                  ),
-                ],
-              ),
-            ),
-          ],
-          automaticallyImplyLeading: false,
-          backgroundColor: Color.fromRGBO(67, 232, 137, 50)),
-      bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Color.fromRGBO(67, 232, 137, 50),
-        currentIndex: _currentIndex,
-        iconSize: 30,
-        selectedFontSize: 15,
-        unselectedFontSize: 10,
-        type: BottomNavigationBarType.fixed,
-        items: [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home, color: Color.fromRGBO(0, 48, 80, 50)),
-            title: Text(
-              "בית",
-              style: TextStyle(color: Color.fromRGBO(0, 48, 80, 50)),
-            ),
-            backgroundColor: Color.fromRGBO(67, 232, 137, 50),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.search, color: Color.fromRGBO(0, 48, 80, 50)),
-            title: Text(
-              "חיפוש",
-              style: TextStyle(color: Color.fromRGBO(0, 48, 80, 50)),
-            ),
-            backgroundColor: Color.fromRGBO(67, 232, 137, 50),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.add, color: Color.fromRGBO(0, 48, 80, 50)),
-            title: Text(
-              'הוספה',
-              style: TextStyle(color: Color.fromRGBO(0, 48, 80, 50)),
-            ),
-            backgroundColor: Color.fromRGBO(67, 232, 137, 50),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.edit, color: Color.fromRGBO(0, 48, 80, 50)),
-            title: Text(
-              'עדכון',
-              style: TextStyle(color: Color.fromRGBO(0, 48, 80, 50)),
-            ),
-            backgroundColor: Color.fromRGBO(67, 232, 137, 50),
-          ),
-        ],
-        onTap: (index) {
-          setState(() {
-            _currentIndex = index;
-          });
-          if (_currentIndex == 0) {
-            Navigator.of(context).pushReplacement(MaterialPageRoute(
-                builder: (context) => HomeScreen(this.widget.list)));
-          } else if (_currentIndex == 1) {
-            Navigator.of(context).pushReplacement(MaterialPageRoute(
-                builder: (context) => MainComponentSearch(this.widget.list)));
-          } else if (_currentIndex == 2) {
-            Navigator.of(context).pushReplacement(MaterialPageRoute(
-                builder: (context) => MainComponentFill(this.widget.list)));
-          }
-        },
-      ),
+      appBar: createAppBar(authBloc),
+      bottomNavigationBar: createButtomBar(context, _currentBarOption, this),
     );
     return scaffold;
   }

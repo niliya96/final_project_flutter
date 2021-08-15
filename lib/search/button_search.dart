@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_firebase/fill_a_review/main_component.dart';
+import 'package:flutter_firebase/fill_a_review/main_component_fill.dart';
 import 'package:flutter_firebase/services/read_from_mongodb.dart';
 
 class ButtonSearch extends StatefulWidget {
@@ -32,7 +32,7 @@ class ButtonSearchState extends State<ButtonSearch> {
                     size: 30,
                   ),
                   onPressed: () {
-                    Reader reader = new Reader();
+                    MongoReader reader = new MongoReader();
                     reader
                         .searchForWorker(
                             this.widget.nameTyped, this.widget.passportTyped)

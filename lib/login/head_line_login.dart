@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:adobe_xd/pinned.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_firebase/Utils/headers.dart';
 
 class HeadLineLogin extends StatelessWidget {
   HeadLineLogin({
@@ -17,11 +16,11 @@ class HeadLineLogin extends StatelessWidget {
         flex: 10,
         child: Center(
           child: Text(
-            'ExWorkerReviewer',
+            LOGIN_HEADLINE,
             style: TextStyle(
-              fontFamily: 'Europa',
+              fontFamily: EUROPA_FONT,
               fontSize: 30,
-              color: Color.fromRGBO(0, 48, 80, 50),
+              color: DARK_BLUE,
               fontWeight: FontWeight.w700,
               height: 1.1666666666666667,
             ),
@@ -36,7 +35,7 @@ class HeadLineLogin extends StatelessWidget {
         child: Container(
           decoration: BoxDecoration(
             image: DecorationImage(
-              image: const AssetImage('assets/images/open1.jfif'),
+              image: const AssetImage(LOGIN1),
               fit: BoxFit.fill,
             ),
           ),

@@ -2,14 +2,17 @@ import 'dart:async';
 import 'dart:collection';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_firebase/Utils/app_bar.dart';
+import 'package:flutter_firebase/Utils/buttom_bar_fill.dart';
 import 'package:flutter_firebase/fill_a_review/rating_format.dart';
 import 'package:flutter_firebase/fill_a_review/selection_format.dart';
 import 'package:flutter_firebase/home/home_screen.dart';
 import 'package:flutter_firebase/login/auth_bloc_google.dart';
-import 'package:flutter_firebase/login/main_component.dart';
+import 'package:flutter_firebase/login/main_component_login.dart';
 import 'package:provider/provider.dart';
 
 import 'complete_fill.dart';
+import 'create_route_page.dart';
 import 'details_fill.dart';
 
 class TextFormat extends StatefulWidget {
@@ -25,7 +28,7 @@ class TextFormat extends StatefulWidget {
 
 class TextFormatState extends State<TextFormat> {
   int _rating;
-  int _currentIndexInBar = 0;
+  int _currentBarOption = 0;
   String text_fill;
   StreamSubscription<FirebaseUser> loginStateSubscription;
 
@@ -61,180 +64,6 @@ class TextFormatState extends State<TextFormat> {
     if (!this.widget.answers.isEmpty) {
       this.widget.answers.removeLast();
     }
-  }
-
-  Widget createRoute() {
-    return Center(
-      child: Row(
-        children: [
-          /**
-           * start of next button
-           */
-          Padding(
-            padding: const EdgeInsets.only(left: 50),
-            child: FlatButton(
-                height: 60,
-                minWidth: 110,
-                color: Color.fromRGBO(0, 48, 80, 50),
-                child: Text(
-                  "הבא",
-                  style: TextStyle(
-                    fontFamily: 'Europa',
-                    fontSize: 25,
-                    color: Colors.white,
-                    fontWeight: FontWeight.w700,
-                    height: 1.1666666666666667,
-                  ),
-                ),
-                onPressed: () {
-                  /**
-                   * update list of answers
-                   */
-                  addAnswer();
-                  this.widget.current_question++;
-                  if (this.widget.current_question < this.widget.list.length) {
-                    // rating bar case
-                    if (this
-                            .widget
-                            .list[this.widget.current_question]['kind']
-                            .toString() ==
-                        'rating') {
-                      Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => RatingFormat((rating) {
-                          setState(() {
-                            _rating = rating;
-                          });
-                        }, this.widget.list, this.widget.current_question,
-                            this.widget.answers),
-                      ));
-                    }
-                    // choose case
-                    else if (this
-                            .widget
-                            .list[this.widget.current_question]['kind']
-                            .toString() ==
-                        'choose') {
-                      List<dynamic> options = this
-                          .widget
-                          .list[this.widget.current_question]['options'];
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                            builder: (context) => SelectionFormat(
-                                this.widget.current_question,
-                                this.widget.list,
-                                options,
-                                this.widget.answers)),
-                      );
-                    }
-                    // text format
-                    else if (this
-                            .widget
-                            .list[this.widget.current_question]['kind']
-                            .toString() ==
-                        'text') {
-                      Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => TextFormat(
-                            this.widget.current_question,
-                            this.widget.list,
-                            this.widget.answers),
-                      ));
-                    }
-                  } else {
-                    Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => CompleteFillReview(
-                            this.widget.list, this.widget.answers)));
-                  }
-                }),
-          ),
-          SizedBox(
-            width: 90,
-          ),
-          /**
-           * start of previous button
-           */
-          Padding(
-            padding: const EdgeInsets.only(right: 50),
-            child: FlatButton(
-                height: 60,
-                minWidth: 110,
-                color: Color.fromRGBO(0, 48, 80, 50),
-                child: Text(
-                  "הקודם",
-                  style: TextStyle(
-                    fontFamily: 'Europa',
-                    fontSize: 25,
-                    color: Colors.white,
-                    fontWeight: FontWeight.w700,
-                    height: 1.1666666666666667,
-                  ),
-                ),
-                onPressed: () {
-                  /**
-                   * update list of answers
-                   */
-                  deleteAnswer();
-                  // not first format
-                  if (this.widget.current_question > 0) {
-                    this.widget.current_question--;
-                    // rating bar case
-                    if (this
-                            .widget
-                            .list[this.widget.current_question]['kind']
-                            .toString() ==
-                        'rating') {
-                      Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => RatingFormat((rating) {
-                          setState(() {
-                            _rating = rating;
-                          });
-                        }, this.widget.list, this.widget.current_question,
-                            this.widget.answers),
-                      ));
-                    }
-                    // choose case
-                    else if (this
-                            .widget
-                            .list[this.widget.current_question]['kind']
-                            .toString() ==
-                        'choose') {
-                      List<dynamic> options = this
-                          .widget
-                          .list[this.widget.current_question]['options'];
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                            builder: (context) => SelectionFormat(
-                                this.widget.current_question,
-                                this.widget.list,
-                                options,
-                                this.widget.answers)),
-                      );
-                    }
-                    // text format
-                    else if (this
-                            .widget
-                            .list[this.widget.current_question]['kind']
-                            .toString() ==
-                        'text') {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                            builder: (context) => TextFormat(
-                                this.widget.current_question,
-                                this.widget.list,
-                                this.widget.answers)),
-                      );
-                    }
-                  }
-                  // first format
-                  else {
-                    Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => DetailsFill(
-                            this.widget.list, this.widget.answers)));
-                  }
-                }),
-          ),
-        ],
-      ),
-    );
   }
 
   Widget createBody() {
@@ -308,7 +137,7 @@ class TextFormatState extends State<TextFormat> {
               height: 50.0,
             ),
             Center(
-              child: createRoute(),
+              child: createRoute(context, this, 0, _currentBarOption),
             ),
             SizedBox(height: 25),
             Padding(
@@ -327,114 +156,16 @@ class TextFormatState extends State<TextFormat> {
     );
   }
 
-  Widget _buildBody() {
+  @override
+  Widget build(BuildContext context) {
     final authBloc = Provider.of<AuthBlocGoogle>(context);
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: const Color(0xffffffff),
-      appBar: AppBar(
-          actions: [
-            Padding(
-              padding: const EdgeInsets.only(bottom: 8),
-              child: Row(
-                children: <Widget>[
-                  Text(
-                    "ברוך הבא",
-                    style: TextStyle(
-                      fontFamily: 'Europa',
-                      fontSize: 17,
-                      color: Color.fromRGBO(0, 48, 80, 50),
-                      fontWeight: FontWeight.w700,
-                      height: 1.1666666666666667,
-                    ),
-                  ),
-                  RaisedButton(
-                    onPressed: () => authBloc.logoutGoogle(),
-                    child: Text(
-                      'התנתק',
-                      style: TextStyle(
-                        fontFamily: 'Europa',
-                        fontSize: 13,
-                        color: Colors.white,
-                        fontWeight: FontWeight.w100,
-                        height: 1.1666666666666667,
-                      ),
-                    ),
-                    color: Color.fromRGBO(0, 48, 80, 50),
-                    padding: EdgeInsets.all(16),
-                    shape: CircleBorder(),
-                    //bottomOpthpacity: 0,
-                    elevation: 0,
-                  ),
-                ],
-              ),
-            ),
-          ],
-          automaticallyImplyLeading: false,
-          backgroundColor: Color.fromRGBO(67, 232, 137, 50)),
-      bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Color.fromRGBO(67, 232, 137, 50),
-        currentIndex: _currentIndexInBar,
-        iconSize: 30,
-        selectedFontSize: 15,
-        unselectedFontSize: 10,
-        type: BottomNavigationBarType.fixed,
-        items: [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home, color: Color.fromRGBO(0, 48, 80, 50)),
-            title: Text(
-              "בית",
-              style: TextStyle(color: Color.fromRGBO(0, 48, 80, 50)),
-            ),
-            backgroundColor: Color.fromRGBO(67, 232, 137, 50),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.save, color: Color.fromRGBO(0, 48, 80, 50)),
-            title: Text(
-              "שמור",
-              style: TextStyle(color: Color.fromRGBO(0, 48, 80, 50)),
-            ),
-            backgroundColor: Color.fromRGBO(67, 232, 137, 50),
-          ),
-        ],
-        onTap: (index) async {
-          setState(() {
-            _currentIndexInBar = index;
-          });
-          if (_currentIndexInBar == 0) {
-            await showDialog(
-              context: context,
-              builder: (ctx) => AlertDialog(
-                title: Text(
-                  "חזור למסך הבית",
-                  textAlign: TextAlign.right,
-                ),
-                content: Text('האם אתה בטוח שברצונך למחוק את החוו"ד שמילאת?',
-                    textAlign: TextAlign.right),
-                actions: <Widget>[
-                  FlatButton(
-                    onPressed: () {
-                      Navigator.of(context).pushReplacement(MaterialPageRoute(
-                          builder: (context) => HomeScreen(this.widget.list)));
-                    },
-                    child: Text("חזור למסך הבית"),
-                  ),
-                ],
-              ),
-            );
-          } else if (_currentIndexInBar == 1) {
-            Navigator.of(context).pushReplacement(MaterialPageRoute(
-                builder: (context) =>
-                    DetailsFill(this.widget.list, this.widget.answers)));
-          }
-        },
-      ),
+      appBar: createAppBar(authBloc),
+      bottomNavigationBar:
+          createButtomBarFill(context, _currentBarOption, this),
       body: createBody(),
     );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return _buildBody();
   }
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_firebase/Utils/headers.dart';
 
-Widget createHeadline() {
+Widget createHomeScreenUI() {
   return Column(children: <Widget>[
     Expanded(
       flex: 20,
@@ -11,7 +12,7 @@ Widget createHeadline() {
       child: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('assets/images/homescreen.jfif'),
+            image: AssetImage(HOMESCREENPIC),
             fit: BoxFit.fill,
           ),
         ),
@@ -21,11 +22,11 @@ Widget createHeadline() {
       flex: 25,
       child: Center(
         child: Text(
-          'ברוך הבא',
+          WELCOM,
           style: TextStyle(
-            fontFamily: 'Europa',
+            fontFamily: EUROPA_FONT,
             fontSize: 30,
-            color: Color.fromRGBO(0, 48, 80, 50),
+            color: DARK_BLUE,
             fontWeight: FontWeight.w700,
             height: 1.1666666666666667,
           ),
@@ -38,7 +39,7 @@ Widget createHeadline() {
     Expanded(
       flex: 5,
       child: Divider(
-        color: const Color.fromRGBO(0, 48, 80, 50),
+        color: DARK_BLUE,
         thickness: 1,
         indent: 120,
         endIndent: 120,
@@ -48,11 +49,11 @@ Widget createHeadline() {
       flex: 30,
       child: Center(
         child: Text(
-          'אם הגעת לכאן, סימן שגם לך חשוב שהכי יקר עבורך יקבל את הטיפול המסור ביותר',
+          TEXT_HOMESCREEN1,
           style: TextStyle(
-            fontFamily: 'Europa',
+            fontFamily: EUROPA_FONT,
             fontSize: 20,
-            color: Color.fromRGBO(0, 48, 80, 50),
+            color: DARK_BLUE,
             fontWeight: FontWeight.w700,
             height: 1.1666666666666667,
           ),

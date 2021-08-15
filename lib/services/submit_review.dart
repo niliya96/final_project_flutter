@@ -8,8 +8,8 @@ void onSubmitReview(List<String> json) async {
   final coll = db.collection('reviews');
   var data = <Map<String, dynamic>>[];
   int i;
-  for (i=0; i<json.length; i+=2) {
-    data.add({json[i]: json[i+1]});
+  for (i = 0; i < json.length; i += 2) {
+    data.add({json[i]: json[i + 1]});
   }
   await coll.insert(data[0], writeConcern: WriteConcern.ACKNOWLEDGED);
 }

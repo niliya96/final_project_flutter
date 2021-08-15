@@ -1,10 +1,11 @@
 import 'package:mongo_dart/mongo_dart.dart';
 import 'package:sevr/sevr.dart';
 
-class Reader {
+class MongoReader {
+  
   List<Map<String, String>> list;
 
-  Future<List<Map<String, dynamic>>> read() async {
+  Future<List<Map<String, dynamic>>> readQuestions() async {
     final db = await Db.create(
         'mongodb+srv://muser:Aa123456@cluster0.f1hwb.mongodb.net/finalProject?retryWrites=true&w=majority');
     await db.open();

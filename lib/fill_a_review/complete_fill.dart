@@ -4,7 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_firebase/home/home_screen.dart';
 import 'package:flutter_firebase/login/auth_bloc_google.dart';
-import 'package:flutter_firebase/login/main_component.dart';
+import 'package:flutter_firebase/login/main_component_login.dart';
 import 'package:flutter_firebase/services/submit_review.dart';
 import 'package:provider/provider.dart';
 import 'details_fill.dart';

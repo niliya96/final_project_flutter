@@ -1,8 +1,7 @@
-import 'package:adobe_xd/adobe_xd.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_firebase/login/buttons.dart';
-import 'package:flutter_firebase/login/head_line.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_firebase/Utils/headers.dart';
+import 'package:flutter_firebase/login/buttons_login.dart';
+import 'package:flutter_firebase/login/head_line_login.dart';
 
 class MainComponentLogin extends StatefulWidget {
   final List<Map<String, dynamic>> list;
@@ -20,7 +19,7 @@ class MainComponentLoginState extends State<MainComponentLogin> {
         backgroundColor: Colors.white,
         appBar: AppBar(
           automaticallyImplyLeading: false,
-          backgroundColor: Color.fromRGBO(67, 232, 137, 50),
+          backgroundColor: LIGHT_GREEN,
         ),
         body: Column(children: <Widget>[
           Expanded(
@@ -30,7 +29,7 @@ class MainComponentLoginState extends State<MainComponentLogin> {
           Expanded(
             flex: 2,
             child: ButtonsLogin(this.widget.list),
-          ),
-        ]));
+        ),
+    ]));
   }
 }
