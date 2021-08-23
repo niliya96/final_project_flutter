@@ -75,6 +75,10 @@ const String WORKER_NAME = 'שם העובד';
 const String CLEAN = "נקה";
 const String IRELEVANT = "סמן כלא רלוונטי";
 const String FREE_TEXT = 'כתוב מלל חופשי';
+const String UPDATE_REVIEW_HEADLINE = "עדכן חוות דעת";
+const String PASSPORT_NUMBER_WORKER = ":מספר דרכון";
+const String NAME_WORKER = ":שם העובד";
+const String DATE = ":עדכון אחרון";
 
 /// Fonts
 const String EUROPA_FONT = 'Europa';
@@ -85,3 +89,4 @@ const String HOMESCREENPIC = 'assets/images/homescreen.jfif';
 const START_QUESTION1PIC = 'assets/images/fill_start.jfif';
 const START_QUESION2PIC = 'assets/images/fill_start2.jfif';
 const DEATAILS_FILL_PIC = 'assets/images/fill_details.jfif';
+const UPDATE_PIC = 'assets/images/update.jfif';

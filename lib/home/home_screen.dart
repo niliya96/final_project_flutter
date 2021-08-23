@@ -9,8 +9,8 @@ import 'home_screen_ui.dart';
 import 'package:flutter_firebase/Utils/buttom_navigation_bar.dart';
 
 class HomeScreen extends StatefulWidget {
-  final List<Map<String, dynamic>> list;
-  HomeScreen(this.list);
+  final List<Map<String, dynamic>> questions;
+  HomeScreen(this.questions);
 
   @override
   HomeScreenState createState() => HomeScreenState();
@@ -27,7 +27,7 @@ class HomeScreenState extends State<HomeScreen> {
       if (fbUser == null) {
         Navigator.of(context).pushReplacement(
           MaterialPageRoute(
-            builder: (context) => MainComponentLogin(this.widget.list),
+            builder: (context) => MainComponentLogin(this.widget.questions),
           ),
         );
       }
