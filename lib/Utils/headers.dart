@@ -53,6 +53,7 @@ const String RATING = "rating";
 const String CHOOSE = "choose";
 const String TEXT = "text";
 const String OPTIONS = "options";
+const String MANDATORY = "mandatory";
 const String PASSPORT_NUMBER = 'מספר דרכון';
 const String VALID_PASSPORT_NUM = "מספר הדרכון חוקי";
 const String AUTH_PASSPORT = 'אימות מספר דרכון';
@@ -78,7 +79,14 @@ const String FREE_TEXT = 'כתוב מלל חופשי';
 const String UPDATE_REVIEW_HEADLINE = "עדכן חוות דעת";
 const String PASSPORT_NUMBER_WORKER = ":מספר דרכון";
 const String NAME_WORKER = ":שם העובד";
-const String DATE = ":עדכון אחרון";
+const String LAST_UPDATE = "עדכון אחרון";
+const String DELETE_YOUR_REVIEW = "מחיקת חוות דעת";
+const String ARE_YOU_SURE_TO_DELETE = "?האם אתה בטוח שברצונך למחוק את חוות הדעת";
+const String DELETE = "מחק";
+const String REVIEW_FOR = " חוות דעת עבור העובד";
+const String NATION = "מדינה";
+const String UPDATING_SECTION = "בעמוד זה תוכל לעדכן את חוות הדעת עבור";
+const String CONSTRAIN = "לא ניתן לעדכן את הפרטים האישיים של העובד";
 
 /// Fonts
 const String EUROPA_FONT = 'Europa';

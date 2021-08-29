@@ -1,220 +1,115 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_firebase/Utils/headers.dart';
-import 'package:flutter_firebase/login/auth_bloc_google.dart';
-import 'package:flutter_firebase/login/main_component_login.dart';
-import 'package:flutter_firebase/update_a_review/main_component_update.dart';
+import 'package:flutter_firebase/update_a_review/updating_section.dart';
+import 'package:flutter_firebase/update_a_review/watch_review.dart';
 
-class ReviewFormat extends StatefulWidget {
-  AuthBlocGoogle authBlock;
-  String name;
-   MainComponentUpdateState state;
-  ReviewFormat(this.authBlock, this.name, this.state);
-  @override
-  ReviewFormatState createState() => ReviewFormatState();
+class ReviewFormatData {
+  final String name_of_worker;
+  final String passport;
+  final String nation;
+  final String last_update;
+  final List<List<String>> rating_answers;
+  final List<List<String>> choose_answers;
+  final List<List<String>> text_answers;
+  final List<Map<String, dynamic>> questions;
+
+  const ReviewFormatData({
+    @required this.name_of_worker,
+    @required this.passport,
+    @required this.nation,
+    @required this.last_update,
+    @required this.rating_answers,
+    @required this.choose_answers,
+    @required this.text_answers,
+    @required this.questions,
+  });
 }
 
-class ReviewFormatState extends State<ReviewFormat> {
-  @override
-  void initState() {
-    super.initState();
-  }
+class ReviewFormatWidget extends StatelessWidget {
+  final ReviewFormatData item;
+  final Animation animation;
+  final VoidCallback onClicked;
+
+  const ReviewFormatWidget({
+    @required this.item,
+    @required this.animation,
+    @required this.onClicked,
+    Key key,
+  }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return createReviewFormat(this.widget.authBlock, this.widget.name, this.widget.state);
-  }
-}
-
-Widget createReviewFormat(AuthBlocGoogle authBlock, String name, MainComponentUpdateState state) {
-  return Padding(
-    padding: const EdgeInsets.only(left: 20, right: 20),
-    child: Container(
-      color: LIGHT_GREEN,
-      child: Column(children: <Widget>[
-        Expanded(
-          flex: 1,
-          child: Container(
-            color: DARK_BLUE,
-          ),
-        ),
-        /**
-         * row 1
-         */
-        Expanded(
-            flex: 2,
-            child: Row(
+  Widget build(BuildContext context) => ScaleTransition(
+        scale: animation,
+        child: Card(
+          margin: EdgeInsets.all(8),
+          color: LIGHT_GREEN,
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              //crossAxisAlignment: CrossAxisAlignment.end,
               children: <Widget>[
-                Expanded(
-                  flex: 1,
-                  child: SizedBox(),
-                ),
-                Expanded(
-                  flex: 2,
-                  child: Text(
-                    DATE,
-                    style: TextStyle(
-                      fontFamily: EUROPA_FONT,
-                      fontSize: 13,
-                      color: DARK_BLUE,
-                      fontWeight: FontWeight.w700,
-                      height: 1.1666666666666667,
-                    ),
-                    textHeightBehavior:
-                        TextHeightBehavior(applyHeightToFirstAscent: false),
-                    textAlign: TextAlign.left,
+                Row(children: <Widget>[
+                  Expanded(
+                    flex: 20,
+                    child: SizedBox(),
                   ),
+                  Text(LAST_UPDATE + ": " + this.item.last_update,
+                      style: TextStyle(fontSize: 18)),
+                  Expanded(
+                    flex: 1,
+                    child: SizedBox(),
+                  ),
+                ]),
+                Row(
+                  children: <Widget>[
+                    Expanded(
+                      flex: 20,
+                      child: SizedBox(),
+                    ),
+                    Column(children: <Widget>[
+                      Text(WORKER_NAME + ": " + this.item.name_of_worker,
+                          style: TextStyle(fontSize: 30)),
+                      Text(PASSPORT_NUMBER + ": " + this.item.passport,
+                          style: TextStyle(fontSize: 25)),
+                    ]),
+                    Expanded(
+                      flex: 1,
+                      child: SizedBox(),
+                    ),
+                    Column(children: <Widget>[]),
+                    Icon(Icons.rate_review, size: 50, color: DARK_BLUE),
+                    Expanded(
+                      flex: 2,
+                      child: SizedBox(),
+                    ),
+                  ],
                 ),
-                Expanded(
-                  flex: 5,
-                  child: SizedBox(),
+                Row(
+                  children: <Widget>[
+                    IconButton(
+                      icon: Icon(Icons.delete, color: DARK_BLUE, size: 35),
+                      onPressed: onClicked,
+                    ),
+                    IconButton(
+                        icon: Icon(Icons.edit, color: DARK_BLUE, size: 35),
+                        onPressed: () {
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) =>
+                                  UpdatingSection(this.item.questions, this.item)));
+                        }),
+                    IconButton(
+                      icon: Icon(Icons.read_more, color: DARK_BLUE, size: 35),
+                      onPressed: () {
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) =>
+                                WatchReview(this.item.questions, this.item)));
+                      },
+                    )
+                  ],
                 ),
               ],
-            )),
-        /**
-         * row 2
-         */
-        Expanded(
-          flex: 2,
-          child: Row(children: <Widget>[
-            Expanded(
-              flex: 8,
-              child: SizedBox(),
             ),
-            Expanded(
-              flex: 8,
-              child: Text(
-                NAME_WORKER + name,
-                style: TextStyle(
-                  fontFamily: EUROPA_FONT,
-                  fontSize: 18,
-                  color: DARK_BLUE,
-                  fontWeight: FontWeight.w700,
-                  height: 1.1666666666666667,
-                ),
-                textHeightBehavior:
-                    TextHeightBehavior(applyHeightToFirstAscent: false),
-                textAlign: TextAlign.right,
-              ),
-            ),
-            Expanded(
-              flex: 1,
-              child: SizedBox(),
-            ),
-          ]),
-          /**
-         * row 3
-         */
+          ),
         ),
-        Expanded(
-          flex: 2,
-          child: Row(children: <Widget>[
-            Expanded(
-              flex: 8,
-              child: SizedBox(),
-            ),
-            Expanded(
-              flex: 8,
-              child: Text(
-                PASSPORT_NUMBER_WORKER,
-                style: TextStyle(
-                  fontFamily: EUROPA_FONT,
-                  fontSize: 18,
-                  color: DARK_BLUE,
-                  fontWeight: FontWeight.w700,
-                  height: 1.1666666666666667,
-                ),
-                textHeightBehavior:
-                    TextHeightBehavior(applyHeightToFirstAscent: false),
-                textAlign: TextAlign.right,
-              ),
-            ),
-            Expanded(
-              flex: 1,
-              child: SizedBox(),
-            ),
-          ]),
-        ),
-        Expanded(
-          flex: 1,
-          child: SizedBox(),
-        ),
-        /**
-         * row 4 buttons
-         */
-        createReviewButtons(state),
-        Expanded(
-          flex: 1,
-          child: SizedBox(),
-        ),
-      ]),
-    ),
-  );
+      );
 }
-
-Widget createReviewButtons( MainComponentUpdateState state) {
-  return Expanded(
-    flex: 1,
-    child: Row(
-      children: [
-        Expanded(
-          flex: 5,
-          child: SizedBox(),
-        ),
-        Expanded(
-          flex: 10,
-          child: FlatButton(
-              height: 60,
-              minWidth: 70,
-              color: DARK_BLUE,
-              child: Icon(Icons.delete),
-              highlightColor: DARK_BLUE2,
-              onPressed: () {
-                state.deleteElement(Widget);
-              }),
-        ),
-        Expanded(
-          flex: 2,
-          child: SizedBox(),
-        ),
-        Expanded(
-          flex: 10,
-          child: FlatButton(
-              height: 60,
-              minWidth: 70,
-              color: DARK_BLUE,
-              child: Icon(Icons.edit),
-              highlightColor: DARK_BLUE2,
-              onPressed: () {
-                // TODO
-              }),
-        ),
-        Expanded(
-          flex: 2,
-          child: SizedBox(),
-        ),
-        Expanded(
-          flex: 10,
-          child: FlatButton(
-              height: 60,
-              minWidth: 70,
-              color: DARK_BLUE,
-              child: Icon(Icons.read_more),
-              highlightColor: DARK_BLUE2,
-              onPressed: () {
-                // TODO
-              }),
-        ),
-        Expanded(
-          flex: 25,
-          child: SizedBox(),
-        ),
-      ],
-    ),
-  );
-}
-
-  @override
-  State<StatefulWidget> createState() {
-    // TODO: implement createState
-    throw UnimplementedError();
-  }

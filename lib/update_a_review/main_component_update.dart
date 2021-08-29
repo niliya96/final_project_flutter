@@ -9,9 +9,10 @@ import 'package:flutter_firebase/login/auth_bloc_google.dart';
 import 'package:flutter_firebase/login/main_component_login.dart';
 import 'package:provider/provider.dart';
 
+import 'list_view_component.dart';
+
 class MainComponentUpdate extends StatefulWidget {
   final List<Map<String, dynamic>> questions;
-  List<ReviewFormat> reviews = [];
   MainComponentUpdate(this.questions);
 
   @override
@@ -34,8 +35,6 @@ class MainComponentUpdateState extends State<MainComponentUpdate> {
         );
       }
     });
-    this.widget.reviews.add(new ReviewFormat(authBloc, "נילי", this));
-    this.widget.reviews.add(new ReviewFormat(authBloc, "נוי", this));
     super.initState();
   }
 
@@ -45,33 +44,13 @@ class MainComponentUpdateState extends State<MainComponentUpdate> {
     super.dispose();
   }
 
-  Widget drawList() {
-    return ListView(
-      children: <Widget>[
-        Column(
-          children: <Widget>[
-            for (ReviewFormat elem in this.widget.reviews)
-              SizedBox(
-                height: 230.0,
-                child: elem,
-              ),
-          ],
-        ),
-      ],
-    );
-  }
-
-  Widget deleteElement(dynamic elem) {
-    this.widget.reviews.remove(elem);
-  }
-
   @override
   Widget build(BuildContext context) {
     final authBloc = Provider.of<AuthBlocGoogle>(context);
     var scaffold = Scaffold(
       body: Column(children: <Widget>[
         Expanded(
-          flex: 15,
+          flex: 18,
           child: createHeadLineUpdate(),
         ),
         Expanded(
@@ -80,11 +59,7 @@ class MainComponentUpdateState extends State<MainComponentUpdate> {
         ),
         Expanded(
           flex: 20,
-          child: drawList(),
-        ),
-        Expanded(
-          flex: 2,
-          child: SizedBox(),
+          child: ListViewComponent(),
         ),
       ]),
       resizeToAvoidBottomInset: false,
@@ -95,3 +70,4 @@ class MainComponentUpdateState extends State<MainComponentUpdate> {
     return scaffold;
   }
 }
+

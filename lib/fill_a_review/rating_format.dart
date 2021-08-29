@@ -144,6 +144,7 @@ class RatingFormatState extends State<RatingFormat> {
             ],
           ),
         ),
+        if (this.widget.questions[this.widget.current_question][MANDATORY] == "no") 
         Expanded(
           flex: 10,
           child: FlatButton(
@@ -166,6 +167,7 @@ class RatingFormatState extends State<RatingFormat> {
           flex: 10,
           child: SizedBox(),
         ),
+        if (this.widget.questions[this.widget.current_question][MANDATORY] == "no") 
         Expanded(
           flex: 10,
           child: Padding(
