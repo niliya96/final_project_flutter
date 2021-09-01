@@ -11,7 +11,7 @@ import 'details_fill.dart';
 
 class StartQuestions2 extends StatefulWidget {
   final List<Map<String, dynamic>> questions;
-  List<Map<String, String>> answers;
+  List< Map<String, Map<dynamic, bool>>> answers;
   StartQuestions2(this.questions, this.answers);
 
   @override

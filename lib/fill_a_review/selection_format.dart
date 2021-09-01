@@ -34,7 +34,7 @@ class SelectionFormat extends StatefulWidget {
   int current_question;
   final List<Map<String, dynamic>> questions;
   final List<dynamic> options;
-  List<Map<String, String>> answers;
+  List< Map<String, Map<dynamic, bool>>> answers;
 
   SelectionFormat(this.current_question, this.questions, this.options, this.answers)
       : super();
@@ -174,7 +174,7 @@ class SelectionFormatState extends State<SelectionFormat> {
         ),
         Expanded(
           flex: 15,
-          child: Center(child: createRoute(context, this, _rating, 0)),
+          child: Center(child: createRoute(context, this, _rating, _selectedOption.toString(), this.widget.answers, this.widget.questions)),
         ),
         Expanded(
           flex: 3,

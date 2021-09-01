@@ -11,8 +11,8 @@ import 'package:flutter_firebase/Utils/buttom_bar_fill.dart';
 
 class StartQuestions extends StatefulWidget {
   final List<Map<String, dynamic>> questions;
-  List<Map<String, String>> answers;
-  StartQuestions(this.questions, this.answers);
+  List< Map<String, Map<dynamic, bool>>> answers = [];
+  StartQuestions(this.questions);
 
   @override
   StartQuestionsState createState() => StartQuestionsState();
@@ -22,8 +22,21 @@ class StartQuestionsState extends State<StartQuestions> {
   int _currentBarOption = 0;
   StreamSubscription<FirebaseUser> loginStateSubscription;
 
+  void buildAnswers() {
+    this.widget.questions.forEach((element) {
+      String number_of_qustion = element[NUMBER].toString();
+      Map<dynamic, bool> status = {"init": false};
+      Map<String, Map<dynamic, bool>> answer_init = {
+        number_of_qustion: status
+      };
+      this.widget.answers.add(answer_init);
+    });
+  }
+
   @override
   void initState() {
+    // init the answers map
+    buildAnswers();
     sortList();
     var authBloc = Provider.of<AuthBlocGoogle>(context, listen: false);
     loginStateSubscription = authBloc.currentUser.listen((fbUser) {

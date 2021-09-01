@@ -14,7 +14,7 @@ import 'package:flutter_firebase/Utils/headers.dart';
 
 class DetailsFill extends StatefulWidget {
   final List<Map<String, dynamic>> questions;
-  List<Map<String, String>> answers;
+  List< Map<String, Map<dynamic, bool>>> answers;
   DetailsFill(this.questions, this.answers);
   int current_question = 0;
 

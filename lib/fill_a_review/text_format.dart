@@ -13,7 +13,7 @@ import 'create_route_page.dart';
 class TextFormat extends StatefulWidget {
   int current_question;
   final List<Map<String, dynamic>> questions;
-  List<Map<String, String>> answers;
+  List< Map<String, Map<dynamic, bool>>> answers;
 
   TextFormat(this.current_question, this.questions, this.answers) : super();
 
@@ -52,7 +52,7 @@ class TextFormatState extends State<TextFormat> {
     Map<String, String> answer = new HashMap<String, String>();
     answer.putIfAbsent(
         this.widget.current_question.toString(), () => text_fill);
-    this.widget.answers.add(answer);
+    //this.widget.answers.add(answer);
   }
 
   void deleteAnswer() {
@@ -139,7 +139,7 @@ class TextFormatState extends State<TextFormat> {
         Expanded(
           flex: 3,
           child: Center(
-            child: createRoute(context, this, 0, _currentBarOption),
+            child: createRoute(context, this, _rating, text_fill, this.widget.answers, this.widget.questions),
           ),
         ),
         Expanded(

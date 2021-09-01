@@ -1,18 +1,19 @@
 import 'dart:async';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_firebase/Utils/app_bar.dart';
+import 'package:flutter_firebase/Utils/buttom_bar_fill.dart';
 import 'package:flutter_firebase/home/home_screen.dart';
 import 'package:flutter_firebase/login/auth_bloc_google.dart';
 import 'package:flutter_firebase/login/main_component_login.dart';
-import 'package:flutter_firebase/services/submit_review.dart';
 import 'package:provider/provider.dart';
-import 'details_fill.dart';
+import 'package:flutter_firebase/Utils/headers.dart';
+
 
 class CompleteFillReview extends StatefulWidget {
-  final List<Map<String, dynamic>> list;
-  List<Map<String, String>> answers;
-  CompleteFillReview(this.list, this.answers);
+  final List<Map<String, dynamic>> questions;
+  List<Map<String, Map<dynamic, bool>>> answers;
+  CompleteFillReview(this.questions, this.answers);
   int index = 0;
 
   @override
@@ -20,7 +21,7 @@ class CompleteFillReview extends StatefulWidget {
 }
 
 class CompleteFillReviewState extends State<CompleteFillReview> {
-  int _currentOptionButtomBar = 0;
+  int _currentBarOption = 0;
   StreamSubscription<FirebaseUser> loginStateSubscription;
   @override
   void initState() {
@@ -29,24 +30,14 @@ class CompleteFillReviewState extends State<CompleteFillReview> {
       if (fbUser == null) {
         Navigator.of(context).pushReplacement(
           MaterialPageRoute(
-            builder: (context) => MainComponentLogin(this.widget.list),
+            builder: (context) => MainComponentLogin(this.widget.questions),
           ),
         );
       }
       /**
        * write the data to the db
        */
-      int index;
-      List<String> lst = [];
-      lst.add("name_of_user");
-      lst.add(authBloc.currentUser.first.toString());
-      this.widget.answers.forEach((e) {
-        e.forEach((key, value) {
-          lst.add(key.toString());
-          lst.add(value.toString());
-        });
-      });
-      onSubmitReview(lst);
+      // TODO 
     });
     super.initState();
   }
@@ -67,7 +58,7 @@ class CompleteFillReviewState extends State<CompleteFillReview> {
           height: 240.0,
           decoration: BoxDecoration(
             image: DecorationImage(
-              image: AssetImage('assets/images/complete_fill.jfif'),
+              image: AssetImage(COMPLETE_FILL_PIC),
               fit: BoxFit.fill,
             ),
           ),
@@ -77,9 +68,9 @@ class CompleteFillReviewState extends State<CompleteFillReview> {
         padding: const EdgeInsets.only(top: 0),
         child: Center(
           child: Text(
-            '!זהו, סיימנו',
+            FINISH,
             style: TextStyle(
-              fontFamily: 'Europa',
+              fontFamily: EUROPA_FONT,
               fontSize: 30,
               color: Color.fromRGBO(0, 48, 80, 50),
               fontWeight: FontWeight.w700,
@@ -94,7 +85,7 @@ class CompleteFillReviewState extends State<CompleteFillReview> {
       Padding(
         padding: const EdgeInsets.only(top: 340),
         child: Divider(
-          color: const Color.fromRGBO(0, 48, 80, 50),
+          color: DARK_BLUE,
           thickness: 1,
           indent: 50,
           endIndent: 50,
@@ -103,11 +94,11 @@ class CompleteFillReviewState extends State<CompleteFillReview> {
       Padding(
         padding: const EdgeInsets.only(top: 360, left: 20, right: 20),
         child: Text(
-          '.תודה שהקדשת מזמנך',
+          THANKS,
           style: TextStyle(
-            fontFamily: 'Europa',
+            fontFamily: EUROPA_FONT,
             fontSize: 17,
-            color: Color.fromRGBO(0, 48, 80, 50),
+            color: DARK_BLUE,
             fontWeight: FontWeight.w700,
             height: 1.1666666666666667,
           ),
@@ -119,11 +110,11 @@ class CompleteFillReviewState extends State<CompleteFillReview> {
       Padding(
         padding: const EdgeInsets.only(top: 420, left: 20, right: 20),
         child: Text(
-          '.חוות הדעת שלך נקלטה במערכת. כל חוות דעת עוברת בדיקה לפני פרסום',
+          IN_THE_SYSTEM,
           style: TextStyle(
-            fontFamily: 'Europa',
+            fontFamily: EUROPA_FONT,
             fontSize: 17,
-            color: Color.fromRGBO(0, 48, 80, 50),
+            color: DARK_BLUE,
             fontWeight: FontWeight.w700,
             height: 1.1666666666666667,
           ),
@@ -136,11 +127,11 @@ class CompleteFillReviewState extends State<CompleteFillReview> {
         padding: const EdgeInsets.only(top: 330, left: 20, right: 20),
         child: Center(
           child: Text(
-            'שים לב כי תוכל לעדכן את חוות הדעת בכל עת דרך כפתור העדכון בתפריט מסך הבית',
+            UPDATE_EXPLANATION,
             style: TextStyle(
-              fontFamily: 'Europa',
+              fontFamily: EUROPA_FONT,
               fontSize: 15,
-              color: Color.fromRGBO(0, 48, 80, 50),
+              color: DARK_BLUE,
               fontWeight: FontWeight.w700,
               height: 1.1666666666666667,
             ),
@@ -156,21 +147,21 @@ class CompleteFillReviewState extends State<CompleteFillReview> {
           child: FlatButton(
               height: 60,
               minWidth: 70,
-              color: Color.fromRGBO(0, 48, 80, 50),
+              color: DARK_BLUE,
               child: Text(
-                "חזור למסך הבית",
+                RETURN_HOME,
                 style: TextStyle(
-                  fontFamily: 'Europa',
+                  fontFamily: EUROPA_FONT,
                   fontSize: 25,
                   color: Colors.white,
                   fontWeight: FontWeight.w700,
                   height: 1.1666666666666667,
                 ),
               ),
-              highlightColor: Color.fromRGBO(0, 48, 80, 30),
+              highlightColor: DARK_BLUE4,
               onPressed: () {
                 Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => HomeScreen(this.widget.list)));
+                    builder: (context) => HomeScreen(this.widget.questions)));
               }),
         ),
       ),
@@ -183,100 +174,8 @@ class CompleteFillReviewState extends State<CompleteFillReview> {
     var scaffold = Scaffold(
         resizeToAvoidBottomInset: false,
         backgroundColor: Colors.white,
-        appBar: AppBar(
-            actions: [
-              Padding(
-                padding: const EdgeInsets.only(bottom: 8),
-                child: Row(
-                  children: <Widget>[
-                    Text(
-                      "ברוך הבא",
-                      style: TextStyle(
-                        fontFamily: 'Europa',
-                        fontSize: 17,
-                        color: Color.fromRGBO(0, 48, 80, 50),
-                        fontWeight: FontWeight.w700,
-                        height: 1.1666666666666667,
-                      ),
-                    ),
-                    RaisedButton(
-                      onPressed: () => authBloc.logoutGoogle(),
-                      child: Text(
-                        'התנתק',
-                        style: TextStyle(
-                          fontFamily: 'Europa',
-                          fontSize: 13,
-                          color: Colors.white,
-                          fontWeight: FontWeight.w100,
-                          height: 1.1666666666666667,
-                        ),
-                      ),
-                      color: Color.fromRGBO(0, 48, 80, 50),
-                      padding: EdgeInsets.all(16),
-                      shape: CircleBorder(),
-                      //bottomOpthpacity: 0,
-                      elevation: 0,
-                    ),
-                  ],
-                ),
-              ),
-            ],
-            automaticallyImplyLeading: false,
-            backgroundColor: Color.fromRGBO(67, 232, 137, 50)),
-        bottomNavigationBar: BottomNavigationBar(
-          backgroundColor: Color.fromRGBO(67, 232, 137, 50),
-          currentIndex: _currentOptionButtomBar,
-          iconSize: 30,
-          selectedFontSize: 15,
-          unselectedFontSize: 10,
-          type: BottomNavigationBarType.fixed,
-          items: [
-            BottomNavigationBarItem(
-              icon: Icon(Icons.home, color: Color.fromRGBO(0, 48, 80, 50)),
-              title: Text(
-                "בית",
-                style: TextStyle(color: Color.fromRGBO(0, 48, 80, 50)),
-              ),
-              backgroundColor: Color.fromRGBO(67, 232, 137, 50),
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.save, color: Color.fromRGBO(0, 48, 80, 50)),
-              title: Text(
-                "שמור",
-                style: TextStyle(color: Color.fromRGBO(0, 48, 80, 50)),
-              ),
-              backgroundColor: Color.fromRGBO(67, 232, 137, 50),
-            ),
-          ],
-          onTap: (index) async {
-            setState(() {
-              _currentOptionButtomBar = index;
-            });
-            if (_currentOptionButtomBar == 0) {
-              await showDialog(
-                context: context,
-                builder: (ctx) => AlertDialog(
-                  title: Text(
-                    "חזור למסך הבית",
-                    textAlign: TextAlign.right,
-                  ),
-                  actions: <Widget>[
-                    FlatButton(
-                      onPressed: () {
-                        Navigator.of(context).pushReplacement(MaterialPageRoute(
-                            builder: (context) =>
-                                HomeScreen(this.widget.list)));
-                      },
-                      child: Text("לחץ לחזרה"),
-                    ),
-                  ],
-                ),
-              );
-            } else if (_currentOptionButtomBar == 1) {
-              //TO DO
-            }
-          },
-        ),
+        appBar: createAppBar(authBloc),
+        bottomNavigationBar: createButtomBarFill(context, _currentBarOption, this),
         body: headLine());
     return scaffold;
   }

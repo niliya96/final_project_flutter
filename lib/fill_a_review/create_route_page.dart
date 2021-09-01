@@ -7,22 +7,27 @@ import 'package:flutter_firebase/Utils/headers.dart';
 import 'complete_fill.dart';
 import 'rating_format.dart';
 
-void addAnswer(dynamic state, int _currentRating) {
-  Map<String, String> answer = new HashMap<String, String>();
-  answer.putIfAbsent(
-      state.widget.questions[state.widget.current_question][TEXT].toString(),
-      () => _currentRating.toString());
-  state.widget.answers.add(answer);
-}
-
-void deleteAnswer(dynamic state) {
-  if (!state.widget.answers.isEmpty) {
-    state.widget.answers.removeLast();
-  }
+void saveAnswer(String answer, List<Map<String, Map<dynamic, bool>>> answers,
+    int number, List<Map<String, dynamic>> questions) {
+  questions.forEach((q) {
+    if (q[NUMBER].toString() == number.toString()) {
+      answers.forEach((a) {
+        var key = number.toString();
+        if (a.containsKey(key)) {
+          a.update(key, (value) => {answer: true});
+        }
+      });
+    }
+  });
 }
 
 Widget createRoute(
-    BuildContext context, dynamic state, int _rating, int _currentRating) {
+    BuildContext context,
+    dynamic state,
+    int _rating,
+    String answer,
+    List<Map<String, Map<dynamic, bool>>> answers,
+    List<Map<String, dynamic>> questions) {
   return Center(
     child: Row(
       children: [
@@ -50,10 +55,16 @@ Widget createRoute(
                 ),
               ),
               onPressed: () {
+                print("nili");
                 /**
                    * update list of answers
                    */
-                addAnswer(state, _currentRating);
+                saveAnswer(
+                    answer,
+                    answers,
+                    state.widget.questions[state.widget.current_question]
+                        [NUMBER],
+                    questions);
                 state.widget.current_question++;
                 if (state.widget.current_question <
                     state.widget.questions.length) {
@@ -130,7 +141,12 @@ Widget createRoute(
                 /**
                    * update list of answers
                    */
-                deleteAnswer(state);
+                saveAnswer(
+                    answer,
+                    answers,
+                    state.widget.questions[state.widget.current_question]
+                        [NUMBER],
+                    questions);
                 // not first format
                 if (state.widget.current_question > 0) {
                   state.widget.current_question--;

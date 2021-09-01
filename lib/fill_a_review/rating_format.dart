@@ -13,7 +13,7 @@ class RatingFormat extends StatefulWidget {
   final int maximumRating = 5;
   final Function(int) onRatingSelected;
   final List<Map<String, dynamic>> questions;
-  List<Map<String, String>> answers;
+  List< Map<String, Map<dynamic, bool>>> answers;
   int current_question;
 
   RatingFormat(this.onRatingSelected, this.questions, this.current_question,
@@ -205,9 +205,17 @@ class RatingFormatState extends State<RatingFormat> {
           flex: 30,
           child: SizedBox(),
         ),
+        if (_checked)
         Expanded(
           flex: 10,
-          child: createRoute(context, this, _rating, _currentRating),
+          child: 
+          createRoute(context, this, _rating, "irelevant", this.widget.answers, this.widget.questions),
+        ),
+        if (!_checked) 
+        Expanded(
+          flex: 10,
+          child: 
+          createRoute(context, this, _rating, _currentRating.toString(), this.widget.answers, this.widget.questions),
         ),
         Expanded(
           flex: 10,

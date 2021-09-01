@@ -8,6 +8,7 @@ const Color LIGHT_GREEN = Color.fromRGBO(67, 232, 137, 50);
 const Color DARK_BLUE = Color.fromRGBO(0, 48, 80, 50);
 const Color DARK_BLUE2 = Color.fromRGBO(0, 48, 80, 50);
 const Color DARK_BLUE3 = Color.fromRGBO(67, 232, 137, 10);
+const Color DARK_BLUE4 = Color.fromRGBO(0, 48, 80, 30);
 const Color WHITE = const Color(0xffffffff);
 
 /// Head Lines
@@ -54,6 +55,7 @@ const String CHOOSE = "choose";
 const String TEXT = "text";
 const String OPTIONS = "options";
 const String MANDATORY = "mandatory";
+const String NUMBER = "number";
 const String PASSPORT_NUMBER = 'מספר דרכון';
 const String VALID_PASSPORT_NUM = "מספר הדרכון חוקי";
 const String AUTH_PASSPORT = 'אימות מספר דרכון';
@@ -87,6 +89,10 @@ const String REVIEW_FOR = " חוות דעת עבור העובד";
 const String NATION = "מדינה";
 const String UPDATING_SECTION = "בעמוד זה תוכל לעדכן את חוות הדעת עבור";
 const String CONSTRAIN = "לא ניתן לעדכן את הפרטים האישיים של העובד";
+const String FINISH = '!זהו, סיימנו';
+const String THANKS = '.תודה שהקדשת מזמנך';
+const String IN_THE_SYSTEM = '.חוות הדעת שלך נקלטה במערכת. כל חוות דעת עוברת בדיקה לפני פרסום';
+const String UPDATE_EXPLANATION = 'שים לב כי תוכל לעדכן את חוות הדעת בכל עת דרך כפתור העדכון בתפריט מסך הבית';
 
 /// Fonts
 const String EUROPA_FONT = 'Europa';
@@ -98,3 +104,4 @@ const START_QUESTION1PIC = 'assets/images/fill_start.jfif';
 const START_QUESION2PIC = 'assets/images/fill_start2.jfif';
 const DEATAILS_FILL_PIC = 'assets/images/fill_details.jfif';
 const UPDATE_PIC = 'assets/images/update.jfif';
+const COMPLETE_FILL_PIC = 'assets/images/complete_fill.jfif';
