@@ -89,7 +89,8 @@ class SelectionFormatState extends State<SelectionFormat> {
           this,
           this.widget.insertion_format.uid,
           this.widget.insertion_format,
-          this.widget.questions, true),
+          this.widget.questions,
+          true),
       body: createBody(),
     );
   }
@@ -193,6 +194,27 @@ class SelectionFormatState extends State<SelectionFormat> {
                   this.widget.insertion_format,
                   this.widget.questions)),
         ),
+        if (this
+                .widget
+                .questions[this.widget.current_question][TEXT]
+                .toString() ==
+            REVIEW_OR_WORK1)
+          Expanded(
+            flex: 3,
+            child: Text(
+              REVIEW_OR_WORK2,
+              style: TextStyle(
+                fontFamily: EUROPA_FONT,
+                fontSize: 12,
+                color: DARK_BLUE,
+                fontWeight: FontWeight.w700,
+                height: 1.1666666666666667,
+              ),
+              textHeightBehavior:
+                  TextHeightBehavior(applyHeightToFirstAscent: false),
+              textAlign: TextAlign.center,
+            ),
+          ),
         Expanded(
           flex: 3,
           child: SizedBox(height: 25),

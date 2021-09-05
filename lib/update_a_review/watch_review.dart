@@ -213,9 +213,15 @@ class WatchReviewState extends State<WatchReview> {
             for (var question in this.widget.review.choose_answers)
               if (question[1] != "init") buildChooseQustion(question),
             // rating questions
+            SizedBox(
+              height: 20,
+            ),
             for (var question in this.widget.review.rating_answers)
               if (question[1] != "init") buildStarsRow(question),
             // text questions
+            SizedBox(
+              height: 20,
+            ),
             for (var question in this.widget.review.text_answers)
               if (question[1] != null && question[1] != "init")
                 buildTextQustion(question),

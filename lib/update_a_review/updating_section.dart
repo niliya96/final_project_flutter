@@ -4,8 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_firebase/Utils/app_bar.dart';
 import 'package:flutter_firebase/Utils/buttom_navigation_bar.dart';
 import 'package:flutter_firebase/Utils/headers.dart';
+import 'package:flutter_firebase/fill_a_review/selection_format.dart';
 import 'package:flutter_firebase/login/auth_bloc_google.dart';
 import 'package:flutter_firebase/login/main_component_login.dart';
+import 'package:flutter_firebase/services/delete_from_db.dart';
+import 'package:flutter_firebase/services/write_to_mongodb.dart';
 import 'package:flutter_firebase/update_a_review/review_format.dart';
 import 'package:provider/provider.dart';
 
@@ -181,9 +184,17 @@ class UpdatingSectionState extends State<UpdatingSection> {
             for (var question in this.widget.review.choose_answers)
               buildChooseQustion(question),
             // rating questions
+            SizedBox(
+              height: 20,
+            ),
+
             for (var question in this.widget.review.rating_answers)
               buildStarsRow(question),
             // text questions
+            SizedBox(
+              height: 20,
+            ),
+
             for (var question in this.widget.review.text_answers)
               buildTextQustion(question),
             FlatButton(
@@ -200,7 +211,14 @@ class UpdatingSectionState extends State<UpdatingSection> {
                     height: 1.1666666666666667,
                   ),
                 ),
-                onPressed: () {})
+                onPressed: () {
+                  // update in db
+                  deleteReviewFromDB(this.widget.review.id);
+                  writeReviewToDB(this.widget.review);
+                  Navigator.of(context).pushReplacement(MaterialPageRoute(
+                      builder: (context) => MainComponentUpdate(
+                          this.widget.questions, this.widget.uid)));
+                })
           ],
         ),
       ],
@@ -285,6 +303,22 @@ class UpdatingSectionState extends State<UpdatingSection> {
   }
 
   Widget buildChooseQustion(List<String> q) {
+    List<dynamic> lst = [];
+    var options = [];
+    this.widget.questions.forEach((elem) {
+      if (elem[TEXT] == q[0]) {
+        lst = elem[OPTIONS];
+      }
+    });
+    List<Option> _options = Option.createData(lst);
+    List<DropdownMenuItem<Option>> _dropdownMenuItems =
+        buildDropdownMenuItems(_options);
+    Option _selectedOption = _dropdownMenuItems[0].value;
+    _dropdownMenuItems.forEach((element) {
+      if (element.value.name == q[1]) {
+        _selectedOption = _dropdownMenuItems[element.value.id].value;
+      }
+    });
     return Column(
       children: <Widget>[
         Text(
@@ -300,8 +334,44 @@ class UpdatingSectionState extends State<UpdatingSection> {
               TextHeightBehavior(applyHeightToFirstAscent: false),
           textAlign: TextAlign.right,
         ),
+        DropdownButton(
+          dropdownColor: LIGHT_GREEN,
+          iconEnabledColor: LIGHT_GREEN,
+          iconDisabledColor: LIGHT_GREEN,
+          value: _selectedOption,
+          style: new TextStyle(
+            color: DARK_BLUE,
+            fontSize: 18.0,
+          ),
+          items: _dropdownMenuItems,
+          onChanged: (value) {
+            setState(() {
+              q[1] = value.name;
+              _selectedOption = value;
+            });
+          },
+        ),
       ],
     );
+  }
+
+  //onChangeDropdownItem(Option selectedOption) {
+  //   setState(() {
+  //     _selectedOption = selectedOption;
+  //   });
+  //}
+
+  List<DropdownMenuItem<Option>> buildDropdownMenuItems(List options) {
+    List<DropdownMenuItem<Option>> items = List();
+    for (Option option in options) {
+      items.add(
+        DropdownMenuItem(
+          value: option,
+          child: Text(option.name),
+        ),
+      );
+    }
+    return items;
   }
 
   Widget buildTextQustion(List<String> q) {

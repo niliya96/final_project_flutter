@@ -98,6 +98,8 @@ const String SAVE_REVIEW2 = "לחץ על שמור על מנת לשמור את מ
 const String CANT_SAVE1 = "טרם תוכל לשמור את חוות הדעת";
 const String CANT_SAVE2 = "יש למלא את הפרטים האישיים של העובד";
 const String BACK_TO_UPDATE = "חזור";
+const String REVIEW_OR_WORK1 = "ספר על סמך מה חוות הדעת שלך מתבססת";
+const String REVIEW_OR_WORK2 = "שים לב - בחוות דעת על בסיס ראיון, שים דגש על המלל החופשי בסוף חוות הדעת";
 /// Fonts
 const String EUROPA_FONT = 'Europa';
 

@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_firebase/Utils/app_bar.dart';
 import 'package:flutter_firebase/Utils/headers.dart';
+import 'package:flutter_firebase/Utils/waiting_bar.dart';
 import 'package:flutter_firebase/fill_a_review/InsertionFormat.dart';
 import 'package:flutter_firebase/fill_a_review/QuestionFormat.dart';
 import 'package:flutter_firebase/fill_a_review/start_questions2.dart';
@@ -50,8 +51,6 @@ class StartQuestionsState extends State<StartQuestions> {
 
   @override
   void initState() {
-    // init the answers map
-    buildInsertionFormat();
     sortList();
     var authBloc = Provider.of<AuthBlocGoogle>(context, listen: false);
     loginStateSubscription = authBloc.currentUser.listen((fbUser) {
@@ -72,30 +71,46 @@ class StartQuestionsState extends State<StartQuestions> {
     super.dispose();
   }
 
-  void sortList() {
-    this.widget.questions.sort(
-        (a, b) => a['numbers'].toString().compareTo(b['numbers'].toString()));
+  List<Map<String, dynamic>> sortList() {
+    this.widget.questions.sort((a, b) => a[NUMBER].compareTo(b[NUMBER]));
   }
 
   @override
   Widget build(BuildContext context) {
     final authBloc = Provider.of<AuthBlocGoogle>(context);
-    var scaffold = Scaffold(
-        resizeToAvoidBottomInset: false,
-        backgroundColor: Colors.white,
-        appBar: createAppBar(authBloc),
-        bottomNavigationBar: createButtomBarFill(
-            context,
-            _currentBarOption,
-            this,
-            this.widget.uid,
-            this.widget.insertion_format,
-            this.widget.questions, false),
-        body: createBody());
-    return scaffold;
+    return FutureBuilder(
+      future: getUid(),
+      builder: (BuildContext context, AsyncSnapshot snapshot) {
+        if (snapshot.data == null) {
+          return WaitingBar();
+        } else {
+          this.widget.uid = snapshot.data;
+          // init the answers map
+          buildInsertionFormat();
+          return Scaffold(
+              resizeToAvoidBottomInset: false,
+              backgroundColor: Colors.white,
+              appBar: createAppBar(authBloc),
+              bottomNavigationBar: createButtomBarFill(
+                  context,
+                  _currentBarOption,
+                  this,
+                  snapshot.data,
+                  this.widget.insertion_format,
+                  this.widget.questions,
+                  false),
+              body: createBody(snapshot.data));
+        }
+      },
+    );
   }
 
-  Widget createBody() {
+  Future<String> getUid() async {
+    FirebaseUser user = await FirebaseAuth.instance.currentUser();
+    return user.uid;
+  }
+
+  Widget createBody(String uid) {
     return Column(children: <Widget>[
       Expanded(
         flex: 10,

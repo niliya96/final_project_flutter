@@ -17,7 +17,6 @@ import 'list_view_component.dart';
 class MainComponentUpdate extends StatefulWidget {
   final List<Map<String, dynamic>> questions;
   List<ReviewFormatData> fromDb;
-  DataList dataList;
   String uid;
   MainComponentUpdate(this.questions, this.uid);
 
@@ -28,10 +27,10 @@ class MainComponentUpdate extends StatefulWidget {
 class MainComponentUpdateState extends State<MainComponentUpdate> {
   StreamSubscription<FirebaseUser> loginStateSubscription;
   int _currentBarOption = 0;
-  dynamic uid;
   Future<List<ReviewFormatData>> _getReviews() async {
-    return readReviewsFromDB(
-        "Oh1bDMMjGuUpRgeqGz9mGWSe78T2", this.widget.questions);
+    FirebaseUser user = await FirebaseAuth.instance.currentUser();
+    this.widget.uid = user.uid;
+    return readReviewsFromDB(user.uid, this.widget.questions);
   }
 
   @override
@@ -88,14 +87,8 @@ class MainComponentUpdateState extends State<MainComponentUpdate> {
       backgroundColor: Colors.white,
       appBar: createAppBar(authBloc),
       bottomNavigationBar:
-          createButtomBar(context, _currentBarOption, this, this.uid),
+          createButtomBar(context, _currentBarOption, this, this.widget.uid),
     );
     return scaffold;
-  }
-
-  Future<List<ReviewFormatData>> useDb(dynamic uid) async {
-    List<ReviewFormatData> fromDb =
-        await readReviewsFromDB(uid, this.widget.questions);
-    return fromDb;
   }
 }

@@ -185,7 +185,7 @@ class DetailsFillState extends State<DetailsFill> {
         child: SizedBox(),
       ),
       Expanded(
-        flex: 25,
+        flex: 35,
         child: Container(
             child: Padding(
           padding: const EdgeInsets.only(left: 10, right: 10),
@@ -232,7 +232,7 @@ class DetailsFillState extends State<DetailsFill> {
         flex: 10,
         child: Center(
           child: FlatButton(
-              height: 60,
+              height: 30,
               minWidth: 70,
               color: DARK_BLUE,
               child: Text(

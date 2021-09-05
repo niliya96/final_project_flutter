@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_firebase/Utils/headers.dart';
+import 'package:flutter_firebase/services/delete_from_db.dart';
 import 'package:flutter_firebase/services/get_from_db.dart';
 import 'package:flutter_firebase/update_a_review/review_format.dart';
 import 'package:flutter_firebase/update_a_review/data_list.dart';
@@ -45,7 +46,9 @@ class ListViewComponentState extends State<ListViewComponent> {
         animation: animation,
         onClicked: () => {
           removeItem(index),
-          this.widget.dataList.reviewsList.remove(item)
+          this.widget.dataList.reviewsList.remove(item),
+          // reomove from db
+          deleteReviewFromDB(item.id)
         },
       );
 

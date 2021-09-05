@@ -32,8 +32,6 @@ class HomeScreenState extends State<HomeScreen> {
             builder: (context) => MainComponentLogin(this.widget.questions),
           ),
         );
-      } else {
-        this.widget.uid = fbUser.uid;
       }
     });
     super.initState();
