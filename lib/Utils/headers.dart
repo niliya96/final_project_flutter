@@ -83,8 +83,7 @@ const String PASSPORT_NUMBER_WORKER = ":מספר דרכון";
 const String NAME_WORKER = ":שם העובד";
 const String LAST_UPDATE = "עדכון אחרון";
 const String DELETE_YOUR_REVIEW = "מחיקת חוות דעת";
-const String ARE_YOU_SURE_TO_DELETE =
-    "?האם אתה בטוח שברצונך למחוק את חוות הדעת";
+const String ARE_YOU_SURE_TO_DELETE = "?האם אתה בטוח שברצונך למחוק את חוות הדעת";
 const String DELETE = "מחק";
 const String REVIEW_FOR = " חוות דעת עבור העובד";
 const String NATION = "מדינה";
@@ -92,36 +91,15 @@ const String UPDATING_SECTION = "בעמוד זה תוכל לעדכן את חוו
 const String CONSTRAIN = "לא ניתן לעדכן את הפרטים האישיים של העובד";
 const String FINISH = '!זהו, סיימנו';
 const String THANKS = '.תודה שהקדשת מזמנך';
-const String IN_THE_SYSTEM =
-    '.חוות הדעת שלך נקלטה במערכת. כל חוות דעת עוברת בדיקה לפני פרסום';
-const String UPDATE_EXPLANATION =
-    'שים לב כי תוכל לעדכן את חוות הדעת בכל עת דרך כפתור העדכון בתפריט מסך הבית';
+const String IN_THE_SYSTEM = '.חוות הדעת שלך נקלטה במערכת. כל חוות דעת עוברת בדיקה לפני פרסום';
+const String UPDATE_EXPLANATION = 'שים לב כי תוכל לעדכן את חוות הדעת בכל עת דרך כפתור העדכון בתפריט מסך הבית';
 const String SAVE_REVIEW = "שמירת חוות דעת";
 const String SAVE_REVIEW2 = "לחץ על שמור על מנת לשמור את מה שכבר מילאת";
 const String CANT_SAVE1 = "טרם תוכל לשמור את חוות הדעת";
 const String CANT_SAVE2 = "יש למלא את הפרטים האישיים של העובד";
 const String BACK_TO_UPDATE = "חזור";
 const String REVIEW_OR_WORK1 = "ספר על סמך מה חוות הדעת שלך מתבססת";
-const String REVIEW_OR_WORK2 =
-    "שים לב - בחוות דעת על בסיס ראיון, שים דגש על המלל החופשי בסוף חוות הדעת";
-const String DB =
-    'mongodb+srv://muser:Aa123456@cluster0.f1hwb.mongodb.net/finalProject?retryWrites=true&w=majority';
-const String REVIEWS = 'reviews';
-const String USER_ID = 'user_id';
-const String QUESTIONS = 'questions';
-const String WORKERS = 'workers';
-const String PASSPORT = "passport";
-const String NAME = "name";
-const String INIT = "init";
-const String IRELEVANT_STRING = "irelevant";
-const String OBJECT_ID = '_id';
-const String NAME_OF_WORKER = 'name_of_worker';
-const String NATION_STRING = 'nation';
-const String LAST_UPDATE_STRING = 'last_update';
-const String RATING_ANSWERS = 'rating_answers';
-const String CHOOSE_ANSWERS = 'choose_answers';
-const String TEXT_ANSWERS = 'text_answers';
-
+const String REVIEW_OR_WORK2 = "שים לב - בחוות דעת על בסיס ראיון, שים דגש על המלל החופשי בסוף חוות הדעת";
 /// Fonts
 const String EUROPA_FONT = 'Europa';
 

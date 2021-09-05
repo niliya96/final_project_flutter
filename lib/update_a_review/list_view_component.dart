@@ -5,9 +5,10 @@ import 'package:flutter_firebase/services/get_from_db.dart';
 import 'package:flutter_firebase/update_a_review/review_format.dart';
 import 'package:flutter_firebase/update_a_review/data_list.dart';
 
+
 class ListViewComponent extends StatefulWidget {
   DataList dataList;
-
+  
   ListViewComponent(this.dataList);
   @override
   ListViewComponentState createState() => ListViewComponentState();
@@ -20,23 +21,23 @@ class ListViewComponentState extends State<ListViewComponent> {
   Widget build(BuildContext context) {
     final items = List.from(this.widget.dataList.reviewsList);
     return Scaffold(
-      backgroundColor: WHITE,
-      body: Column(
-        children: [
-          Expanded(
-            child: AnimatedList(
-              key: key,
-              initialItemCount: items.length,
-              itemBuilder: (context, index, animation) =>
-                  buildItem(items[index], index, animation),
+        backgroundColor: WHITE,
+        body: Column(
+          children: [
+            Expanded(
+              child: AnimatedList(
+                key: key,
+                initialItemCount: items.length,
+                itemBuilder: (context, index, animation) =>
+                    buildItem(items[index], index, animation),
+              ),
             ),
-          ),
-          Container(
-            padding: EdgeInsets.all(16),
-          ),
-        ],
-      ),
-    );
+            Container(
+              padding: EdgeInsets.all(16),
+            ),
+          ],
+        ),
+      );
   }
 
   Widget buildItem(item, int index, Animation<double> animation) =>

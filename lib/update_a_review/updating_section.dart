@@ -11,7 +11,7 @@ import 'package:flutter_firebase/services/delete_from_db.dart';
 import 'package:flutter_firebase/services/write_to_mongodb.dart';
 import 'package:flutter_firebase/update_a_review/review_format.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_firebase/Utils/headers.dart';
+
 import 'main_component_update.dart';
 
 class UpdatingSection extends StatefulWidget {
@@ -292,7 +292,7 @@ class UpdatingSectionState extends State<UpdatingSection> {
   }
 
   Widget _buildRatingStar(int index, List<String> q) {
-    if (q[1] == IRELEVANT_STRING || q[1] == INIT) {
+    if (q[1] == "irelevant" || q[1] == "init") {
       return Icon(Icons.star, size: 50, color: Colors.grey[300]);
     }
     if (index < int.parse(q[1])) {

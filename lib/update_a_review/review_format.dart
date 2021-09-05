@@ -30,41 +30,41 @@ class ReviewFormatData {
   });
 
   fromJson(Map<String, dynamic> json, List<Map<String, dynamic>> q) {
-    this.id = json[OBJECT_ID];
-    this.user_id = json[USER_ID];
-    this.name_of_worker = json[NAME_OF_WORKER];
-    this.passport = json[PASSPORT];
-    this.nation = json[NATION_STRING];
-    this.last_update = json[LAST_UPDATE_STRING];
+    this.id = json['_id'];
+    this.user_id = json['user_id'];
+    this.name_of_worker = json['name_of_worker'];
+    this.passport = json['passport'];
+    this.nation = json['nation'];
+    this.last_update = json['last_update'];
     this.rating_answers = [];
     this.choose_answers = [];
     this.text_answers = [];
     this.questions = q;
 
-    for (var i = 0; i < json[RATING_ANSWERS].length; i++) {
-      List<String> temp = new List<String>.from(json[RATING_ANSWERS][i]);
+    for (var i = 0; i < json['rating_answers'].length; i++) {
+      List<String> temp = new List<String>.from(json['rating_answers'][i]);
       this.rating_answers.add(temp);
     }
-    for (var i = 0; i < json[CHOOSE_ANSWERS].length; i++) {
-      List<String> temp = new List<String>.from(json[CHOOSE_ANSWERS][i]);
+    for (var i = 0; i < json['choose_answers'].length; i++) {
+      List<String> temp = new List<String>.from(json['choose_answers'][i]);
       this.choose_answers.add(temp);
     }
-    for (var i = 0; i < json[TEXT_ANSWERS].length; i++) {
-      List<String> temp = new List<String>.from(json[TEXT_ANSWERS][i]);
+    for (var i = 0; i < json['text_answers'].length; i++) {
+      List<String> temp = new List<String>.from(json['text_answers'][i]);
       this.text_answers.add(temp);
     }
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data[USER_ID] = this.user_id;
-    data[NAME_OF_WORKER] = this.name_of_worker;
-    data[PASSPORT] = this.passport;
-    data[NATION] = this.nation;
-    data[LAST_UPDATE_STRING] = this.last_update;
-    data[RATING_ANSWERS] = this.rating_answers;
-    data[CHOOSE_ANSWERS] = this.choose_answers;
-    data[TEXT_ANSWERS] = this.text_answers;
+    data['user_id'] = this.user_id;
+    data['name_of_worker'] = this.name_of_worker;
+    data['passport'] = this.passport;
+    data['nation'] = this.nation;
+    data['last_update'] = this.last_update;
+    data['rating_answers'] = this.rating_answers;
+    data['choose_answers'] = this.choose_answers;
+    data['text_answers'] = this.text_answers;
     return data;
   }
 }
