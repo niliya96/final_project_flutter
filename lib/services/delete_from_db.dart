@@ -1,9 +1,9 @@
 import 'package:mongo_dart/mongo_dart.dart';
+import 'package:flutter_firebase/Utils/headers.dart';
 
 deleteReviewFromDB(ObjectId id) async {
-  final db = await Db.create(
-      'mongodb+srv://muser:Aa123456@cluster0.f1hwb.mongodb.net/finalProject?retryWrites=true&w=majority');
+  final db = await Db.create(DB);
   await db.open();
-  final coll = db.collection('reviews');
+  final coll = db.collection(REVIEWS);
   coll.remove(where.id(id));
 }

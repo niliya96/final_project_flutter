@@ -8,7 +8,7 @@ import 'package:flutter_firebase/login/auth_bloc_google.dart';
 import 'package:flutter_firebase/login/main_component_login.dart';
 import 'package:flutter_firebase/update_a_review/review_format.dart';
 import 'package:provider/provider.dart';
-
+import 'package:flutter_firebase/Utils/headers.dart';
 import 'main_component_update.dart';
 
 class WatchReview extends StatefulWidget {
@@ -211,19 +211,19 @@ class WatchReviewState extends State<WatchReview> {
           children: <Widget>[
             // choose questions
             for (var question in this.widget.review.choose_answers)
-              if (question[1] != "init") buildChooseQustion(question),
+              if (question[1] != INIT) buildChooseQustion(question),
             // rating questions
             SizedBox(
               height: 20,
             ),
             for (var question in this.widget.review.rating_answers)
-              if (question[1] != "init") buildStarsRow(question),
+              if (question[1] != INIT) buildStarsRow(question),
             // text questions
             SizedBox(
               height: 20,
             ),
             for (var question in this.widget.review.text_answers)
-              if (question[1] != null && question[1] != "init")
+              if (question[1] != null && question[1] != INIT)
                 buildTextQustion(question),
           ],
         ),
@@ -259,30 +259,30 @@ class WatchReviewState extends State<WatchReview> {
               flex: 8,
               child: SizedBox(),
             ),
-            if (q[1] != "irelevant")
+            if (q[1] != IRELEVANT_STRING)
               decideStar(
                   1, int.parse(q.elementAt(1)), int.parse(q.elementAt(2))),
-            if (q[1] == "irelevant" || q[1] == "init")
+            if (q[1] == IRELEVANT_STRING || q[1] == INIT)
               decideStar(1, 6, int.parse(q.elementAt(2))),
-            if (q[1] != "irelevant")
+            if (q[1] != IRELEVANT_STRING)
               decideStar(
                   2, int.parse(q.elementAt(1)), int.parse(q.elementAt(2))),
-            if (q[1] == "irelevant" || q[1] == "init")
+            if (q[1] == IRELEVANT_STRING || q[1] == INIT)
               decideStar(2, 6, int.parse(q.elementAt(2))),
-            if (q[1] != "irelevant")
+            if (q[1] != IRELEVANT_STRING)
               decideStar(
                   3, int.parse(q.elementAt(1)), int.parse(q.elementAt(2))),
-            if (q[1] == "irelevant" || q[1] == "init")
+            if (q[1] == IRELEVANT_STRING || q[1] == INIT)
               decideStar(3, 6, int.parse(q.elementAt(2))),
-            if (q[1] != "irelevant")
+            if (q[1] != IRELEVANT_STRING)
               decideStar(
                   4, int.parse(q.elementAt(1)), int.parse(q.elementAt(2))),
-            if (q[1] == "irelevant" || q[1] == "init")
+            if (q[1] == IRELEVANT_STRING || q[1] == INIT)
               decideStar(4, 6, int.parse(q.elementAt(2))),
-            if (q[1] != "irelevant")
+            if (q[1] != IRELEVANT_STRING)
               decideStar(
                   5, int.parse(q.elementAt(1)), int.parse(q.elementAt(2))),
-            if (q[1] == "irelevant" || q[1] == "init")
+            if (q[1] == IRELEVANT_STRING || q[1] == INIT)
               decideStar(5, 6, int.parse(q.elementAt(2))),
             Expanded(
               flex: 1,

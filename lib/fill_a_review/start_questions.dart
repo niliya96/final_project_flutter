@@ -11,6 +11,7 @@ import 'package:flutter_firebase/login/auth_bloc_google.dart';
 import 'package:flutter_firebase/login/main_component_login.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_firebase/Utils/buttom_bar_fill.dart';
+import 'package:flutter_firebase/Utils/headers.dart';
 
 class StartQuestions extends StatefulWidget {
   final List<Map<String, dynamic>> questions;
@@ -35,7 +36,7 @@ class StartQuestionsState extends State<StartQuestions> {
       QuestionFormat current_question = new QuestionFormat(
           kind: kind,
           text: text,
-          answer: "init",
+          answer: INIT,
           number: number_of_qustion,
           ifAnswered: false);
       answers.add(current_question);

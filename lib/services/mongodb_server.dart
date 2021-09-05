@@ -1,12 +1,15 @@
 import 'package:mongo_dart/mongo_dart.dart';
 import 'package:sevr/sevr.dart';
+import 'package:flutter_firebase/Utils/headers.dart';
+import 'package:flutter_firebase/Utils/headers.dart';
+
 
 void start() async{
   final db = await Db.create(
-    'mongodb+srv://muser:mbuser@cluster0.f1hwb.mongodb.net/finalProject?retryWrites=true&w=majority');
+   DB);
   await db.open();
   print('Connected to database');
-  final coll = db.collection('reviews');
+  final coll = db.collection(REVIEWS);
   print(await coll.find().toList());
   var data = <Map<String, dynamic>>[];
   data.add({ 'nation': 'UK', 'pasport': '12121212', 'review': 'very good'});
