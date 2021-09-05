@@ -6,14 +6,19 @@ import 'package:flutter_firebase/Utils/buttom_bar_fill.dart';
 import 'package:flutter_firebase/home/home_screen.dart';
 import 'package:flutter_firebase/login/auth_bloc_google.dart';
 import 'package:flutter_firebase/login/main_component_login.dart';
+import 'package:flutter_firebase/services/json_convert.dart';
+import 'package:flutter_firebase/services/write_to_mongodb.dart';
+import 'package:flutter_firebase/update_a_review/review_format.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_firebase/Utils/headers.dart';
-
+import 'InsertionFormat.dart';
+import 'QuestionFormat.dart';
+import 'package:intl/intl.dart';
 
 class CompleteFillReview extends StatefulWidget {
   final List<Map<String, dynamic>> questions;
-  List<Map<String, Map<dynamic, bool>>> answers;
-  CompleteFillReview(this.questions, this.answers);
+  InsertionFormat insertion_format;
+  CompleteFillReview(this.questions, this.insertion_format);
   int index = 0;
 
   @override
@@ -37,7 +42,6 @@ class CompleteFillReviewState extends State<CompleteFillReview> {
       /**
        * write the data to the db
        */
-      // TODO 
     });
     super.initState();
   }
@@ -170,12 +174,22 @@ class CompleteFillReviewState extends State<CompleteFillReview> {
 
   @override
   Widget build(BuildContext context) {
+    // db
+    ReviewFormatData review = convert(
+        this.widget.insertion_format.answers,
+        this.widget.questions,
+        this.widget.insertion_format.name_of_worker,
+        this.widget.insertion_format.passport,
+        this.widget.insertion_format.nation,
+        this.widget.insertion_format.uid);
+    writeReviewToDB(review);
     final authBloc = Provider.of<AuthBlocGoogle>(context);
     var scaffold = Scaffold(
         resizeToAvoidBottomInset: false,
         backgroundColor: Colors.white,
         appBar: createAppBar(authBloc),
-        bottomNavigationBar: createButtomBarFill(context, _currentBarOption, this),
+        bottomNavigationBar: createButtomBarFill(context, _currentBarOption,
+            this, this.widget.insertion_format.passport, this.widget.insertion_format, this.widget.questions, true),
         body: headLine());
     return scaffold;
   }

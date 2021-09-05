@@ -5,9 +5,10 @@ import 'package:flutter_firebase/services/read_from_mongodb.dart';
 class ButtonSearch extends StatefulWidget {
   String nameTyped = '';
   String passportTyped = '';
-  final List<Map<String, dynamic>> list;
+  final List<Map<String, dynamic>> questions;
+  String uid;
 
-  ButtonSearch(this.nameTyped, this.passportTyped, this.list);
+  ButtonSearch(this.nameTyped, this.passportTyped, this.questions, this.uid);
 
   @override
   ButtonSearchState createState() => ButtonSearchState();
@@ -45,7 +46,7 @@ class ButtonSearchState extends State<ButtonSearch> {
                                 {
                                   Navigator.of(context).push(MaterialPageRoute(
                                       builder: (context) =>
-                                          MainComponentFill(this.widget.list)))
+                                          MainComponentFill(this.widget.questions, this.widget.uid)))
                                 }
                             });
                   }),

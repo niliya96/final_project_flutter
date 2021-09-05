@@ -8,14 +8,16 @@ import 'package:flutter_firebase/Utils/headers.dart';
 import 'package:flutter_firebase/login/auth_bloc_google.dart';
 import 'package:flutter_firebase/login/main_component_login.dart';
 import 'package:provider/provider.dart';
+import 'InsertionFormat.dart';
 import 'create_route_page.dart';
 
 class TextFormat extends StatefulWidget {
   int current_question;
   final List<Map<String, dynamic>> questions;
-  List< Map<String, Map<dynamic, bool>>> answers;
+  InsertionFormat insertion_format;
 
-  TextFormat(this.current_question, this.questions, this.answers) : super();
+  TextFormat(this.current_question, this.questions, this.insertion_format)
+      : super();
 
   @override
   TextFormatState createState() => TextFormatState();
@@ -55,12 +57,6 @@ class TextFormatState extends State<TextFormat> {
     //this.widget.answers.add(answer);
   }
 
-  void deleteAnswer() {
-    if (!this.widget.answers.isEmpty) {
-      this.widget.answers.removeLast();
-    }
-  }
-
   Widget createBody() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
@@ -73,9 +69,12 @@ class TextFormatState extends State<TextFormat> {
         Expanded(
           flex: 5,
           child: Padding(
-            padding: const EdgeInsets.only(left:10, right:10),
+            padding: const EdgeInsets.only(left: 10, right: 10),
             child: Text(
-              this.widget.questions[this.widget.current_question][TEXT].toString(),
+              this
+                  .widget
+                  .questions[this.widget.current_question][TEXT]
+                  .toString(),
               style: TextStyle(
                 fontFamily: EUROPA_FONT,
                 fontSize: 22,
@@ -106,9 +105,9 @@ class TextFormatState extends State<TextFormat> {
           ),
         ),
         Expanded(
-          flex: 10  ,
+          flex: 10,
           child: Padding(
-            padding: const EdgeInsets.only(left:20, right:20),
+            padding: const EdgeInsets.only(left: 20, right: 20),
             child: TextFormField(
               decoration: InputDecoration(
                 fillColor: DARK_BLUE,
@@ -122,7 +121,7 @@ class TextFormatState extends State<TextFormat> {
                 return null;
               },
               maxLength: 500,
-              maxLines: 5,
+              //maxLines: 5,
               onChanged: (value) => setState(() {
                 text_fill = value;
               }),
@@ -139,7 +138,8 @@ class TextFormatState extends State<TextFormat> {
         Expanded(
           flex: 3,
           child: Center(
-            child: createRoute(context, this, _rating, text_fill, this.widget.answers, this.widget.questions),
+            child: createRoute(context, this, _rating, text_fill,
+                this.widget.insertion_format, this.widget.questions),
           ),
         ),
         Expanded(
@@ -149,7 +149,7 @@ class TextFormatState extends State<TextFormat> {
         Expanded(
           flex: 1,
           child: Padding(
-            padding: const EdgeInsets.only(left:20, right: 20),
+            padding: const EdgeInsets.only(left: 20, right: 20),
             child: LinearProgressIndicator(
                 value: (this.widget.current_question + 1) /
                     (this.widget.questions.length),
@@ -172,8 +172,13 @@ class TextFormatState extends State<TextFormat> {
       resizeToAvoidBottomInset: false,
       backgroundColor: WHITE,
       appBar: createAppBar(authBloc),
-      bottomNavigationBar:
-          createButtomBarFill(context, _currentBarOption, this),
+      bottomNavigationBar: createButtomBarFill(
+          context,
+          _currentBarOption,
+          this,
+          this.widget.insertion_format.uid,
+          this.widget.insertion_format,
+          this.widget.questions, true),
       body: createBody(),
     );
   }

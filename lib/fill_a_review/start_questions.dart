@@ -3,6 +3,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_firebase/Utils/app_bar.dart';
 import 'package:flutter_firebase/Utils/headers.dart';
+import 'package:flutter_firebase/fill_a_review/InsertionFormat.dart';
+import 'package:flutter_firebase/fill_a_review/QuestionFormat.dart';
 import 'package:flutter_firebase/fill_a_review/start_questions2.dart';
 import 'package:flutter_firebase/login/auth_bloc_google.dart';
 import 'package:flutter_firebase/login/main_component_login.dart';
@@ -11,8 +13,9 @@ import 'package:flutter_firebase/Utils/buttom_bar_fill.dart';
 
 class StartQuestions extends StatefulWidget {
   final List<Map<String, dynamic>> questions;
-  List< Map<String, Map<dynamic, bool>>> answers = [];
-  StartQuestions(this.questions);
+  String uid;
+  InsertionFormat insertion_format;
+  StartQuestions(this.questions, this.uid);
 
   @override
   StartQuestionsState createState() => StartQuestionsState();
@@ -22,21 +25,33 @@ class StartQuestionsState extends State<StartQuestions> {
   int _currentBarOption = 0;
   StreamSubscription<FirebaseUser> loginStateSubscription;
 
-  void buildAnswers() {
+  void buildInsertionFormat() {
+    List<QuestionFormat> answers = [];
     this.widget.questions.forEach((element) {
-      String number_of_qustion = element[NUMBER].toString();
-      Map<dynamic, bool> status = {"init": false};
-      Map<String, Map<dynamic, bool>> answer_init = {
-        number_of_qustion: status
-      };
-      this.widget.answers.add(answer_init);
+      int number_of_qustion = element[NUMBER];
+      String kind = element[KIND];
+      String text = element[TEXT];
+      QuestionFormat current_question = new QuestionFormat(
+          kind: kind,
+          text: text,
+          answer: "init",
+          number: number_of_qustion,
+          ifAnswered: false);
+      answers.add(current_question);
     });
+    InsertionFormat insertion_format = new InsertionFormat(
+        name_of_worker: "",
+        passport: "",
+        nation: "",
+        answers: answers,
+        uid: this.widget.uid);
+    this.widget.insertion_format = insertion_format;
   }
 
   @override
   void initState() {
     // init the answers map
-    buildAnswers();
+    buildInsertionFormat();
     sortList();
     var authBloc = Provider.of<AuthBlocGoogle>(context, listen: false);
     loginStateSubscription = authBloc.currentUser.listen((fbUser) {
@@ -69,8 +84,13 @@ class StartQuestionsState extends State<StartQuestions> {
         resizeToAvoidBottomInset: false,
         backgroundColor: Colors.white,
         appBar: createAppBar(authBloc),
-        bottomNavigationBar:
-            createButtomBarFill(context, _currentBarOption, this),
+        bottomNavigationBar: createButtomBarFill(
+            context,
+            _currentBarOption,
+            this,
+            this.widget.uid,
+            this.widget.insertion_format,
+            this.widget.questions, false),
         body: createBody());
     return scaffold;
   }
@@ -163,7 +183,7 @@ class StartQuestionsState extends State<StartQuestions> {
               onPressed: () {
                 Navigator.of(context).push(MaterialPageRoute(
                     builder: (context) => StartQuestions2(
-                        this.widget.questions, this.widget.answers)));
+                        this.widget.questions, this.widget.insertion_format)));
               }),
         ),
       ),

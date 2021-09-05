@@ -6,15 +6,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_firebase/Utils/headers.dart';
 import 'complete_fill.dart';
 import 'rating_format.dart';
+import 'InsertionFormat.dart';
 
-void saveAnswer(String answer, List<Map<String, Map<dynamic, bool>>> answers,
+void saveAnswer(String answer, InsertionFormat insertion_format,
     int number, List<Map<String, dynamic>> questions) {
   questions.forEach((q) {
-    if (q[NUMBER].toString() == number.toString()) {
-      answers.forEach((a) {
-        var key = number.toString();
-        if (a.containsKey(key)) {
-          a.update(key, (value) => {answer: true});
+    if (q[NUMBER] == number) {
+      insertion_format.answers.forEach((a) {
+        if (a.number == number) {
+          a.kind = q[KIND];
+          a.number = number;
+          a.text = q[TEXT];
+          a.ifAnswered = true;
+          a.answer = answer;
         }
       });
     }
@@ -26,7 +30,7 @@ Widget createRoute(
     dynamic state,
     int _rating,
     String answer,
-    List<Map<String, Map<dynamic, bool>>> answers,
+    InsertionFormat insertion_format,
     List<Map<String, dynamic>> questions) {
   return Center(
     child: Row(
@@ -55,13 +59,12 @@ Widget createRoute(
                 ),
               ),
               onPressed: () {
-                print("nili");
                 /**
                    * update list of answers
                    */
                 saveAnswer(
                     answer,
-                    answers,
+                    insertion_format,
                     state.widget.questions[state.widget.current_question]
                         [NUMBER],
                     questions);
@@ -79,7 +82,7 @@ Widget createRoute(
                           _rating = rating;
                         });
                       }, state.widget.questions, state.widget.current_question,
-                          state.widget.answers),
+                          state.widget.insertion_format),
                     ));
                   }
                   // choose case
@@ -95,7 +98,7 @@ Widget createRoute(
                               state.widget.current_question,
                               state.widget.questions,
                               options,
-                              state.widget.answers)),
+                              state.widget.insertion_format)),
                     );
                   }
                   // text format
@@ -107,13 +110,13 @@ Widget createRoute(
                       builder: (context) => TextFormat(
                           state.widget.current_question,
                           state.widget.questions,
-                          state.widget.answers),
+                          state.widget.insertion_format),
                     ));
                   }
                 } else {
                   Navigator.of(context).push(MaterialPageRoute(
                       builder: (context) => CompleteFillReview(
-                          state.widget.questions, state.widget.answers)));
+                          state.widget.questions, state.widget.insertion_format)));
                 }
               }),
         ),
@@ -143,7 +146,7 @@ Widget createRoute(
                    */
                 saveAnswer(
                     answer,
-                    answers,
+                    insertion_format,
                     state.widget.questions[state.widget.current_question]
                         [NUMBER],
                     questions);
@@ -161,7 +164,7 @@ Widget createRoute(
                           _rating = rating;
                         });
                       }, state.widget.questions, state.widget.current_question,
-                          state.widget.answers),
+                          state.widget.insertion_format),
                     ));
                   }
                   // choose case
@@ -177,7 +180,7 @@ Widget createRoute(
                               state.widget.current_question,
                               state.widget.questions,
                               options,
-                              state.widget.answers)),
+                              state.widget.insertion_format)),
                     );
                   }
                   // text format
@@ -190,7 +193,7 @@ Widget createRoute(
                           builder: (context) => TextFormat(
                               state.widget.current_question,
                               state.widget.questions,
-                              state.widget.answers)),
+                              state.widget.insertion_format)),
                     );
                   }
                 }
@@ -198,7 +201,7 @@ Widget createRoute(
                 else {
                   Navigator.of(context).push(MaterialPageRoute(
                       builder: (context) => DetailsFill(
-                          state.widget.questions, state.widget.answers)));
+                          state.widget.questions, state.widget.insertion_format)));
                 }
               }),
         ),

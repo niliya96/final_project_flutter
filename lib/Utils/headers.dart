@@ -93,7 +93,11 @@ const String FINISH = '!זהו, סיימנו';
 const String THANKS = '.תודה שהקדשת מזמנך';
 const String IN_THE_SYSTEM = '.חוות הדעת שלך נקלטה במערכת. כל חוות דעת עוברת בדיקה לפני פרסום';
 const String UPDATE_EXPLANATION = 'שים לב כי תוכל לעדכן את חוות הדעת בכל עת דרך כפתור העדכון בתפריט מסך הבית';
-
+const String SAVE_REVIEW = "שמירת חוות דעת";
+const String SAVE_REVIEW2 = "לחץ על שמור על מנת לשמור את מה שכבר מילאת";
+const String CANT_SAVE1 = "טרם תוכל לשמור את חוות הדעת";
+const String CANT_SAVE2 = "יש למלא את הפרטים האישיים של העובד";
+const String BACK_TO_UPDATE = "חזור";
 /// Fonts
 const String EUROPA_FONT = 'Europa';
 

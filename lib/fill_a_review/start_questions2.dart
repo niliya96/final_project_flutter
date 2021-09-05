@@ -7,12 +7,13 @@ import 'package:flutter_firebase/Utils/headers.dart';
 import 'package:flutter_firebase/login/auth_bloc_google.dart';
 import 'package:flutter_firebase/login/main_component_login.dart';
 import 'package:provider/provider.dart';
+import 'InsertionFormat.dart';
 import 'details_fill.dart';
 
 class StartQuestions2 extends StatefulWidget {
   final List<Map<String, dynamic>> questions;
-  List< Map<String, Map<dynamic, bool>>> answers;
-  StartQuestions2(this.questions, this.answers);
+  InsertionFormat insertion_format;
+  StartQuestions2(this.questions, this.insertion_format);
 
   @override
   StartQuestionsState2 createState() => StartQuestionsState2();
@@ -50,8 +51,13 @@ class StartQuestionsState2 extends State<StartQuestions2> {
         resizeToAvoidBottomInset: false,
         backgroundColor: Colors.white,
         appBar: createAppBar(authBloc),
-        bottomNavigationBar:
-            createButtomBarFill(context, _currentBarOption, this),
+        bottomNavigationBar: createButtomBarFill(
+            context,
+            _currentBarOption,
+            this,
+            this.widget.insertion_format.uid,
+            this.widget.insertion_format,
+            this.widget.questions, false),
         body: createBody());
     return scaffold;
   }
@@ -105,13 +111,13 @@ class StartQuestionsState2 extends State<StartQuestions2> {
       Expanded(
         flex: 10,
         child: Padding(
-          padding: const EdgeInsets.only(left:10, right:10),
+          padding: const EdgeInsets.only(left: 10, right: 10),
           child: Text(
             FILL_QUESTIONS_5,
             style: TextStyle(
-              fontFamily:  EUROPA_FONT,
+              fontFamily: EUROPA_FONT,
               fontSize: 17,
-              color:DARK_BLUE,
+              color: DARK_BLUE,
               fontWeight: FontWeight.w700,
               height: 1.1666666666666667,
             ),
@@ -126,7 +132,7 @@ class StartQuestionsState2 extends State<StartQuestions2> {
         child: Padding(
           padding: const EdgeInsets.only(left: 10, right: 10),
           child: Text(
-           FILL_QUESTIONS_6,
+            FILL_QUESTIONS_6,
             style: TextStyle(
               fontFamily: EUROPA_FONT,
               fontSize: 17,
@@ -165,7 +171,7 @@ class StartQuestionsState2 extends State<StartQuestions2> {
             minWidth: 70,
             color: DARK_BLUE,
             child: Text(
-             FILL_QUESTIONS_8,
+              FILL_QUESTIONS_8,
               style: TextStyle(
                 fontFamily: EUROPA_FONT,
                 fontSize: 25,
@@ -177,8 +183,8 @@ class StartQuestionsState2 extends State<StartQuestions2> {
             highlightColor: DARK_BLUE,
             onPressed: () {
               Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) =>
-                      DetailsFill(this.widget.questions, this.widget.answers)));
+                  builder: (context) => DetailsFill(
+                      this.widget.questions, this.widget.insertion_format)));
             }),
       ),
       Expanded(

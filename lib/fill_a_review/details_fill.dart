@@ -12,10 +12,12 @@ import 'package:flutter_firebase/login/main_component_login.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_firebase/Utils/headers.dart';
 
+import 'InsertionFormat.dart';
+
 class DetailsFill extends StatefulWidget {
   final List<Map<String, dynamic>> questions;
-  List< Map<String, Map<dynamic, bool>>> answers;
-  DetailsFill(this.questions, this.answers);
+  InsertionFormat insertion_format;
+  DetailsFill(this.questions, this.insertion_format);
   int current_question = 0;
 
   @override
@@ -108,8 +110,13 @@ class DetailsFillState extends State<DetailsFill> {
         resizeToAvoidBottomInset: false,
         backgroundColor: Colors.white,
         appBar: createAppBar(authBloc),
-        bottomNavigationBar:
-            createButtomBarFill(context, _currentBarOption, this),
+        bottomNavigationBar: createButtomBarFill(
+            context,
+            _currentBarOption,
+            this,
+            this.widget.insertion_format.uid,
+            this.widget.insertion_format,
+            this.widget.questions, false),
         body: createBody());
     return scaffold;
   }
@@ -189,15 +196,17 @@ class DetailsFillState extends State<DetailsFill> {
                 child: Column(
                   children: [
                     buildPassport(passport, context, this, _selectedOption),
-                    buildAuth(auth_passport, passport, context, this),
-                    buildName(name, context, this),
+                    buildAuth(auth_passport, passport, context, this,
+                        this.widget.insertion_format),
+                    buildName(
+                        name, context, this, this.widget.insertion_format),
                   ],
                 ),
               ),
               Row(
                 children: [
                   buildNation(_selectedOption, _dropdownMenuItems,
-                      onChangeDropdownItem),
+                      onChangeDropdownItem, this.widget.insertion_format),
                   SizedBox(width: 130),
                   Text(
                     ORIGIN_COUNTRY,
@@ -250,7 +259,7 @@ class DetailsFillState extends State<DetailsFill> {
                               },
                                   this.widget.questions,
                                   this.widget.current_question,
-                                  this.widget.answers)),
+                                  this.widget.insertion_format)),
                     );
                   } else if (this.widget.questions[0][KIND].toString() ==
                       CHOOSE) {
@@ -260,14 +269,14 @@ class DetailsFillState extends State<DetailsFill> {
                             this.widget.current_question,
                             this.widget.questions,
                             options,
-                            this.widget.answers)));
+                            this.widget.insertion_format)));
                   } else if (this.widget.questions[0][KIND].toString() ==
                       TEXT) {
                     Navigator.of(context).push(MaterialPageRoute(
                         builder: (context) => TextFormat(
                             this.widget.current_question,
                             this.widget.questions,
-                            this.widget.answers)));
+                            this.widget.insertion_format)));
                   }
                 }
               }),

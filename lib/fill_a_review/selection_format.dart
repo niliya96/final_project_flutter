@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_firebase/Utils/app_bar.dart';
 import 'package:flutter_firebase/Utils/buttom_bar_fill.dart';
 import 'package:flutter_firebase/Utils/headers.dart';
+import 'package:flutter_firebase/fill_a_review/InsertionFormat.dart';
 import 'package:flutter_firebase/login/auth_bloc_google.dart';
 import 'package:flutter_firebase/login/main_component_login.dart';
 import 'package:provider/provider.dart';
@@ -34,9 +35,10 @@ class SelectionFormat extends StatefulWidget {
   int current_question;
   final List<Map<String, dynamic>> questions;
   final List<dynamic> options;
-  List< Map<String, Map<dynamic, bool>>> answers;
+  InsertionFormat insertion_format;
 
-  SelectionFormat(this.current_question, this.questions, this.options, this.answers)
+  SelectionFormat(this.current_question, this.questions, this.options,
+      this.insertion_format)
       : super();
 
   @override
@@ -81,8 +83,13 @@ class SelectionFormatState extends State<SelectionFormat> {
       resizeToAvoidBottomInset: false,
       backgroundColor: WHITE,
       appBar: createAppBar(authBloc),
-      bottomNavigationBar:
-          createButtomBarFill(context, _currentBarOption, this),
+      bottomNavigationBar: createButtomBarFill(
+          context,
+          _currentBarOption,
+          this,
+          this.widget.insertion_format.uid,
+          this.widget.insertion_format,
+          this.widget.questions, true),
       body: createBody(),
     );
   }
@@ -121,7 +128,10 @@ class SelectionFormatState extends State<SelectionFormat> {
         Expanded(
           flex: 10,
           child: Text(
-            this.widget.questions[this.widget.current_question][TEXT].toString(),
+            this
+                .widget
+                .questions[this.widget.current_question][TEXT]
+                .toString(),
             style: TextStyle(
               fontFamily: EUROPA_FONT,
               fontSize: 22,
@@ -174,7 +184,14 @@ class SelectionFormatState extends State<SelectionFormat> {
         ),
         Expanded(
           flex: 15,
-          child: Center(child: createRoute(context, this, _rating, _selectedOption.toString(), this.widget.answers, this.widget.questions)),
+          child: Center(
+              child: createRoute(
+                  context,
+                  this,
+                  _rating,
+                  _selectedOption.name.toString(),
+                  this.widget.insertion_format,
+                  this.widget.questions)),
         ),
         Expanded(
           flex: 3,
@@ -183,7 +200,7 @@ class SelectionFormatState extends State<SelectionFormat> {
         Expanded(
           flex: 1,
           child: Padding(
-            padding: const EdgeInsets.only(left:20, right: 20),
+            padding: const EdgeInsets.only(left: 20, right: 20),
             child: LinearProgressIndicator(
                 value: (this.widget.current_question + 1) /
                     (this.widget.questions.length),

@@ -2,18 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:flutter_firebase/Utils/headers.dart';
 import 'package:flutter_firebase/update_a_review/updating_section.dart';
 import 'package:flutter_firebase/update_a_review/watch_review.dart';
+import 'package:mongo_dart/mongo_dart.dart';
 
 class ReviewFormatData {
-  final String name_of_worker;
-  final String passport;
-  final String nation;
-  final String last_update;
-  final List<List<String>> rating_answers;
-  final List<List<String>> choose_answers;
-  final List<List<String>> text_answers;
-  final List<Map<String, dynamic>> questions;
+  ObjectId id;
+  String user_id;
+  String name_of_worker;
+  String passport;
+  String nation;
+  String last_update;
+  List<List<String>> rating_answers;
+  List<List<String>> choose_answers;
+  List<List<String>> text_answers;
+  List<Map<String, dynamic>> questions;
 
-  const ReviewFormatData({
+  ReviewFormatData({
+    @required this.id,
+    @required this.user_id,
     @required this.name_of_worker,
     @required this.passport,
     @required this.nation,
@@ -23,6 +28,45 @@ class ReviewFormatData {
     @required this.text_answers,
     @required this.questions,
   });
+
+  fromJson(Map<String, dynamic> json, List<Map<String, dynamic>> q) {
+    this.id = json['_id'];
+    this.user_id = json['user_id'];
+    this.name_of_worker = json['name_of_worker'];
+    this.passport = json['passport'];
+    this.nation = json['nation'];
+    this.last_update = json['last_update'];
+    this.rating_answers = [];
+    this.choose_answers = [];
+    this.text_answers = [];
+    this.questions = q;
+
+    for (var i = 0; i < json['rating_answers'].length; i++) {
+      List<String> temp = new List<String>.from(json['rating_answers'][i]);
+      this.rating_answers.add(temp);
+    }
+    for (var i = 0; i < json['choose_answers'].length; i++) {
+      List<String> temp = new List<String>.from(json['choose_answers'][i]);
+      this.choose_answers.add(temp);
+    }
+    for (var i = 0; i < json['text_answers'].length; i++) {
+      List<String> temp = new List<String>.from(json['text_answers'][i]);
+      this.text_answers.add(temp);
+    }
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['user_id'] = this.user_id;
+    data['name_of_worker'] = this.name_of_worker;
+    data['passport'] = this.passport;
+    data['nation'] = this.nation;
+    data['last_update'] = this.last_update;
+    data['rating_answers'] = this.rating_answers;
+    data['choose_answers'] = this.choose_answers;
+    data['text_answers'] = this.text_answers;
+    return data;
+  }
 }
 
 class ReviewFormatWidget extends StatelessWidget {
@@ -87,22 +131,40 @@ class ReviewFormatWidget extends StatelessWidget {
                 Row(
                   children: <Widget>[
                     IconButton(
-                      icon: Icon(Icons.delete, color: DARK_BLUE, size: 35),
-                      onPressed: onClicked,
-                    ),
+                        icon: Icon(Icons.delete, color: DARK_BLUE, size: 35),
+                        onPressed: () async {
+                          await showDialog(
+                              context: context,
+                              builder: (ctx) => AlertDialog(
+                                      title: Text(
+                                        DELETE_YOUR_REVIEW,
+                                        textAlign: TextAlign.right,
+                                      ),
+                                      content: Text(ARE_YOU_SURE_TO_DELETE,
+                                          textAlign: TextAlign.right),
+                                      actions: <Widget>[
+                                        FlatButton(
+                                            onPressed: onClicked,
+                                            child: Text(DELETE)),
+                                      ]));
+                        }),
                     IconButton(
                         icon: Icon(Icons.edit, color: DARK_BLUE, size: 35),
                         onPressed: () {
                           Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) =>
-                                  UpdatingSection(this.item.questions, this.item)));
+                              builder: (context) => UpdatingSection(
+                                  this.item.questions,
+                                  this.item,
+                                  this.item.user_id)));
                         }),
                     IconButton(
                       icon: Icon(Icons.read_more, color: DARK_BLUE, size: 35),
                       onPressed: () {
                         Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) =>
-                                WatchReview(this.item.questions, this.item)));
+                            builder: (context) => WatchReview(
+                                this.item.questions,
+                                this.item,
+                                this.item.user_id)));
                       },
                     )
                   ],

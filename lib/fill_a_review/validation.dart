@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_firebase/Utils/headers.dart';
+import 'package:flutter_firebase/fill_a_review/InsertionFormat.dart';
 
 
  Widget buildPassport(String passport, BuildContext context,  dynamic state,  String _selectedOption) {
@@ -28,7 +29,7 @@ import 'package:flutter_firebase/Utils/headers.dart';
     );
   }
 
-  Widget buildAuth(String auth_passport, String passport, BuildContext context,  dynamic state) {
+  Widget buildAuth(String auth_passport, String passport, BuildContext context,  dynamic state, InsertionFormat insertion_format) {
     return TextFormField(
       decoration: InputDecoration(
         fillColor: DARK_BLUE,
@@ -42,6 +43,7 @@ import 'package:flutter_firebase/Utils/headers.dart';
         if (value != state.passport) {
           return NOT_SAME_PASSPORT;
         } else {
+          insertion_format.passport = value;
           return null;
         }
       },
@@ -53,7 +55,8 @@ import 'package:flutter_firebase/Utils/headers.dart';
     );
   }
 
-  Widget buildNation(String _selectedOption, List<DropdownMenuItem<String>> _dropdownMenuItems, Function onChangeDropdownItem) {
+  Widget buildNation(String _selectedOption, List<DropdownMenuItem<String>> _dropdownMenuItems, Function onChangeDropdownItem, InsertionFormat insertion_format) {
+    insertion_format.nation = _selectedOption;
     return DropdownButton(
       dropdownColor: LIGHT_GREEN,
       iconEnabledColor: LIGHT_GREEN,
@@ -68,7 +71,7 @@ import 'package:flutter_firebase/Utils/headers.dart';
     );
   }
 
-  Widget buildName(String name, BuildContext context,  dynamic state) {
+  Widget buildName(String name, BuildContext context,  dynamic state, InsertionFormat insertion_format) {
     return TextFormField(
       decoration: InputDecoration(
         fillColor: DARK_BLUE,
@@ -78,7 +81,9 @@ import 'package:flutter_firebase/Utils/headers.dart';
         labelText: WORKER_NAME,
         border: OutlineInputBorder(),
       ),
-      validator: (value) {},
+      validator: (value) {
+        insertion_format.name_of_worker = value;
+      },
       maxLength: 20,
       onChanged: (value) => state.setState(() {
         name = value;

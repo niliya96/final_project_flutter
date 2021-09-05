@@ -13,9 +13,10 @@ import 'input_formats.dart';
 class MainComponentSearch extends StatefulWidget {
   String nameTyped = '';
   String passportTyped = '';
-  final List<Map<String, dynamic>> list;
+  final List<Map<String, dynamic>> questions;
+  String uid;
 
-  MainComponentSearch(this.list);
+  MainComponentSearch(this.questions, this.uid);
 
   @override
   MainComponentSearchState createState() => MainComponentSearchState();
@@ -33,7 +34,7 @@ class MainComponentSearchState extends State<MainComponentSearch> {
       if (fbUser == null) {
         Navigator.of(context).pushReplacement(
           MaterialPageRoute(
-            builder: (context) => MainComponentLogin(this.widget.list),
+            builder: (context) => MainComponentLogin(this.widget.questions),
           ),
         );
       }
@@ -116,7 +117,7 @@ class MainComponentSearchState extends State<MainComponentSearch> {
         Expanded(
             flex: 5,
             child: ButtonSearch(this.widget.nameTyped,
-                this.widget.passportTyped, this.widget.list)),
+                this.widget.passportTyped, this.widget.questions, this.widget.uid)),
       ]),
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: Color.fromRGBO(67, 232, 137, 50),
@@ -165,13 +166,13 @@ class MainComponentSearchState extends State<MainComponentSearch> {
           });
           if (_currentIndex == 0) {
             Navigator.of(context).pushReplacement(MaterialPageRoute(
-                builder: (context) => HomeScreen(this.widget.list)));
+                builder: (context) => HomeScreen(this.widget.questions)));
           } else if (_currentIndex == 1) {
             Navigator.of(context).pushReplacement(MaterialPageRoute(
-                builder: (context) => MainComponentSearch(this.widget.list)));
+                builder: (context) => MainComponentSearch(this.widget.questions, this.widget.uid)));
           } else if (_currentIndex == 2) {
             Navigator.of(context).pushReplacement(MaterialPageRoute(
-                builder: (context) => MainComponentFill(this.widget.list)));
+                builder: (context) => MainComponentFill(this.widget.questions, this.widget.uid)));
           }
         },
       ),

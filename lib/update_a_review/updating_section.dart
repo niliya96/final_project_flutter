@@ -14,7 +14,8 @@ import 'main_component_update.dart';
 class UpdatingSection extends StatefulWidget {
   final List<Map<String, dynamic>> questions;
   ReviewFormatData review;
-  UpdatingSection(this.questions, this.review);
+  String uid;
+  UpdatingSection(this.questions, this.review, this.uid);
 
   @override
   UpdatingSectionState createState() => UpdatingSectionState();
@@ -52,7 +53,8 @@ class UpdatingSectionState extends State<UpdatingSection> {
         resizeToAvoidBottomInset: false,
         backgroundColor: Colors.white,
         appBar: createAppBar(authBloc),
-        bottomNavigationBar: createButtomBar(context, _currentBarOption, this),
+        bottomNavigationBar:
+            createButtomBar(context, _currentBarOption, this, this.widget.uid),
         body: createBody());
     return scaffold;
   }
@@ -60,17 +62,29 @@ class UpdatingSectionState extends State<UpdatingSection> {
   Widget createBody() {
     return Column(children: <Widget>[
       Expanded(
-        flex: 1,
+        flex: 2,
         child: SizedBox(),
       ),
       Expanded(
-        flex: 1,
-        child: IconButton(
-          icon: Icon(Icons.arrow_back, color: DARK_BLUE, size: 35),
+        flex: 2,
+        child: FlatButton(
+          height: 60,
+          minWidth: 110,
+          color: DARK_BLUE,
+          child: Text(
+            BACK_TO_UPDATE,
+            style: TextStyle(
+              fontFamily: EUROPA_FONT,
+              fontSize: 15,
+              color: Colors.white,
+              fontWeight: FontWeight.w700,
+              height: 1.1666666666666667,
+            ),
+          ),
           onPressed: () {
             Navigator.of(context).pushReplacement(MaterialPageRoute(
-                builder: (context) =>
-                    MainComponentUpdate(this.widget.questions)));
+                builder: (context) => MainComponentUpdate(
+                    this.widget.questions, this.widget.uid)));
           },
         ),
       ),
@@ -79,7 +93,7 @@ class UpdatingSectionState extends State<UpdatingSection> {
         child: SizedBox(),
       ),
       Expanded(
-        flex: 15,
+        flex: 10,
         child: createDetails(),
       ),
       Expanded(
@@ -106,12 +120,12 @@ class UpdatingSectionState extends State<UpdatingSection> {
           child: SizedBox(),
         ),
         Expanded(
-          flex: 10,
+          flex: 8,
           child: Text(
             UPDATING_SECTION + ": " + this.widget.review.name_of_worker,
             style: TextStyle(
               fontFamily: EUROPA_FONT,
-              fontSize: 30,
+              fontSize: 25,
               color: DARK_BLUE,
               fontWeight: FontWeight.w700,
               height: 1.1666666666666667,
@@ -119,15 +133,6 @@ class UpdatingSectionState extends State<UpdatingSection> {
             textHeightBehavior:
                 TextHeightBehavior(applyHeightToFirstAscent: false),
             textAlign: TextAlign.center,
-          ),
-        ),
-        Expanded(
-          flex: 5,
-          child: Divider(
-            color: DARK_BLUE,
-            thickness: 1,
-            indent: 120,
-            endIndent: 120,
           ),
         ),
         Expanded(
@@ -181,6 +186,21 @@ class UpdatingSectionState extends State<UpdatingSection> {
             // text questions
             for (var question in this.widget.review.text_answers)
               buildTextQustion(question),
+            FlatButton(
+                height: 60,
+                minWidth: 110,
+                color: DARK_BLUE,
+                child: Text(
+                  SAVE,
+                  style: TextStyle(
+                    fontFamily: EUROPA_FONT,
+                    fontSize: 15,
+                    color: Colors.white,
+                    fontWeight: FontWeight.w700,
+                    height: 1.1666666666666667,
+                  ),
+                ),
+                onPressed: () {})
           ],
         ),
       ],
@@ -217,7 +237,7 @@ class UpdatingSectionState extends State<UpdatingSection> {
               q.elementAt(0),
               style: TextStyle(
                 fontFamily: EUROPA_FONT,
-                fontSize: 18,
+                fontSize: 13,
                 color: DARK_BLUE,
                 fontWeight: FontWeight.w700,
                 height: 1.1666666666666667,
@@ -254,6 +274,9 @@ class UpdatingSectionState extends State<UpdatingSection> {
   }
 
   Widget _buildRatingStar(int index, List<String> q) {
+    if (q[1] == "irelevant" || q[1] == "init") {
+      return Icon(Icons.star, size: 50, color: Colors.grey[300]);
+    }
     if (index < int.parse(q[1])) {
       return Icon(Icons.star, size: 50, color: Colors.amber[700]);
     } else {
@@ -268,12 +291,13 @@ class UpdatingSectionState extends State<UpdatingSection> {
           q[0],
           style: TextStyle(
             fontFamily: EUROPA_FONT,
-            fontSize: 18,
+            fontSize: 13,
             color: DARK_BLUE,
             fontWeight: FontWeight.w700,
             height: 1.1666666666666667,
           ),
-          textHeightBehavior: TextHeightBehavior(applyHeightToFirstAscent: false),
+          textHeightBehavior:
+              TextHeightBehavior(applyHeightToFirstAscent: false),
           textAlign: TextAlign.right,
         ),
       ],
@@ -289,7 +313,7 @@ class UpdatingSectionState extends State<UpdatingSection> {
             q[0],
             style: TextStyle(
               fontFamily: EUROPA_FONT,
-              fontSize: 18,
+              fontSize: 13,
               color: DARK_BLUE,
               fontWeight: FontWeight.w700,
               height: 1.1666666666666667,
@@ -311,7 +335,7 @@ class UpdatingSectionState extends State<UpdatingSection> {
                 return null;
               },
               maxLength: 500,
-              maxLines: 5,
+              //maxLines: 5,
               onChanged: (value) => setState(() {
                     q[1] = value;
                   })),
@@ -319,5 +343,4 @@ class UpdatingSectionState extends State<UpdatingSection> {
       ),
     );
   }
-  
 }

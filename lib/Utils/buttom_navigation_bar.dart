@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter_firebase/fill_a_review/main_component_fill.dart';
 import 'package:flutter_firebase/home/home_screen.dart';
@@ -7,7 +8,7 @@ import 'package:flutter_firebase/update_a_review/main_component_update.dart';
 import 'headers.dart';
 
 BottomNavigationBar createButtomBar(
-    BuildContext context, int _currentBarOption, dynamic state) {
+    BuildContext context, int _currentBarOption, dynamic state, String uid) {
   return BottomNavigationBar(
     backgroundColor: LIGHT_GREEN,
     currentIndex: _currentBarOption,
@@ -59,13 +60,13 @@ BottomNavigationBar createButtomBar(
           option = HomeScreen(state.widget.questions);
           break;
         case 1:
-          option = MainComponentSearch(state.widget.questions);
+          option = MainComponentSearch(state.widget.questions, uid);
           break;
         case 2:
-          option = MainComponentFill(state.widget.questions);
+          option = MainComponentFill(state.widget.questions, uid);
           break;
         case 3:
-          option = MainComponentUpdate(state.widget.questions);
+          option = MainComponentUpdate(state.widget.questions, uid);
           break;
       }
       Navigator.of(context)
